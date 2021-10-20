@@ -133,7 +133,7 @@ will print the file exactly.
 >
 > [Answer](files_answer01.html)
 
-## Data type conversion
+## Data type conversion
 
 Simply reading the data and printing it isn't very useful. Let's take a 
 first step towards some data analysis and pretend that the task we're 

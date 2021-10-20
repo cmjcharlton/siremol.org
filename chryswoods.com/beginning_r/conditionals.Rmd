@@ -128,7 +128,7 @@ of the code block in the if keyword. It does not have any option for the
 user to provide a boolean statement to it. In this case, you can guarantee 
 that one and only one of the two bodies will run.
 
-## `else if`
+## `else if`
 
 If you *do* want to provide a boolean statement to an else then you 
 can use an `else if` instead. It stands for "else, if ..." and it 
