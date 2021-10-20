@@ -238,7 +238,7 @@ Running this new script will now print out our "processed" data:
 >
 > [Answer](files_answer06.html)
 >
-> Collect the statistics into a summary vector with names `sum`, `count` and `mean`.
+> Collect the statistics into a summary list with names `sum`, `count` and `mean`.
 >
 > [Answer](files_answer07.html)
 

@@ -21,23 +21,23 @@ Starting with creating our data file data.txt:
 
 The logic in this script is identical but instead of having `total`, 
 `count` and `mean` as separate scalars, we have collected them 
-into a single atomic vector:
+into a single list:
 
 ```R
 file_handle <- file("data.txt")
 file_lines <- readLines(file_handle)
 close(file_handle)
 
-stats <- c("sum" = 0, "count" = 0)
+stats <- list("sum" = 0, "count" = 0L)
 
 for (file_line in file_lines) {
   number <- as.numeric(file_line)
-  stats["sum"] <- stats["sum"] + number
-  stats["count"] <- stats["count"] + 1
+  stats[["sum"]] <- stats[["sum"]] + number
+  stats[["count"]] <- stats[["count"]] + 1L
 }
 
-if (stats["count"] > 0) {
-  stats["mean"] <- stats["sum"] / stats["count"]
+if (stats[["count"]] > 0) {
+  stats[["mean"]] <- stats[["sum"]] / stats[["count"]]
 }
 
 print(stats)
@@ -46,6 +46,12 @@ print(stats)
 ```
 Rscript file.R
 
-      sum     count      mean 
-460.00000   7.00000  65.71429
+$sum
+[1] 460
+
+$count
+[1] 7
+
+$mean
+[1] 65.71429
 ```
