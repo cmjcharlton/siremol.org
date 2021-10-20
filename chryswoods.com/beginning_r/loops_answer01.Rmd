@@ -7,7 +7,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Adding more items to the list makes the loop go around more times:
+Adding more items to the vector makes the loop go around more times:
 
 ```R
 my_words <- c("Hello", "R", "Goodbye", "R")
@@ -26,7 +26,8 @@ Rscript loop.R
 [1] "R"
 ```
 
-A list with a mixture of data types can be printed without issue:
+As the atomic vector is coerced into the most general type (in the case string)
+when you create it from a a mixture of data types it can be printed without issue:
 
 ```R
 my_words <- c("Hello", "R", 404, "Goodbye", "R", 42)
@@ -47,10 +48,10 @@ Rscript loop.R
 [1] "42"
 ```
 
-Looping over an empty list does not print anything:
+Looping over an empty vector does not print anything:
 
 ```R
-my_words <- c()
+my_words <- vector()
 
 for (word in my_words) {
     print(word)

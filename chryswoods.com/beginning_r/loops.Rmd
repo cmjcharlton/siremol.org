@@ -15,7 +15,7 @@ The ability to run a line of code multiple times is the first large step on
 your road to making your code reusable.
 
 Imagine we have two strings that we want to print. We could start by making 
-a variable containing one of the words and then printing it:
+an object containing one of the words and then printing it:
 
 ```R
 word <- "Hello"
@@ -45,16 +45,16 @@ This will print to the screen
 
 as we want. But we can see that this code is wasteful as the two `print` lines 
 are identical to each other. They both print whatever data is contained in the 
-variable `word`. If we can manage to write that line only once then we could 
+object `word`. If we can manage to write that line only once then we could 
 save ourselves some typing!
 
-Let's start by making a container for our words, an R list makes sense:
+Let's start by making a container for our words, an R character vector makes sense:
 
 ```R
 my_words <- c("Hello", "R")
 ```
 
-we can now write a loop which will perform a task once for each word in our list:
+we can now write a loop which will perform a task once for each word in our vector:
 
 ```R
 my_words <- c("Hello", "R")
@@ -69,9 +69,9 @@ Copy that code into a file called `loop.R` and run it in the terminal with
 
 We've taken a script that was four lines of code and have reduced it to three lines. 
 That might not seem like much of a reduction but the loop we wrote will work no 
-matter how many items there are in the list `my_words`.
+matter how many items there are in the vector `my_words`.
 
-Most loops in R work by doing some set of actions for each item in the list. 
+Most loops in R work by doing some set of actions for each item in the vector. 
 For this reason, this sort of loop is sometimes called a for-each loop.
 
 This maps to real life where you may want, for example, to buy each item on 
@@ -87,11 +87,11 @@ for (item in shopping_list) {
 
 > EXERCISE
 >
-> Edit `loop.R` to have a different number of words in the list.
+> Edit `loop.R` to have a different number of words in the vector.
 > 
 > Does it work if you put integers or floats in there as well?
 >
-> What happens if the list my_words is empty?
+> What happens if the vector my_words is empty?
 >
 > [Answer](loops_answer01.html)
 
@@ -117,8 +117,8 @@ for (word in my_words) {
 
 Once the scaffolding is in place, you can place between it the things that *you* 
 care about. The first thing to think about is the object that you want to loop over. 
-In our case we want to loop over the list `my_words` because we want to perform 
-some action on every item in that list (we want to print the item):
+In our case we want to loop over the vector `my_words` because we want to perform 
+some action on every item in that vector (we want to print the item):
 
 ```
                 ↓
@@ -129,11 +129,11 @@ for (word in my_words) {
 
 Now we have decided what object we are looping over, we need to decide what 
 name we want to give temporarily to each item as we get to it. As with 
-any variable naming, it is important that we choose a good name which 
-describes a single object from the list. For example, if we're looping 
-over all students in a class then we could call the variable `student`, 
-or if we're looping over a list of ages then we could call the variable `age`. 
-Here, since we're looping over a list of generic words, we name our variable `word`:
+any object naming, it is important that we choose a good name which 
+describes a single object from the vector. For example, if we're looping 
+over all students in a class then we could call the item `student`, 
+or if we're looping over a vector of ages then we could call the item `age`. 
+Here, since we're looping over a vector of generic words, we name our item `word`:
 
 ```
       ↓
@@ -146,7 +146,7 @@ That's all that's required to tell R that we're making a loop, but if we want
 the loop to actually do something then we need to give the loop a body. 
 The body is the lines of code that are going to be repeated. They can be 
 any R code but it is only within the body of the loop that we can refer 
-to the loop variable `word`:
+to the loop element `word`:
 
 ```
 for (word in my_words) {
@@ -230,7 +230,7 @@ after the last line of the body of the loop.
 A lot of the power of loops comes from being able to put a lot of different things 
 in the place of `my_words`.
 
-Most simply, instead of putting a variable name there, you can put a list directly:
+Most simply, instead of putting a object name there, you can put a vector directly:
 
 ```R
 for (word in c("Hello", "R")) {
@@ -238,10 +238,9 @@ for (word in c("Hello", "R")) {
 }
 ```
 
-As well as lists we can put anything which R considers iterable. 
-For now we haven't come across many of those but as we keep learning 
-we'll discover many more. One example is the `seq` function, that can 
-be used to iterate over a fixed set of numbers:
+R provides some convenient functions to easily generate vectors from a pattern that 
+can to be used for iteration. One example is the `seq` function, that can be used 
+to create a vector containing a fixed set of numbers, which we can then iterate over:
 
 ```R
 for (i in seq(1, 10)) {
@@ -258,7 +257,7 @@ will print the numbers from 1 to 10, and then from 10 to 1.
 
 > EXERCISE
 > 
-> Experiment with `loop.R` and make it loop over both lists and sequences.
+> Experiment with `loop.R` and make it loop over both vectors and sequences.
 >
 > [Answer](loops_answer02.html)
 
