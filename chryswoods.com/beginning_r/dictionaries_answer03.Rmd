@@ -3,19 +3,19 @@ title: "Beginning R"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```R
 capitals <- c(
-    "France"="Paris",
-    "United Kingdom"="London",
-    "USA"="Washington DC",
-    "Kenya"="Nairobi"
+    "France" = "Paris",
+    "United Kingdom" = "London",
+    "USA" = "Washington DC",
+    "Kenya" = "Nairobi"
 )
 
-for (i in seq(1, length(capitals))){
+for (i in seq(1, length(capitals))) {
     capital <- capitals[i]
     country <- names(capital)
 

@@ -3,7 +3,7 @@ title: "Beginning R - Conditionals"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -20,11 +20,11 @@ into a file called if.R and run it with `Rscript if.R` in the terminal:
 ```R
 my_number <- 128
 
-if (my_number > 100){
+if (my_number > 100) {
     print(paste(my_number, "is large"))
-} else if (my_number < 0){
+} else if (my_number < 0) {
     print(paste(my_number, "is negative"))
-} else{
+} else {
     print(paste(my_number, "is not large"))
 }
 ```
@@ -45,8 +45,8 @@ has scaffolding as well as user-supplied parts. The scaffolding is the
 word `if` and the curly brackets again:
 
 ```
- ↓                  ↓
-if (my_number > 100){
+ ↓                   ↓
+if (my_number > 100) {
     print(paste(my_number, "is large"))
 }
 ```
@@ -56,7 +56,7 @@ brackets;
 
 ```
           ↓
-if (my_number > 100){
+if (my_number > 100) {
     print(paste(my_number, "is large"))
 }
 ```
@@ -64,9 +64,9 @@ if (my_number > 100){
 As before, the body must be contained with an open and closed curly brackets
 
 ```
-                open curly bracket                
-                    ↓
-if (my_number > 100){
+                 open curly bracket                
+                     ↓
+if (my_number > 100) {
     print(paste(my_number, "is large"))
 }
 ↑
@@ -116,7 +116,7 @@ an `else` statement to the if statement:
 ```R
 my_number <- 128
 
-if (my_number > 100){
+if (my_number > 100) {
     print(paste(my_number, "is large"))
 } else {
     print(paste(my_number, "is not large"))
@@ -137,9 +137,9 @@ allows you to refine the questions you are asking:
 ```R
 my_number <- 128
 
-if (my_number > 100){
+if (my_number > 100) {
     print(paste(my_number, "is large"))
-} else if (my_number < 0){
+} else if (my_number < 0) {
     print(paste(my_number, "is negative"))
 } else {
     print(paste(my_number, "is not large"))

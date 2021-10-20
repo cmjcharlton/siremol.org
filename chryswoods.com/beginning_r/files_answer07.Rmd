@@ -3,7 +3,7 @@ title: "Beginning R"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -26,15 +26,15 @@ into a single dictionary:
 ```R
 lines <- readLines(file("data.txt"))
 
-stats <- c("sum"=0, "count"=0)
+stats <- c("sum" = 0, "count" = 0)
 
-for (line in lines){
+for (line in lines) {
   number <- as.numeric(line)
   stats["sum"] <- stats["sum"] + number
   stats["count"] <- stats["count"] + 1
 }
 
-if (stats["count"] > 0){
+if (stats["count"] > 0) {
   stats["mean"] <- stats["sum"] / stats["count"]
 }
 

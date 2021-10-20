@@ -3,7 +3,7 @@ title: "Beginning R - Files"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -20,7 +20,7 @@ to the screen. Make a new script called `file.R` and put the following in it:
 ```R
 lines <- readLines(file("file.R"))
 
-for (line in lines){
+for (line in lines) {
   print(line)
 }
 ```
@@ -31,7 +31,7 @@ when you run it with `Rscript file.R` you will see it print out:
 [1] ""
 [1] "lines <- readLines(file(\"file.R\"))"
 [1] ""
-[1] "for (line in lines){"
+[1] "for (line in lines) {"
 [1] "  print(line)"
 [1] "}"
 ```
@@ -74,13 +74,13 @@ file to the variable `line`.
 
 Finally, we print the string `line`. Note that R will automatically
 add quotes and backslashes to the lines that are printed. You can 
-remove them by passing `quote=FALSE` to `print`, e.g.
+remove them by passing `quote = FALSE` to `print`, e.g.
 
 ```R
 lines <- readLines(file("file.R"))
 
-for (line in lines){
-  print(line, quote=FALSE)
+for (line in lines) {
+  print(line, quote = FALSE)
 }
 ```
 
@@ -89,8 +89,8 @@ will print
 ```
 [1] lines <- readLines(file("file.R"))
 [1] 
-[1] for (line in lines){
-[1]   print(line, quote=FALSE)
+[1] for (line in lines) {
+[1]   print(line, quote = FALSE)
 [1] }
 ```
 
@@ -101,8 +101,8 @@ used to separate each line, e.g.
 ```R
 lines <- readLines(file("file.R"))
 
-for (line in lines){
-  cat(line, sep="\n")
+for (line in lines) {
+  cat(line, sep = "\n")
 }
 ```
 
@@ -142,7 +142,7 @@ trying to do is to read in data from the file and add 17 to each value.
 ```R
 lines <- readLines(file("data.txt"))
 
-for (line in lines){
+for (line in lines) {
   new_number <- line + 17
   print(new_number)
 }
@@ -171,7 +171,7 @@ to a numeric as it comes in using the `as.numeric` function:
 ```R
 lines <- readLines(file("data.txt"))
 
-for (line in lines){
+for (line in lines) {
   number <- as.numeric(line)
   new_number <- number + 17
   print(new_number)

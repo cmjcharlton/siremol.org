@@ -3,7 +3,7 @@ title: "Beginning R"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -12,7 +12,7 @@ Less than:
 ```R
 my_number <- 74
 
-if (my_number < 100){
+if (my_number < 100) {
     print(paste(my_number, "is less than 100"))
 }
 ```
@@ -28,11 +28,11 @@ Equal to:
 ```R
 my_number <- 74
 
-if (my_number == 100){
+if (my_number == 100) {
     print(paste(my_number, "== 100"))
 }
 
-if (my_number == 74){
+if (my_number == 74) {
     print(paste(my_number, "== 74"))
 }
 ```
@@ -48,11 +48,11 @@ Not equal to:
 ```R
 my_number <- 74
 
-if (my_number != 100){
+if (my_number != 100) {
     print(paste(my_number, "!= 100"))
 }
 
-if (my_number != 74){
+if (my_number != 74) {
     print(paste(my_number, "!= 74"))
 }
 ```

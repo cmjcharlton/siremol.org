@@ -3,7 +3,7 @@ title: "Beginning R - Dictionaries"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -17,7 +17,7 @@ in a list. You thus create them using the same combine (`c`) function
 as used to create a list.  Make a new file called `dict.R` and put this in it:
 
 ```R
-sounds <- c("cat"="meow", "dog"="woof", "horse"="neigh")
+sounds <- c("cat" = "meow", "dog" = "woof", "horse" = "neigh")
 
 cat_sound <- sounds["cat"]
 
@@ -35,7 +35,7 @@ printed to the screen.
 
 What we did here was create a dictionary by adding names (keys) to the items
 in the list. The three items in the list are `meow`, `woof` and `neigh`. We have
-added names (keys) using the syntax `name=value`, so `meow` is given the name `cat`,
+added names (keys) using the syntax `name = value`, so `meow` is given the name `cat`,
 `woof` is named `dog` and `neigh` is named `horse`.
 
 The value is the real data that we want to keep hold of and the name (also called key) 
@@ -53,9 +53,9 @@ dictionaries over multiple lines, one line per key-value item:
 
 ```R
 sounds <- c(
-  "cat"="meow", 
-  "dog"="woof", 
-  "horse"="neigh"
+  "cat" = "meow", 
+  "dog" = "woof", 
+  "horse" = "neigh"
 )
 
 cat_sound <- sounds["cat"]
@@ -80,9 +80,9 @@ is a string, or `as.numeric` if the value is a number, e.g.
 
 ```R
 sounds <- c(
-  "cat"="meow",
-  "dog"="woof",
-  "horse"="neigh"
+  "cat" = "meow",
+  "dog" = "woof",
+  "horse" = "neigh"
 )
 
 cat_sound <- sounds["cat"]
@@ -115,9 +115,9 @@ that we want to put into the dictionary:
 
 ```R
 sounds <- c(
-    "cat"="meow",
-    "dog"="woof",
-    "horse"="neigh"
+    "cat" = "meow",
+    "dog" = "woof",
+    "horse" = "neigh"
 )
 
 sounds["cow"] <- "moo"
@@ -151,12 +151,12 @@ happens when we loop over a dictionary:
 
 ```R
 sounds <- c(
-    "cat"="meow",
-    "dog"="woof",
-    "horse"="neigh"
+    "cat" = "meow",
+    "dog" = "woof",
+    "horse" = "neigh"
 )
 
-for (thing in sounds){
+for (thing in sounds) {
     print(thing)
 }
 ```
@@ -179,12 +179,12 @@ that you can loop over them:
 
 ```R
 sounds <- c(
-    "cat"="meow",
-    "dog"="woof",
-    "horse"="neigh"
+    "cat" = "meow",
+    "dog" = "woof",
+    "horse" = "neigh"
 )
 
-for (thing in names(sounds)){
+for (thing in names(sounds)) {
     print(thing)
 }
 ```
@@ -203,12 +203,12 @@ and value by looking up the item by its numeric index:
 
 ```R
 sounds <- c(
-  "cat"="meow",
-  "dog"="woof",
-  "horse"="neigh"
+  "cat" = "meow",
+  "dog" = "woof",
+  "horse" = "neigh"
 )
 
-for (i in seq(1,length(sounds))){
+for (i in seq(1, length(sounds))) {
   sound <- sounds[i]
   print(paste(names(sound), "goes", sound))
 }

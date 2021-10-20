@@ -3,7 +3,7 @@ title: "Beginning R"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -26,8 +26,8 @@ here is the argument being passed to `file`:
 ```R
 lines <- readLines(file("data.txt"))
 
-for (line in lines){
-  cat(line, sep="\n")
+for (line in lines) {
+  cat(line, sep = "\n")
 }
 ```
 

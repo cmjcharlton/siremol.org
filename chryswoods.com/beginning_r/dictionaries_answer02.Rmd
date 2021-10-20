@@ -3,12 +3,12 @@ title: "Beginning R"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```R
-sounds <- c("cat"="meow", "dog"="woof")
+sounds <- c("cat" = "meow", "dog" = "woof")
 
 sounds["horse"] <- "neigh"
 sounds["cow"] <- "moo"

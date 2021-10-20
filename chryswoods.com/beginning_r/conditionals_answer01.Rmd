@@ -3,14 +3,14 @@ title: "Beginning R"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```R
 my_number <- 74
 
-if (my_number > 100){
+if (my_number > 100) {
     print(paste(my_number, "is large"))
 }
 ```

@@ -3,15 +3,15 @@ title: "Beginning R"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```R
 sounds <- c(
-    "cat"="meow", 
-    "dog"="woof", 
-    "horse"="neigh"
+    "cat" = "meow", 
+    "dog" = "woof", 
+    "horse" = "neigh"
 )
 
 dog_sound <- sounds["dog"]
@@ -33,9 +33,9 @@ we will see that is returns `NA`.
 
 ```R
 sounds <- c(
-    "cat"="meow",
-    "dog"="woof", 
-    "horse"="neigh"
+    "cat" = "meow",
+    "dog" = "woof", 
+    "horse" = "neigh"
 )
 
 fish_sound <- sounds["fish"]
@@ -56,12 +56,12 @@ in the `names()` of the dictionary;
 
 ```R
 sounds <- c(
-    "cat"="meow",
-    "dog"="woof",
-    "horse"="neigh"
+    "cat" = "meow",
+    "dog" = "woof",
+    "horse" = "neigh"
 )
 
-if ("fish" %in% names(sounds)){
+if ("fish" %in% names(sounds)) {
     fish_sound <- sounds["fish"]
     print(paste("Fish goes", fish_sound))
 } else {

@@ -3,7 +3,7 @@ title: "Beginning R"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -12,7 +12,7 @@ Adding more items to the list makes the loop go around more times:
 ```R
 my_words <- c("Hello", "R", "Goodbye", "R")
 
-for (word in my_words){
+for (word in my_words) {
     print(word)
 }
 ```
@@ -31,7 +31,7 @@ A list with a mixture of data types can be printed without issue:
 ```R
 my_words <- c("Hello", "R", 404, "Goodbye", "R", 42)
 
-for (word in my_words){
+for (word in my_words) {
     print(word)
 }
 ```
@@ -52,7 +52,7 @@ Looping over an empty list does not print anything:
 ```R
 my_words <- c()
 
-for (word in my_words){
+for (word in my_words) {
     print(word)
 }
 ```

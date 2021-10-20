@@ -3,7 +3,7 @@ title: "Beginning R"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -24,7 +24,7 @@ We have changed just one line so that it now has `* 10` rather than `+ 17`:
 ```R
 lines <- readLines(file("data.txt"))
 
-for (line in lines){
+for (line in lines) {
   number <- as.numeric(line)
   new_number <- number * 10
   print(new_number)

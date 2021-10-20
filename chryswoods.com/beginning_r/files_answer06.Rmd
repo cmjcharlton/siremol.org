@@ -3,7 +3,7 @@ title: "Beginning R"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -18,7 +18,7 @@ lines <- readLines(file("data.txt"))
 total <- 0
 count <- 0
 
-for (line in lines){
+for (line in lines) {
   number <- as.numeric(line)
   total <- total + number
   count <- count + 1
@@ -28,7 +28,7 @@ mean <- total / count
 
 print(paste("Sum of all", count, "values is:", total))
 
-if (count > 0){
+if (count > 0) {
     print(paste("The mean is", mean))
 }
 ```

@@ -3,7 +3,7 @@ title: "Beginning R"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -12,7 +12,7 @@ We start with the same list we had in the chapter.
 ```R
 words <- c("Hello", "R")
 
-for (word in words){
+for (word in words) {
     print(word)
 }
 ```
@@ -33,7 +33,7 @@ words <- c("Hello", "R")
 
 num_words = length(words)
 
-for (i in seq(1,num_words)){
+for (i in seq(1, num_words)) {
     print(words[i])
 }
 ```
