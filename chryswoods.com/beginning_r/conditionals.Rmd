@@ -73,7 +73,7 @@ if (my_number > 100) {
 close curly bracket
 ```
 
-## Booleans
+## Booleans (logical)
 
 If we take a closer look at that user-supplied conditional we'll see it's made up 
 of three parts; some data on either side of a greater-than sign (`>`). 
