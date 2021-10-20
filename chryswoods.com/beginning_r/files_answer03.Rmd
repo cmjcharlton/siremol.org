@@ -25,12 +25,11 @@ increases the variable `total` by the value in the variable `number`.
 Finally we print the total:
 
 ```R
-lines <- readLines(file("data.txt"))
-
+file_lines <- readLines(file("data.txt"))
 total <- 0
 
-for (line in lines) {
-  number <- as.numeric(line)
+for (file_line in file_lines) {
+  number <- as.numeric(file_line)
   total <- total + number
 }
 

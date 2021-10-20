@@ -24,12 +24,12 @@ The logic in this script is identical but instead of having `total`,
 into a single dictionary:
 
 ```R
-lines <- readLines(file("data.txt"))
+file_lines <- readLines(file("data.txt"))
 
 stats <- c("sum" = 0, "count" = 0)
 
-for (line in lines) {
-  number <- as.numeric(line)
+for (file_line in file_lines) {
+  number <- as.numeric(file_line)
   stats["sum"] <- stats["sum"] + number
   stats["count"] <- stats["count"] + 1
 }

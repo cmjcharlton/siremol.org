@@ -13,13 +13,13 @@ We then edit the end of the script where it calculates the mean so that it
 only runs if the count is greater than zero:
 
 ```R
-lines <- readLines(file("data.txt"))
+file_lines <- readLines(file("data.txt"))
 
 total <- 0
 count <- 0
 
-for (line in lines) {
-  number <- as.numeric(line)
+for (file_line in file_lines) {
+  number <- as.numeric(file_line)
   total <- total + number
   count <- count + 1
 }

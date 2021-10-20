@@ -20,22 +20,22 @@ Starting with our data file, calc.txt:
 calc.R then looks like:
 
 ```R
-lines <- readLines(file("calc.txt"))
+file_lines <- readLines(file("calc.txt"))
 
-for (line in lines) {
-  words <- strsplit(line, " ")[[1]]
+for (file_line in file_lines) {
+  words <- strsplit(file_line, " ")[[1]]
   lhs <- as.numeric(words[1])
   operator <- words[2]
   rhs <- as.numeric(words[3])
   
   if (operator == "+") {
-    cat(line, "is", lhs + rhs, "\n")
+    cat(file_line, "is", lhs + rhs, "\n")
   } else if (operator == "-") {
-    cat(line, "is", lhs - rhs, "\n")
+    cat(file_line, "is", lhs - rhs, "\n")
   } else if (operator == "*") {
-    cat(line, "is", lhs * rhs, "\n")
+    cat(file_line, "is", lhs * rhs, "\n")
   } else if (operator == "/") {
-    cat(line, "is", lhs / rhs, "\n") 
+    cat(file_line, "is", lhs / rhs, "\n") 
   }
 }
 ```

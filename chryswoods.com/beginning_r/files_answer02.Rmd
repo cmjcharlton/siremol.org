@@ -22,10 +22,10 @@ Starting with creating our data file data.txt:
 We have changed just one line so that it now has `* 10` rather than `+ 17`:
 
 ```R
-lines <- readLines(file("data.txt"))
+file_lines <- readLines(file("data.txt"))
 
-for (line in lines) {
-  number <- as.numeric(line)
+for (file_line in file_lines) {
+  number <- as.numeric(file_line)
   new_number <- number * 10
   print(new_number)
 }

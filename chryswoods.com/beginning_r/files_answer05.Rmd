@@ -23,13 +23,13 @@ Here the loop itself has not changed, we've just created a new variable
 afterwards, `mean` which is calculated from `total` and `count`:
 
 ```R
-lines <- readLines(file("data.txt"))
+file_lines <- readLines(file("data.txt"))
 
 total <- 0
 count <- 0
 
-for (line in lines) {
-  number <- as.numeric(line)
+for (file_line in file_lines) {
+  number <- as.numeric(file_line)
   total <- total + number
   count <- count + 1
 }

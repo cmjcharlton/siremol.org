@@ -23,13 +23,13 @@ As before we start with defining a variable `count` to start at zero.
 We increase it by 1 each time around the loop and print it out at the end:
 
 ```R
-lines <- readLines(file("data.txt"))
+file_lines <- readLines(file("data.txt"))
 
 total <- 0
 count <- 0
 
-for (line in lines) {
-  number <- as.numeric(line)
+for (file_line in file_lines) {
+  number <- as.numeric(file_line)
   total <- total + number
   count <- count + 1
 }
