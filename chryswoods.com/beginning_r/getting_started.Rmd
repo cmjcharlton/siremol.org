@@ -23,8 +23,8 @@ then go to File → Save and choose the save the file as "hello.R".
 
 We've just saved our R script with the name "hello.R". We could have used any name
 we wanted. We chose "hello.R" as this is descriptive. The use of ".R" at the end
-is a sign to other people that this text file contains commands written in the 
-R programming language.
+is a sign to other people (and text editors) that this text file contains commands 
+written in the R programming language.
 
 ![](images/started01.png)
 
@@ -70,12 +70,25 @@ This script has introduced three of the basic building blocks of R;
 in this case print tells R to print the following string to the screen. 
 Functions are "called" by following them with a pair of parentheses (). 
 Whatever we put between those parentheses are called "arguments" and specify 
-exactly what the function should do.
+exactly what the function should do. R is a very open environment and you can usually
+see how a function works by typing in its name without the parentheses.
 * A string "Hello from R". A string is just a piece of text, which can contain 
 multiple lines. Strings are enclosed in double quotes.
 * A line of code `print("Hello from R")`. A line of code forms a complete instruction 
 which can be executed by R. R executes each line of code, one at a time in order, 
 moving from the top of the file downwards until it reaches the end of the file.
+
+Note that the default behaviour of R is to automatically call the `print` function
+on the final result of each line. This means that you could have omitted the print
+function and replaced the script content with:
+
+```R
+"Hello from R"
+```
+
+to get the same result. This use is very common with R users and so you are likely
+to encounter it when reading code from others, however we shall be using
+`print` within this course to make the intent explicit.
 
 Important things to remember for this section are:
 
