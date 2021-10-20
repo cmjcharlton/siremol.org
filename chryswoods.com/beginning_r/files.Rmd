@@ -120,6 +120,12 @@ for (file_line in file_lines) {
 
 will print the file exactly.
 
+You may be wondering where the `[1]` comes from. When R displays a vector it starts
+each line with the index that corresponds to the first element displayed on the line.
+As in this case print is displaying a character vector with one element this will 
+always be `[1]'. You could experiment with longer vectors to become more familiar 
+with this.
+
 > EXERCISE
 >
 > Printing out R code isn't the most useful so let's make a data 
