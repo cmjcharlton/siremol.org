@@ -24,20 +24,21 @@ file_handle <- file("calc.txt")
 file_lines <- readLines(file_handle)
 close(file_handle)
 
-for (file_line in file_lines) {
-  words <- strsplit(file_line, " ")[[1]]
-  lhs <- as.numeric(words[1])
-  operator <- words[2]
-  rhs <- as.numeric(words[3])
+line_tokens <- strsplit(file_lines, " ")
+
+for (tokens in line_tokens) {
+  lhs <- as.numeric(tokens[[1]])
+  operator <- tokens[[2]]
+  rhs <- as.numeric(tokens[[3]])
   
   if (operator == "+") {
-    cat(file_line, "is", lhs + rhs, "\n")
+    cat(tokens, "is", lhs + rhs, "\n")
   } else if (operator == "-") {
-    cat(file_line, "is", lhs - rhs, "\n")
+    cat(tokens, "is", lhs - rhs, "\n")
   } else if (operator == "*") {
-    cat(file_line, "is", lhs * rhs, "\n")
+    cat(tokens, "is", lhs * rhs, "\n")
   } else if (operator == "/") {
-    cat(file_line, "is", lhs / rhs, "\n") 
+    cat(tokens, "is", lhs / rhs, "\n") 
   }
 }
 ```

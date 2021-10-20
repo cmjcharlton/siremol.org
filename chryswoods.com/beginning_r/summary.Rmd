@@ -58,10 +58,10 @@ These notes will remain online so feel free to refer back to them at any time.
 >
 > There are some extra functions that you may need;
 >
-> `strsplit(file_line, " ")[[1]]` will split a line of text into words 
-> and will return a list of those words.
+> `strsplit(file_line, " ")` will split each line of text into a vector of 
+> strings, using space as a delimiter and will return a list of these vectors.
 >
-> `cat(file_line, "is", value, "\n")` will print values to the screen,
+> `cat(expression, "is", value, "\n")` will print values to the screen,
 > while adding a newline onto the end of each line.
 > 
 > [Answer](summary_answer01.html)
