@@ -19,9 +19,9 @@ Starting with creating our data file data.txt:
 0
 ```
 
-We start by defining an integer, `total` to be zero before the loop. 
+We start by defining an scalar, `total` to be zero before the loop. 
 Inside the loop we add the line of code `total <- total + number` which 
-increases the variable `total` by the value in the variable `number`.
+increases the scalar `total` by the value in the scalar `number`.
 Finally we print the total:
 
 ```R

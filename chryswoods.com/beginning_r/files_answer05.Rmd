@@ -19,7 +19,7 @@ Starting with creating our data file data.txt:
 0
 ```
 
-Here the loop itself has not changed, we've just created a new variable 
+Here the loop itself has not changed, we've just created a new scalar 
 afterwards, `mean` which is calculated from `total` and `count`:
 
 ```R
@@ -28,12 +28,12 @@ file_lines <- readLines(file_handle)
 close(file_handle)
 
 total <- 0
-count <- 0
+count <- 0L
 
 for (file_line in file_lines) {
   number <- as.numeric(file_line)
   total <- total + number
-  count <- count + 1
+  count <- count + 1L
 }
 
 mean <- total / count

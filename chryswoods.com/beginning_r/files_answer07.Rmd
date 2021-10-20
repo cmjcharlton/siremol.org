@@ -20,8 +20,8 @@ Starting with creating our data file data.txt:
 ```
 
 The logic in this script is identical but instead of having `total`, 
-`count` and `mean` as separate variables, we have collected them 
-into a single dictionary:
+`count` and `mean` as separate scalars, we have collected them 
+into a single atomic vector:
 
 ```R
 file_handle <- file("data.txt")

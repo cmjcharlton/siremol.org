@@ -74,10 +74,9 @@ memory. If you forget to close the file then R will close it automatically
 connection or when the script ends.
 
 In the next line (`for (file_line in file_lines)`) we are looping over the lines 
-of the file. This loop looks just like those we used when looping over 
-lists a few chapters previously, because `lines` is just a list containing
-the lines of the file. We assign the string containing the line from the 
-file to the variable `file_line`.
+of the file. This loop looks just like those we used a few chapters previously, 
+because `file_lines` is just a character vector containing the lines of the file. 
+We assign the string containing the line from the file to the variable `file_line`.
 
 Finally, we print the string `file_line`. Note that R will automatically
 add quotes and backslashes to the lines that are printed. You can 
@@ -158,7 +157,7 @@ file_lines <- readLines(file_handle)
 close(file_handle)
 
 for (file_line in file_lines) {
-  new_number <- file_line + 17
+  new_number <- file_line + 17L
   print(new_number)
 }
 ```
@@ -166,7 +165,7 @@ for (file_line in file_lines) {
 If you edit `file.R` to contain this code and run it you should see an error:
 
 ```
-Error in file_line + 17 : non-numeric argument to binary operator
+Error in file_line + 17L : non-numeric argument to binary operator
 Execution halted
 ```
 
@@ -174,8 +173,8 @@ This is telling us that there is an error occurring when trying to add 17 to the
 data read in from the line in the file. The error message says that there is
 a "non-numeric argument to a binary operator", which implies that the computer 
 believes that we're trying to add together something that is not a numeric
-value. The only two things involved in this operation are `file_line` and `17`. 
-We know that `17` is an integer, and so is a numeric, so `file_line` must be 
+value. The only two things involved in this operation are `file_line` and `17L`. 
+We know that `17L` is an integer, and so is a numeric, so `file_line` must be 
 the problematic non-numeric argument.
 
 When reading from a file like this, everything it gives you will *always* 
@@ -190,7 +189,7 @@ close(file_handle)
 
 for (file_line in file_lines) {
   number <- as.numeric(file_line)
-  new_number <- number + 17
+  new_number <- number + 17L
   print(new_number)
 }
 ```
@@ -215,7 +214,7 @@ Running this new script will now print out our "processed" data:
 > 
 > After looping though the data, print out the sum of all the data values seen.
 >
-> hint: Make an integer before the loop, initially set to zero and 
+> hint: Make an scalar before the loop, initially set to zero and 
 > add to it each time around the loop
 > 
 > [Answer](files_answer03.html)
@@ -233,7 +232,7 @@ Running this new script will now print out our "processed" data:
 >
 > [Answer](files_answer06.html)
 >
-> Collect the statistics into a summary dictionary with keys `sum`, `count` and `mean`.
+> Collect the statistics into a summary vector with names `sum`, `count` and `mean`.
 >
 > [Answer](files_answer07.html)
 

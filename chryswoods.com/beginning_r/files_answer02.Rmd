@@ -19,7 +19,7 @@ Starting with creating our data file data.txt:
 0
 ```
 
-We have changed just one line so that it now has `* 10` rather than `+ 17`:
+We have changed just one line so that it now has `* 10` rather than `+ 17L`:
 
 ```R
 file_handle <- file("data.txt")
