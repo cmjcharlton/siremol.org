@@ -23,7 +23,9 @@ As before we start with defining a variable `count` to start at zero.
 We increase it by 1 each time around the loop and print it out at the end:
 
 ```R
-file_lines <- readLines(file("data.txt"))
+file_handle <- file("data.txt")
+file_lines <- readLines(file_handle)
+close(file_handle)
 
 total <- 0
 count <- 0

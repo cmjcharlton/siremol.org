@@ -18,7 +18,9 @@ The simplest this we can do with files is read a file in and print it
 to the screen. Make a new script called `file.R` and put the following in it:
 
 ```R
-file_lines <- readLines(file("file.R"))
+file_handle <- file("file.R")
+file_lines <- readLines(file_handle)
+close(file_handle)
 
 for (file_line in file_lines) {
   print(file_line)
@@ -28,7 +30,9 @@ for (file_line in file_lines) {
 when you run it with `Rscript file.R` you will see it print out:
 
 ```
-[1] "file_lines <- readLines(file(\"file.R\"))"
+[1] "file_handle <- file(\"file.R\")"
+[1] "file_lines <- readLines(file_handle)"
+[1] "close(file_handle)"
 [1] ""
 [1] "for (file_line in file_lines) {"
 [1] "  print(file_line)"
@@ -49,21 +53,25 @@ If this file does not exist, then `readLines` will print an error
 and exit the script, e.g.
 
 ```R
-file_lines <- readLines(file("does_not_exist.R"))
+file_handle <- file("does_not_exist.R")
+file_lines <- readLines(file_handle)
+close(file_handle)
 ```
 
 ```
 Rscript file.R
 
-Error in readLines(file("does_not_exist.R")) : cannot open the connection
+Error in readLines(file_handle) : cannot open the connection
 In addition: Warning message:
-In readLines(file("does_not_exist.R")) :
+In readLines(file_handle) :
   cannot open file 'does_not_exist.R': No such file or directory
 Execution halted
 ```
 
-If the file does exist, then it is opened, all of its lines read into 
-memory, and then closed automatically.
+If the file does exist, then it is opened and all of its lines read into 
+memory. If you forget to close the file then R will close it automatically
+(with a warning) some time after there are no longer any references to the
+connection or when the script ends.
 
 In the next line (`for (file_line in file_lines)`) we are looping over the lines 
 of the file. This loop looks just like those we used when looping over 
@@ -76,7 +84,9 @@ add quotes and backslashes to the lines that are printed. You can
 remove them by passing `quote = FALSE` to `print`, e.g.
 
 ```R
-file_lines <- readLines(file("file.R"))
+file_handle <- file("file.R")
+file_lines <- readLines(file_handle)
+close(file_handle)
 
 for (file_line in file_lines) {
   print(file_line, quote = FALSE)
@@ -86,7 +96,9 @@ for (file_line in file_lines) {
 will print
 
 ```
-[1] file_lines <- readLines(file("file.R"))
+[1] file_handle <- file("file.R")
+[1] file_lines <- readLines(file_handle)
+[1] close(file_handle)
 [1] 
 [1] for (file_line in file_lines) {
 [1]   print(file_line, quote = FALSE)
@@ -98,7 +110,9 @@ to the screen using `cat`, specifying that a newline (`\n`) should be
 used to separate each line, e.g.
 
 ```R
-file_lines <- readLines(file("file.R"))
+file_handle <- file("file.R")
+file_lines <- readLines(file_handle)
+close(file_handle)
 
 for (file_line in file_lines) {
   cat(file_line, sep = "\n")
@@ -139,7 +153,9 @@ first step towards some data analysis and pretend that the task we're
 trying to do is to read in data from the file and add 17 to each value.
 
 ```R
-file_lines <- readLines(file("data.txt"))
+file_handle <- file("data.txt")
+file_lines <- readLines(file_handle)
+close(file_handle)
 
 for (file_line in file_lines) {
   new_number <- file_line + 17
@@ -168,7 +184,9 @@ that the file only contains numerics, then we can convert each number
 to a numeric as it comes in using the `as.numeric` function: 
 
 ```R
-file_lines <- readLines(file("data.txt"))
+file_handle <- file("data.txt")
+file_lines <- readLines(file_handle)
+close(file_handle)
 
 for (file_line in file_lines) {
   number <- as.numeric(file_line)

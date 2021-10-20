@@ -20,7 +20,9 @@ Starting with our data file, calc.txt:
 calc.R then looks like:
 
 ```R
-file_lines <- readLines(file("calc.txt"))
+file_handle <- file("calc.txt")
+file_lines <- readLines(file_handle)
+close(file_handle)
 
 for (file_line in file_lines) {
   words <- strsplit(file_line, " ")[[1]]

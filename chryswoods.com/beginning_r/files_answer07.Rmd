@@ -24,7 +24,9 @@ The logic in this script is identical but instead of having `total`,
 into a single dictionary:
 
 ```R
-file_lines <- readLines(file("data.txt"))
+file_handle <- file("data.txt")
+file_lines <- readLines(file_handle)
+close(file_handle)
 
 stats <- c("sum" = 0, "count" = 0)
 

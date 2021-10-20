@@ -24,7 +24,9 @@ lines and print each in-turn. The only thing that has been changed
 here is the argument being passed to `file`:
 
 ```R
-file_lines <- readLines(file("data.txt"))
+file_handle <- file("data.txt")
+file_lines <- readLines(file_handle)
+close(file_handle)
 
 for (file_line in file_lines) {
   cat(file_line, sep = "\n")
