@@ -63,10 +63,11 @@ and macOS Catalina are here;
 Because R is not installed by default on most computers, you will need to download
 and install it before continuing with this workshop. R is available for many
 operating systems, including Windows, Linux and OS X. You will need administrator
-access to install R on your computer. If you don't have administrator access,
-then your IT Services may have made it available via a software catalogue
-or software center. If not, then get in contact with your IT Services to
-install R.
+access to install R via the official installation method or your distribution's package
+manager. If you don't have administrator access, then your IT Services may have made it
+available via a software catalogue or software center. If not, then get in contact with
+your IT Services to install R. Alternatively you could copy the files from a version
+installed elsewhere or download "portable" version of the software.
 
 If you have administrator access or elevated user rights, you can download and install
 R by following the [links on this page](https://cran.r-project.org). For convenience,
@@ -107,16 +108,17 @@ many extra tools along the way.
 For the purpose of this course we will be using a free and open source version 
 of RStudio. This provides a graphical interface with a local text editor,
 interface to the operating system terminal, and an interactive R console.
-Again, you need administrator access or elevated user rights to install
-RStudio on your computer. If you don't have this, then your IT Services
-may have made RStudio available via a software catalogue or software center.
-If not, then get in touch with your IT Services to install RStudio for you.
+If you want to use the installer to integrate the software with your system
+you need administrator access or elevated user rights.
 
 If you do have administrator access or elevated user rights, then 
 the easiest way to get access to RStudio is to download the free "open source edition"
 of "RStudio Desktop" [from the website](https://rstudio.com/products/rstudio/),
 and to then follow the instructions on the website to install the version
 that is appropriate for your operating system.
+
+If you do not have administrator access the select the "Zip/Tarballs" version for
+your operating system and extract it to the location of your choice.
 
 ## Setting up your workspace
 
@@ -137,7 +139,9 @@ Next, on the tab reading "Console", "Terminal", "Jobs", click the "Terminal"
 tab. This will open a terminal that will let you type commands directly
 to your computer. The contents of the terminal will be different on different
 computers, but that's ok. On Linux and OS X this will likely be a bash (or similar) prompt,
-while on Windows this will likely be a command prompt.
+while on Windows this will likely be a command prompt if you haven't installed Git
+or Windows Subsystem for Linux onto the computer. If you want to use a particular
+version you can set this via the Tools→Global Options→Terminal menu within RStudio.
 
 ![](images/rstudio02.png)
 
