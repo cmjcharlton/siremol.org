@@ -37,7 +37,7 @@ This workshop is going to introduce you to the basics of the R programming langu
 with more advanced topics being covered by later workshops.
 
 You can jump ahead to any chapter (and pre-recorded video walkthroughs of 
-each chapter is avaiable at the link):
+each chapter is available at the link):
 
 1. [Getting started](getting_started.html) - [walkthrough video](https://youtu.be/kpXGXyo8j9E)
 2. [Data types](data_types.html) - [walkthrough video](https://youtu.be/lUqm8SMQPO0)

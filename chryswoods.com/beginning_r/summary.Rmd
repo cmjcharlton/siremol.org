@@ -18,7 +18,7 @@ Well done for getting this far! We've covered a lot in this course:
 * Creating, modifying and accessing dictionaries
 * Reading files
 
-You're not expected to have comitted all of this to memory already, 
+You're not expected to have committed all of this to memory already, 
 learning any programming language takes more than three hours. It is 
 only by continuing to use R and practise that you will become confident. 
 These notes will remain online so feel free to refer back to them at any time.

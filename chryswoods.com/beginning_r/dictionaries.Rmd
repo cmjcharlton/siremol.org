@@ -215,7 +215,7 @@ for (i in seq(1,length(sounds))){
 ```
 
 The `length` function gives the number of items in the dictionary, which is passed
-to `seq` to generate a sequence of all of the numeric indicies. For each index
+to `seq` to generate a sequence of all of the numeric indices. For each index
 we look up the `sound` as `sounds[i]`. This contains both the value (e.g.
 `meow`) and an associated name (e.g. `cat`). The name is extracted using
 the `names` function.

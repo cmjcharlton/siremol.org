@@ -82,7 +82,7 @@ print(pi)
 ```
 
 Names in R can contain upper and lower case letters, numbers and underscores 
-(but can't start with a number). Chosing the correct name for a particular 
+(but can't start with a number). Choosing the correct name for a particular 
 variable is an important task as a non-descriptive name (or worse, 
 an incorrect name) will be very confusing for you and anyone reading your code. 
 It is common in R to name your variables with all lower case letters and 
@@ -133,8 +133,8 @@ printed out the new variable.
 Likewise we can do addition:
 
 ```R
-temperature_in_celcius <- 25.1
-temperature_in_kelvin <- temperature_in_celcius + 273.15
+temperature_in_celsius <- 25.1
+temperature_in_kelvin <- temperature_in_celsius + 273.15
 
 print(temperature_in_kelvin)
 ```

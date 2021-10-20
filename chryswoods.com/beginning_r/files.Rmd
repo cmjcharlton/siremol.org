@@ -155,7 +155,7 @@ Error in line + 17 : non-numeric argument to binary operator
 Execution halted
 ```
 
-This is telling us that there is an error occuring when trying to add 17 to the 
+This is telling us that there is an error occurring when trying to add 17 to the 
 data read in from the line in the file. The error message says that there is
 a "non-numeric argument to a binary operator", which implies that the computer 
 believes that we're trying to add together something that is not a numeric

@@ -211,7 +211,7 @@ be the sequence of odd numbers between 1 and 9, while
 
 ## Negative indicies and masking
 
-You can use negative indicies to mask out elements from a list. For example:
+You can use negative indices to mask out elements from a list. For example:
 
 ```R
 my_list <- c("red", "green", "blue")
@@ -233,7 +233,7 @@ This is because `my_list[-1]` means "everything except the element at index 1",
 thus meaning `"green" "blue"`. Similarly, `my_list[-3]` means 
 "everything except the element at index 3", thus meaning `"red" "green"`.
 
-You can mask out multiple indicies at once, e.g.
+You can mask out multiple indices at once, e.g.
 
 ```R
 my_list <- c("red", "green", "blue")
@@ -241,7 +241,7 @@ my_list <- c("red", "green", "blue")
 print(my_list[c(-1, -2)])
 ```
 
-would print `[1] "blue"`, as we have masked out the items at indicies 1 and 2.
+would print `[1] "blue"`, as we have masked out the items at indices 1 and 2.
 
 You can also mask by passing in a list of booleans (true or false values) 
 that has the same size as the list, e.g.
@@ -287,8 +287,8 @@ would print
 [1] "fish"  "dog"   "horse"
 ```
 
-because we have updated the items at indicies 1 and 3 with the items
-`fish` and `horse`. You must make sure that the number of indicies
+because we have updated the items at indices 1 and 3 with the items
+`fish` and `horse`. You must make sure that the number of indices
 matches the number of items that are updated.
 
 ## Adding things to lists

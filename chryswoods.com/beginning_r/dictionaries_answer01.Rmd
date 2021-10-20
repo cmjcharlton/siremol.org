@@ -49,7 +49,7 @@ Rscript dict.R
 [1] "Fish goes NA"
 ```
 
-As with lists, returning `NA` for a non-existant value can be a major
+As with lists, returning `NA` for a non-existent value can be a major
 source of bugs. You can test if a name (key) exists in a 
 dictionary by using the `%in%` keyword, to see if the name is
 in the `names()` of the dictionary;

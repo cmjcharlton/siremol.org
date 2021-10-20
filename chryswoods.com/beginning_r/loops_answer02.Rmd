@@ -46,7 +46,7 @@ Rscript loop.R
 ```
 
 we see again that we have printed each word, but this time we have
-looped over the list indicies as a sequence.
+looped over the list indices as a sequence.
 
 
 
