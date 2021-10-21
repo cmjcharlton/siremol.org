@@ -7,7 +7,19 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Strings
+The most common data type in R is the "vector", which is a sequence of zero or
+more data elements. This has two sub-types, the "atomic vector" where all
+elements are of the same type and the "list", which can contain elements of any 
+type (technically speaking it is a vector where all elements are references),
+including other lists or vectors. Vectors with only one element are often 
+referred to as scalars.
+
+## Atomic Vectors
+
+Atomic vectors can be one of a variety of different types and we will now
+describe the most common of these.
+
+## Character (often referred to as strings)
 
 In the last chapter we introduced the idea of "strings". They are a way of 
 representing normal human words inside an R script. Strings start and end with 
@@ -32,7 +44,12 @@ and they can even be empty:
 
 It is possible in R to also use single quotes (') to make strings, 
 as long as the string starts and ends with the same type of quote, 
-but it is convention to prefer double quotes.
+but it is convention to prefer double quotes, except where the quoted
+string itself contains double quotes and no single quotes, for example:
+
+```R
+'"Read this!", he said'
+```
 
 > EXERCISE
 >
@@ -41,13 +58,16 @@ but it is convention to prefer double quotes.
 > 
 > [Answer](data_types_answer01.html)
 
-## Numbers
+## Numeric (integer and double, but not complex numbers)
 
-The other most common type of data that you'll find in R scripts are numbers. 
-There are two main types of number in R:
+R divides numeric values into two sub-types
 
-* **Floats** (or floating point numbers) are a way of representing numbers with decimal places
-* **Integers** are for representing whole numbers
+* **Double** (or floating point numbers) are a way of representing numbers with 
+decimal places (up to 15 digits of precision). "floating" refers to the decimal place,
+which can move between any of the digits to allow representation of a wide range of
+values.
+* **Integer** are for representing whole numbers up to .Machine$integer.max 
+(usually 2147483647)
 
 When creating numbers in R, you do not use quotes, you write the number directly. So:
 
@@ -55,20 +75,66 @@ When creating numbers in R, you do not use quotes, you write the number directly
 3.14159
 ```
 
-is a float, and
+is a floating point number, and
 
 ```R
-42
+42L
 ```
 
 is an integer.
 
-## Variables
+Note that if the "L" is omitted then R will store the number as a double even though
+you have not specified a decimal point. Note also that as integers in R currently 
+have 32 bits of precision whereas double has 53 it is actually better to store very
+large integers using the double type.
 
-Of course, it not much use to have numbers and strings floating about with no 
-connection to each other. We want to be able to give them names and combine 
-them together. We assign names to data using `<-` (less than, followed by 
-a hyphen). For example if we want to make some data and give it a name we can do it like:
+## Logical (boolean)
+
+Logicals can take one of two values, TRUE or FALSE. These are often used as flag values
+or the result of conditions. We will cover these in more detail in the "conditionals" 
+section of this tutorial.
+
+## Checking and converting types
+
+You will often find "object" used in the R documentation as an umbrella terms for
+anything that R can reference. R provides a number of functions to see and change 
+the type of an object, we describe some of the most common of these below:
+
+* `typeof`       returns a string with the underlying type of the object as a string
+* `class`        returns a string with the class of the object as a string
+* `str`          returns the underlying structure of an object
+
+* `is.atomic`    returns TRUE or FALSE indicating whether the object type is atomic vector
+* `is.list`      returns TRUE or FALSE indicating whether the object type is list
+* `is.character` returns TRUE or FALSE indicating whether the object type is character (string)
+* `is.double`    returns TRUE or FALSE indicating whether the object type is floating point
+* `is.integer`   returns TRUE or FALSE indicating whether the object type is integer
+(note that this refers to the storage type not whether the contained numbers have 
+values after the decimal place)
+* `is.logical`   returns TRUE or FALSE indicating whether the object type is logical (boolean)
+* `is.numeric`   returns TRUE or FALSE indicating whether the object type is integer or floating point
+
+* `as.character` converts the object type to character (string)
+* `as.double`    converts the object type to double
+* `as.integer`   converts the object type to integer
+* `as.logical`   converts the object type to boolean
+* `as.numeric`   converts the object type to double (alias for as.double)
+
+Notice the inconsistency between is.numeric and as.numeric, as this can be a source
+of confusion. This is because any R integers have 32 bits of precision while R doubles
+have 53. This means that any integer can be represented as a double without losing
+accuracy and therefore converting to the larger type is always safe. As you might
+expect this is also an `is.vector` function, however as so many other types
+derive from vector this only returns true if the object is a vector with no
+extra attributes (other than names). `as.vector` will correspondingly strip
+any of these from its argument.
+
+## Binding
+
+Of course, it not much use to have values floating about with no connection to
+each other. We want to be able to give them names and combine them together. 
+We assign names to data using `<-` (less than, followed by a hyphen). For example 
+if we want to make some data and give it a name we can do it like:
 
 ```R
 pi <- 3.14159
@@ -81,18 +147,22 @@ this name in other parts of the program to refer to that piece of data:
 print(pi)
 ```
 
-Names in R can contain upper and lower case letters, numbers and underscores 
-(but can't start with a number). Choosing the correct name for a particular 
-variable is an important task as a non-descriptive name (or worse, 
-an incorrect name) will be very confusing for you and anyone reading your code. 
-It is common in R to name your variables with all lower case letters and 
-use underscores to separate words.
+Names in R can contain upper and lower case letters, numbers, underscores and
+dots (but can't start with a number or underscore). Choosing the correct name to
+associate with a particular value is an important task as a non-descriptive name
+(or worse, an incorrect name) will be very confusing for you and anyone reading
+your code. It is common in R to give names all lower case letters and use
+underscores or dots to separate words. This can be a source of confusion if you
+have previously used a language such as C++ or Java where a dot is used to
+reference members of a class.
 
-So, for a variable which contains a number representing a distance in miles, 
-avoid shortened names like dm, distm or d and instead use a name like distance_in_miles. 
-Remember, code will be written once but read many times so make it easy to read.
+So, for a value representing a distance in miles, avoid shortened names like dm, 
+distm or d and instead use a name like distance_in_miles. Remember, code will be 
+written once but read many times so make it easy to read. A common exception to 
+this is when naming a value that is used as an integer index in a loop, but we 
+will cover this later in the course.
 
-Note that R uses `<-` to mean "assign a value to a variable". This is different
+Note that R uses `<-` to mean "assign a value to a name". This is different
 to many other programming languages, which use `=` for this meaning. R does
 support the use of `=`, e.g.
 
@@ -100,22 +170,123 @@ support the use of `=`, e.g.
 pi = 3.14159
 ```
 
-but its use is discouraged.
+but its use is discouraged. `=` is also used for a different purpose when assigning
+values to function arguments, and we will encounter this later on.
+
+R also allows the assignment operator to point in the other direction using the `->` 
+operator, e.g.
+
+```R
+3.14159 -> pi
+```
+
+This was originally included to aid the usability of the software on machines where 
+line editing was not available but its use is now generally discouraged. It has
+recently had some return in the context of pipes (|> in base R or %>% via an addon
+package) to maintain a left to right flow in the syntax. This syntax is not covered in this
+module, but will be introduced in the "Intermediate R" module.
+
+There is one final type of assignment operator that you may encounter `<<-` and 
+`->>`. This means "assign the value to the first matching parent environment". 
+This is not widely used and we are not covering environment hierarchies within 
+this course, so I will not go into any further detail other than to highlight 
+its existence and that you need to watch out for accidentally mistyping this 
+instead of the normal assignment operator, as R will not issue a warning if you do!
 
 > EXERCISE
 >
 > Edit your `hello.R` to split it over two lines. The first line should create 
-> a string and give it a variable name and the second line should use that 
-> name to print. Make sure you save the file and rerun it in the terminal.
+> a string and give it a name and the second line should use that name to print. 
+> Make sure you save the file and rerun it in the terminal.
 >
 > [Answer](data_types_answer02.html)
 
-## Combining variables
+## Creating longer vectors
 
-Variables are more that just a way of labelling data, they also make it easier 
-to do things with your data. If you have some numbers you can add, subtract, 
-multiply and divide them as you would expect. The symbol for multiplication 
-is `*` and the symbol for division is `/`.
+So far we have just looked at vectors containing a single value (scalar), however
+as we have seen before these can be of any length. R provides a handy `c` (combine)
+function for joining together vectors into a longer one so:
+
+```R
+c(4.4, 7.8, 9.9)
+```
+
+would result in a double vector with three elements.
+
+If you combine vectors of different types then R will use the most common type
+when creating the resulting vector so:
+
+```R
+c(4.4, 7.8, 9.9, 6L)
+```
+
+would result in a double vector and:
+
+```R
+c(4.4, 7.8, 9.9, "cow")
+```
+
+would result in a character vector.
+
+You can also assign names to the element of the vector as follows:
+```R
+c(height = 160.2, weight = 65.4, age = 30.5)
+```
+
+R also provides a special `vector` function allowing you to specify the length
+of a vector when creating this, e.g.
+
+a double vector with values of zero and a length of six with:
+
+```R
+vector(mode = "double", length = 6)
+```
+
+or a vector of six empty strings with:
+
+```R
+vector(mode = "character", length = 6)
+```
+
+You can also use this to create an empty vector with:
+
+```R
+vector(length = 0)
+```
+
+In this case R will not know what type to use as storage, so will use logical by
+default unless you choose a specific type, i.e.:
+
+```R
+vector(mode = "integer")
+```
+
+You might want to use this to "preallocate" your vector if you know what the final
+length will be, as otherwise each time you combine vectors new new vector is
+allocated and their values are copied into it.
+
+Warning: You may have looked at the previous syntax patterns and assumed that you
+could also create an empty vector using by leaving the arguments to the `combine`
+function empty, i.e.
+
+```R
+c()
+```
+
+This is not the case however and you will instead get a `NULL` object, which is a
+special value indicating an object that is undefined. The `c` (combine) function
+is a generic function for combining its arguments and does not only apply to vectors.
+
+You may encounter the R types `matrix` or `array`. These are simply vectors that
+have their dimension set to 2 (matrix) or more (array), but we will not be covering
+these in this course.
+
+## Performing Calculations
+
+Binding a name to value has more use than just giving it a label, it also makes
+it easier to do things with your data. If you have some numbers you can add, 
+subtract, multiply and divide them as you would expect. The symbol for 
+multiplication is `*` and the symbol for division is `/`.
 
 ```R
 distance_in_miles <- 30
@@ -124,11 +295,10 @@ distance_in_km <- distance_in_miles * 1.60934
 print(distance_in_km)
 ```
 
-Here we created a variable `distance_in_miles` with the value of `30`. 
-Then we used that variable in line two and multiplied it by a number 
-(`distance_in_miles * 1.60934`) and assigned the result of that 
-calculation to a new variable called `distance_in_km`. Finally, we 
-printed out the new variable.
+Here we bound the name `distance_in_miles` to the value of `30`. Then we used 
+that in line two and multiplied it by a number (`distance_in_miles * 1.60934`) 
+and gave the result of that calculation the name `distance_in_km`. Finally, we 
+printed out the new value.
 
 Likewise we can do addition:
 
@@ -139,9 +309,17 @@ temperature_in_kelvin <- temperature_in_celsius + 273.15
 print(temperature_in_kelvin)
 ```
 
+If the vectors used in the expression have a length greater than one then the
+results will likewise have this length as the expression is applied to each
+element (this is called vectorisation).
+
+Note that when performing operations on mixed types of numeric values
+R will automatically coerce the values to the most general type, so in a calculation
+involving a logical and an integer the result will be integer and in a calculation
+involving an integer and a double the result would be of type double. 
+
 We cannot use mathematical operations on strings. They can only be used
 on numbers (numeric data). To join strings, we use the `paste` function;
-
 
 ```R
 greeting <- "Hello"
@@ -173,7 +351,41 @@ line, separated by spaces.
 print(paste("Hello", "R"))
 ```
 
-will print `Hello R`.
+will print:
+```
+[1] "Hello R"
+```
+
+You can choose something other than a space to separate the parts by specifying 
+the `sep` argument. This can be any string, including an empty string if you 
+want no separator. As this last option is a common requirement R provides a 
+special variant of the function `paste0` for this purpose.
+
+You might wonder what would happen if you passed the strings as part of a longer
+vector rather than as separate arguments to the paste function, i.e.:
+
+```R
+print(paste(c("Hello", "R")))
+```
+
+this will print:
+
+```
+[1] "Hello" "R"
+```
+
+To print the combined elements as one string the `paste` function provides a
+`collapse` argument. If you change the code above to:
+
+```R
+print(paste(c("Hello", "R"), collapse = " "))
+```
+
+You will once again see:
+
+```
+[1] "Hello R"
+```
 
 > EXERCISE
 >

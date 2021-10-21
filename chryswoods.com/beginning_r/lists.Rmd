@@ -9,43 +9,68 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Lists
 
-Until now all the variables we have used have contained a single piece 
-of information, for example, `a <- 4` makes a variable `a` containing 
-a single number, `4`. It’s very common in programming (and in fact real 
-life) to want to refer to collections of this. For example a shopping 
-list contains a list of items you want to buy, or a car park 
-contains a set of cars.
+Until now we have created sequences where all the values have the same type.
+Sometimes we want to store a set of values that have different types together
+in the same structure (for example a person's name, weight, height and age). To
+do this we can use the other sub-type of vector, the `list'.
 
 Create a new file by going to *File → New File → R Script*. 
 Save it (e.g. using *File → Save*) to a file called list.R. 
 Inside that file write the following:
 
 ```R
-my_list <- c("cat", "dog", 261)
+my_list <- c("cat", "dog", 261L)
 
 print(my_list)
+
+typeof(my_list)
 ```
 
 Run this script in the terminal with `Rscript list.R` and look at the output.
 
-This will create a R list (also called a vector) with three elements and 
-assign it to the variable `my_list`. The function `c` is the "combine" function that
-"creates a list" from by combining its arguments. The elements of the list, like all
-arguments to a function, are separated by commas. As with previous 
+Notice that the "combine" function has converted all of the elements into character
+strings as this is the most general type. In order to maintain the types of the
+elements we need to switch to using the `list` function when creating the
+sequence:
+
+```R
+my_list <- list("cat", "dog", 261L)
+
+print(my_list)
+
+typeof(my_list)
+```
+
+This will create a R list with three elements and assign it to the variable 
+`my_list`. The function `list` is like the "combine" function that we saw previously
+and "creates a list" from by combining its arguments. The elements of the list, 
+like all arguments to a function, are separated by commas. As with previous 
 variable types, you can print lists by passing their name to the `print()` function.
 
+As with atomic vectors you can assign labels to each element of the list, i.e.
+
+```R
+my_list <- list(model = "ford", age = 10L, weight = 1.2)
+```
+
 You can have as many items in a list as you like, even zero items. 
-An empty list could look like:
+An empty list can be created by providing no arguments to the function:
 
 ```R
-my_list <- c()
+my_list <- list()
 ```
 
-And a list with six different numbers could look like:
+You can also create a pre-allocated list with a set size in the same way as
+we saw with the atomic vector:
 
 ```R
-my_list <- c(32, 65, 3, 867, 3, -5)
+my_list <- vector(mode = "list", length = 6)
 ```
+
+R also provides a special type of list called a data.frame, which is a list of
+vectors all of the same length. We will cover this in more detail in the
+"Intermediate R" course but the most important thing to note is that all of the
+access methods described below will also apply to this.
 
 > EXERCISE
 >
@@ -58,30 +83,54 @@ my_list <- c(32, 65, 3, 867, 3, -5)
 
 ## Indexing
 
-The power of R's lists comes not simply from being able to hold many pieces 
+The power of R's vectors comes not simply from being able to hold many pieces 
 of data but from being able to get specific pieces of data out. The primary 
-method of this is called indexing. Indexing a list in R is done using the 
-square brackets `[]`. To get a single element out of a list you write 
-the name of the variable followed by a pair of square brackets with a 
-single number between them:
+method of this is called indexing. R has two ways of indexing, either using single
+square brackets `[`, or double square brackets `[[`. Single square brackets are for
+matching a set of elements whereas double square brackets extract a single
+element. For now we will use both forms to extract single elements, but will visit
+extracting multiple values in the "subsetting" section further below. To do this 
+place the index number of the element you wish to extract between the square brackets:
 
 ```R
-my_list <- c("cat", "dog", 261)
+my_list <- list("cat", "dog", 261L)
 
-my_element <- my_list[1]
+my_element <- my_list[[1]]
+
+print(my_element)
+
+my_elements <- my_list[1]
+
+print(my_elements)
+```
+
+The code `my_list[[1]]` means "give me the number 1 element of the list my_list". 
+Run this code and see what you get. Is it what you expect?
+
+You'll probably notice that it prints `cat` whereas those of you who've used
+some other programming languages may have expected it to print `dog`. 
+This is because in R indices are numbered from one, similarly to Fortran, MATLAB and
+Pascal, rather than zero, which is the convention in languages such as C++, Java or Python.
+
+The code `my_elements <- my_list[1]' means "give me a new list containing the first
+element of the list my_list.
+
+If you have named elements of the vector then you can use these instead of
+numeric indices to access array elements. The list has a final method of indexing
+which is the `$` operator. This is a shortcut to the `[[` notation that can be 
+used when an element of the list is named, for example:
+
+```R
+my_list <- list(name = "Fred", age = 35L, height = 180.5)
+
+my_element <- my_list$name
 
 print(my_element)
 ```
 
-The code `my_list[1]` means "give me the number 1 element of the list my_list". 
-Run this code and see what you get. Is it what you expect?
-
-You'll probably notice that it prints `cat` whereas those of you who've used
-other programming languages may have expected it to print `dog`. 
-This is because in R you count from one when indexing lists and 
-so index 1 refers to the first item in the list. This is different to languages
-like Python or C++, which count from 0. R instead counts from 1.
-This "one-indexing" is not common and is not used by many programming languages.
+Be careful when using this notation however as by default R will allow partial
+matching, meaning that in the above example `my_list$n`, `my_list$na` and
+`my_list$nam` will all match the element labelled by "name".
 
 > EXERCISE
 >
@@ -90,22 +139,28 @@ This "one-indexing" is not common and is not used by many programming languages.
 >
 > [Answer](lists_answer02.html)
 
-## R NA
+## R NA and NULL
 
-Indexing lists is likely the first time you will see an R `NA`. `NA` is short
-for "not available", and is returned by R whenever you ask for something 
-that is not available. This can happen when you ask for an item in a list
-that doesn't exist. You can test if a value is `NA` using the `is.na` function.
+Indexing is likely the first time you will see an R `NA` or `NULL`. `NA` is short
+for "not available", and is returned by R whenever you use the `[` to ask for an 
+element in an atomic vector that is not available. `NULL` is a special value that
+represents an undefined object and as such is returned when you use `[[` to ask for
+items in a list that don't exist. You can test if a value is `NA` using the `is.na`
+function. You can test whether the returned value is `NULL` with the `is.null` function.
+Note that the NA will be of the same type as the vector being indexed. But in practice
+this does not matter as R will automatically convert between the different versions of NA.
 For example;
 
 ```R
-my_list <- c("cat", "dog", 261)
+my_vector <- c("cat", "dog", "mouse")
 
-my_element <- my_list[6]
+my_element <- my_vector[6]
 
 print(my_element)
 
 print(is.na(my_element))
+
+typeof(my_element)
 ```
 
 Running this you will see the following printed to the screen:
@@ -113,73 +168,101 @@ Running this you will see the following printed to the screen:
 ```
 [1] NA
 [1] TRUE
+[1] "character"
 ```
 
-Be very careful in R that you check if values are `NA`. A common 
-source of bugs is accessing elements in a list that don't exist.
+Be very careful in R that you check returned values for NA as subsequent calculations using
+these values will often also become NA. This "NA propagation" can be a common source of errors.
 
-You can get the length of the list using the `length` function, e.g.
+Note that if you request a single item that doesn't exist you will instead get an
+"subscript out of bounds" error, for example running:
 
 ```R
-my_list <- c("cat", "dog", 261)
+my_vector <- c("cat", "dog", "mouse")
 
-print(length(my_list))
+my_element <- my_vector[[6]]
 ```
 
-A valid index in a list must be `1 <= index <= length(list)`.
+will produce the following output:
+
+```
+Error in my_vector[[6]] : subscript out of bounds
+```
+
+It is recommended that if you know you only want to extract a single item you
+should always use `[[` to make this intent explicit and to ensure you get an
+error if no items match.
+
+A valid index when requesting a single item (`[[`) must be `1 <= index <= length(vector)`.
+
+You can get the length of a vector using the `length` function, e.g.
+
+```R
+my_vector <- c("cat", "dog", "mouse")
+
+print(length(my_vector))
+```
 
 ## Updating
 
-You can update a value in a list by putting it on the left-hand side
+You can update a value in a vector by putting it on the left-hand side
 of the assignment operator (`<-`), e.g.
 
 ```R
-my_list <- c("cat", "dog", 261)
+my_vector <- c("cat", "dog", "mouse")
 
-my_list[1] <- "fish"
+my_vector[1] <- "fish"
 
-print(my_list)
+print(my_vector)
 ```
 
 would print
 
 ```
-[1] "fish" "dog"  "261"
+[1] "fish"  "dog"   "mouse"
 ```
 
 as the item at index 1 (which was `cat`) has been replaced by `fish`.
 
+When updating one element using `[` or `[[` to access the elements has the same 
+effect, however if you wanted to update more than one element at a time (see 
+subsetting below) you would need to use the `[`.
+
 Note that you can update items at any index, including those outside of the
-list, e.g.
+vector, e.g.
 
 ```R
-my_list <- c("cat", "dog", 261)
+my_vector <- c("cat", "dog", "mouse")
 
-my_list[8] <- "fish"
+my_vector[8] <- "fish"
 
-print(my_list)
+print(my_vector)
 ```
 
 would print
 
 ```
-[1] "cat"  "dog"  "261"  NA     NA     NA     NA     "fish"
+[1] "cat"  "dog"  "mouse"  NA     NA     NA     NA     "fish"
 ```
 
 because `fish` was assigned to index 8. Since there was nothing previously
-above index 3, R automatically added `NA` values to indexes 4, 5, 6 and 7.
+above index 3, R automatically created a new vector of length eight, copying
+over the old values and filling the new elements with `NA` values in
+indexes 4, 5, 6 and 7. In practice you should avoid expanding vectors
+in this way, as this can result in unexpected memory allocations and be
+detrimental to your code's performance.
 
-## Slicing
+## Subsetting
 
-As well as being able to select individual elements from a list, 
-you can also grab sections of it at once. This process of asking 
-for subsections of a list of called slicing. Slicing starts out 
+As well as being able to select individual elements from a vector, 
+you can also request a subset of items. This process of asking 
+for subsections is sometimes called slicing. Subsetting starts out 
 the same way as standard indexing (i.e. with square brackets) 
 but instead of putting a single number between them, you combine 
-a collection (`c`) of numbers. For example;
+a collection (`c`) of indices For example;
 
 ```R
-my_list <- c(3, 5, "green", 5.3, "house", 100, 1)
+my_list <- list(3, 5, "green", 5.3, "house", 100, 1)
 
 my_slice <- my_list[c(3, 4, 5)]
 
@@ -189,36 +272,39 @@ print(my_slice)
 Run this code and look at the output.
 
 You see that is printed `"green" "5.3" "house"` which is index 3 (`green`), 
-index 4 (`5.3`) and index 5 (`house`), as you requested.
+index 4 (`5.3`) and index 5 (`house`), as you requested. Subsetting syntax
+also allows you to duplicate elements in the output by specifying the same
+index more than once. As before you can replace the numeric indices with
+names if you have assigned these to the elements.
 
 Writing out each index you want would be hard if you wanted a lot of values, 
-e.g. slicing elements 5 to 50 of a big list. Fortunately, the `seq` function
+e.g. subsetting elements 5 to 50 of a big list. Fortunately, the `seq` function
 generates sequences of numbers, e.g.
 
 ```R
-my_list <- c(3, 5, "green", 5.3, "house", 100, 1)
+my_list <- list(3L, 5L, "green", 5.3, "house", 100L, 1L)
 
-my_slice <- my_list[seq(3, 5)]
+my_slice <- my_list[seq(from = 3, to = 5)]
 
 print(my_slice)
 ```
 
-In this case, `seq(3, 5)` generates the sequence of numbers from 3 to 5 
+In this case, `seq(from = 3, to = 5)` generates the sequence of numbers from 3 to 5 
 inclusive. It is thus the same as `c(3, 4, 5)`. You can add an optional
-third argument to `seq` that gives the step, e.g. `seq(1, 9, 2)` will 
-be the sequence of odd numbers between 1 and 9, while 
-`seq(10, 1, -1)` would be a countdown from 10 to 1.
+extra argument to `seq` that gives the step, e.g. `seq(from = 1, to = 9, by = 2)` will 
+be the sequence of odd numbers between 1 and 9, while `seq(from = 10, to = 1)` 
+would be a countdown from 10 to 1.
 
 ## Negative indicies and masking
 
-You can use negative indices to mask out elements from a list. For example:
+You can use negative indices to mask out elements from a vector. For example:
 
 ```R
-my_list <- c("red", "green", "blue")
+my_vector <- c("red", "green", "blue")
 
-print(my_list[-1])
-print(my_list[-2])
-print(my_list[-3])
+print(my_vector[-1])
+print(my_vector[-2])
+print(my_vector[-3])
 ```
 
 will print
@@ -229,40 +315,53 @@ will print
 [1] "red"   "green"
 ```
 
-This is because `my_list[-1]` means "everything except the element at index 1",
-thus meaning `"green" "blue"`. Similarly, `my_list[-3]` means 
+This is because `my_vector[-1]` means "everything except the element at index 1",
+thus meaning `"green" "blue"`. Similarly, `my_vector[-3]` means 
 "everything except the element at index 3", thus meaning `"red" "green"`.
 
 You can mask out multiple indices at once, e.g.
 
 ```R
-my_list <- c("red", "green", "blue")
+my_vector <- c("red", "green", "blue")
 
-print(my_list[c(-1, -2)])
+print(my_vector[c(-1, -2)])
 ```
 
 would print `[1] "blue"`, as we have masked out the items at indices 1 and 2.
 
-You can also mask by passing in a list of booleans (true or false values) 
+You can also mask by passing in a list of logicals (true or false values) 
 that has the same size as the list, e.g.
 
 ```R
-my_list <- c("red", "green", "blue")
+my_vector <- c("red", "green", "blue")
 
-print(my_list[c(FALSE, TRUE, FALSE)])
+print(my_vector[c(FALSE, TRUE, FALSE)])
 ```
 
 would print `[1] "green"`, as this is the only value whose index is `TRUE`
-in the list of passed booleans. Equally:
+in the list of passed logicals Equally:
 
 ```R
-my_list <- c("red", "green", "blue")
+my_vector <- c("red", "green", "blue")
 
-print(my_list[c(TRUE, FALSE, TRUE)])
+print(my_vector[c(TRUE, FALSE, TRUE)])
 ```
 
 would now print `[1] "red"  "blue"`, as the value `green` is masked by
 `FALSE`, while `red` and `blue` are both masked as `TRUE`.
+
+In practice you are unlikely to use indexing by a logical vector directly,
+instead it would typically be generated as the result of an expression. For
+example:
+
+```R
+my_vector <- c("red", "green", "blue")
+
+print(my_vector[my_vector != "green"])
+```
+
+Would print `[1] "red"  "blue"` as the condition `my_vector != "green"` would
+return the vector `[1]  TRUE FALSE  TRUE`, which would then be used as the index.
 
 > EXERCISE
 >
@@ -271,14 +370,14 @@ would now print `[1] "red"  "blue"`, as the value `green` is masked by
 > 
 > [Answer](lists_answer03.html)
 
-Note that you can also use slices to update items in a list. For example;
+Note that you can also use subsetting to update items in a vector. For example;
 
 ```R
-my_list <- c("cat", "dog", 261)
+my_vector <- c("cat", "dog", "mouse")
 
-my_list[c(1, 3)] <- c("fish", "horse")
+my_vector[c(1, 3)] <- c("fish", "horse")
 
-print(my_list)
+print(my_vector)
 ```
 
 would print
@@ -289,51 +388,46 @@ would print
 
 because we have updated the items at indices 1 and 3 with the items
 `fish` and `horse`. You must make sure that the number of indices
-matches the number of items that are updated.
+matches the number of items that are updated. If the number to be replaced
+is longer than the number of items to be updated then R will "recycle" the
+elements starting again at the beginning of the replacement list. If the number
+of elements to be replaced is shorter than the number of items to be updated
+then R will give an error message. This can be a source of errors.
 
-## Adding things to lists
+## Inserting elements
 
-In addition to updating a list, you can add items to the end of your list by using 
-the `append` function:
+So far we have only seen new elements being added to the end of vectors by specifying
+a non-existent index with the `[` or `$` notation, or by combining the new values
+with the `c` function. Sometimes you might want to insert values part way through
+the sequence and R provides the `append` function for this purpose. This is in
+fact a wrapper around the `c` function and you can see how it works by typing in
+`append` without the parenthesis, although we do not currently expect you to
+understand the details.
 
-```R
-my_list <- c("cat", "dog")
-
-my_list <- append(my_list, "horse")
-
-print(my_list)
-
-other_list <- c("fish", "zebra")
-
-my_list <- append(my_list, other_list)
-
-print(my_list)
-```
-
-Append takes two arguments; the list, and then
-the item (or items) you want to append to the list. It appends the item(s) onto
-a copy of the list, which is returned.
-
-The combine (`c`) function does a very similar job to `append`, and
-so you may see it used to append items too, e.g.
 
 ```R
-my_list <- c("cat", "dog")
+my_vector <- c("cat", "dog")
 
-my_list <- c(my_list, "horse")
+my_vector <- append(my_vector, "horse", after = 1)
 
-print(my_list)
+print(my_vector)
 
-other_list <- c("fish", "zebra")
+other_vector <- c("fish", "zebra")
 
-my_list <- c(my_list, other_list)
+my_vector <- append(my_vector, other_vector, after = 2)
 
-print(my_list)
+print(my_vector)
 ```
 
-In my opinion, your code should be descriptive, and so describe the
-intent of what you want to do. Thus, I recommend using `append` when
-you want to append items onto the end of a list, and use
-`c` only when you want to combine or create a collection.
+Append takes three arguments; the vector, the item (or items) you want to append 
+and the position that you want to insert the new elements. It then returns a new
+vector containing the requested elements. If you omit the third `after` parameter
+then append will behave the same as the combine (`c`) function.
+
+As these functions involve creating a new vector and copying over the new values
+it is generally recommended to create the initial vector with its final length 
+if possible, assigning the values as they are known, rather than appending new
+values as the script runs. This will result in your code running more efficiently
+and avoid unnecessary copying and memory allocations.
 
 ## [Previous](data_types.html) | [Next](loops.html)

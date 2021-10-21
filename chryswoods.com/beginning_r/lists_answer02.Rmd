@@ -8,13 +8,13 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```R
-my_list <- c("cat", "dog", 261)
+my_list <- list("cat", "dog", 261L)
 
-my_element <- my_list[1]
+my_element <- my_list[[1]]
 
 print(my_element)
 
-my_other_element <- my_list[3]
+my_other_element <- my_list[[3]]
 
 print(my_other_element)
 ```

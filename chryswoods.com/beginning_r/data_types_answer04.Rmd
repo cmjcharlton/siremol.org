@@ -7,9 +7,9 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-The variables `first_phrase` and `second_phrase` are almost unchanged. 
-We pass these two variables as two arguments to `paste()`, separating them by commas
-straight to `print`. As before, this will automatically add spaces between each argument 
+The objects `first_phrase` and `second_phrase` are almost unchanged. We pass 
+these as two arguments to `paste()`, separating them by commas straight to 
+`print`. As before, this will automatically add spaces between each argument 
 when displaying the output.
 
 ```R

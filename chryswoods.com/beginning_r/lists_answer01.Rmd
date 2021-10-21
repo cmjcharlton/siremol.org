@@ -11,7 +11,7 @@ We have changed our list by adding two more items to the end of it.
 Each is still separated by a comma:
 
 ```R
-my_list <- c("cat", "dog", 261, "hello", 5.76)
+my_list <- list("cat", "dog", 261L, "hello", 5.76)
 
 print(my_list)
 ```
@@ -19,13 +19,26 @@ print(my_list)
 ```
 RScript list.R
 
-[1] "cat"   "dog"   "261"   "hello" "5.76" 
+[[1]]
+[1] "cat"
+
+[[2]]
+[1] "dog"
+
+[[3]]
+[1] 261
+
+[[4]]
+[1] "hello"
+
+[[5]]
+[1] 5.76
 ```
 
 Here we edit our list so that the items are all in a different order:
 
 ```R
-my_list <- c(261, "hello", 5.76, "cat", "dog")
+my_list <- list(261L, "hello", 5.76, "cat", "dog")
 
 print(my_list)
 ```
@@ -33,6 +46,19 @@ print(my_list)
 ```
 Rscript list.R
 
-[1] "261"   "hello" "5.76"  "cat"   "dog"
+[[1]]
+[1] 261
+
+[[2]]
+[1] "hello"
+
+[[3]]
+[1] 5.76
+
+[[4]]
+[1] "cat"
+
+[[5]]
+[1] "dog"
 ```
 

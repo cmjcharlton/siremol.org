@@ -8,7 +8,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 We make two strings. One called `first_phrase` and second called `second_phrase`. 
-We then make a third variable called `message` by pasting together (using the 
+We then make a third called `message` by pasting together (using the 
 `paste` function) the other two. This combines the strings together into a new, 
 longer string:
 
