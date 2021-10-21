@@ -356,5 +356,13 @@ as the whole names vector would need to be searched for each value looked up.
 > print something like `The capital of France is Paris` for each item.
 > 
 > [Answer](dictionaries_answer03.html)
- 
+
+## Further reading
+* [Advanced R - Environments](https://adv-r.hadley.nz/environments.html)
+* [Advanced R - Named vectors](https://adv-r.hadley.nz/vectors-chap.html#attr-names)
+* [Advanced R - Lookup Tables](https://adv-r.hadley.nz/subsetting.html#lookup-tables)
+* [R Language Definition - Lexical Environments](https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Lexical-environment)
+* [R Language Definition - Names](https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Names)
+* [R Language Definition - Indexing by vectors](https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Indexing-by-vectors)
+
 ## [Previous](conditionals.html) | [Next](files.html)

@@ -274,4 +274,8 @@ vector in this case.
 >
 > [Answer](loops_answer02.html)
 
+## Further reading
+* [Advanced R - Loops](https://adv-r.hadley.nz/control-flow.html#loops)
+* [R Language Definition - Looping](https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Looping)
+
 ## [Previous](lists.html) | [Next](conditionals.html)

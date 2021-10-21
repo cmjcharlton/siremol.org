@@ -164,4 +164,8 @@ You can again rely on at most one of the branches being run.
 >
 > [Answer](conditionals_answer03.html)
 
+## Further reading
+* [Advanced R - Choices](https://adv-r.hadley.nz/control-flow.html#choices)
+* [R Language Definition - if](https://cran.r-project.org/doc/manuals/r-release/R-lang.html#if)
+
 ## [Previous](loops.html) | [Next](dictionaries.html)

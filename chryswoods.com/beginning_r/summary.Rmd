@@ -79,11 +79,38 @@ Hadley Wickham:
 to learn more about R as a programming language.
 * [R for Data Science](https://r4ds.had.co.nz) - this book is a brilliant
 introduction on how to use R for data science.
+* [Hands-On Programming with R](https://rstudio-education.github.io/hopr/) - if
+you prefer to learn through practical exercises then this is a good place to start.
+
+If you are interested in the philosophy and history of the language I would recommend:
+
+* [The History of S](https://sas.uwaterloo.ca/~rwoldfor/software/R-code/historyOfS.pdf)
+written by one of the original creators of the language.
+* [An interview with John Chambers](https://www.youtube.com/watch?v=jk9S3RTAl38),
+an original developer of S and part of the R core team.
+* [Forty years of S](https://channel9.msdn.com/Events/useR-international-R-User-conference/useR2016/Forty-years-of-S),
+a talk given by Richard Becker, another of the original developers.
 
 Once you have completed this workshop and [Intermediate R](https://chryswoods.com/intermediate_r),
 you will be ready to take are future workshops, [Introduction to Data Analysis in R](https://chryswoods.com/data_analysis_r)
 and "Applied Data Analysis in R". These will be linked here once they 
 are ready.
+
+We have mentioned conventions a number of times when describing the layout of code.
+This is because when writing R code it is a good idea to keep a consistent syntax
+style to aid other people reading it. The following guides cover some popular variants:
+
+* [The Tidyverse Style Guide](https://style.tidyverse.org/syntax.html)
+* [Google’s R Style Guide](https://google.github.io/styleguide/Rguide.html)
+
+In various places in this module I have warned of traps to be avoided when writing 
+in R and you can find a more comprehensive list of these in the short book [The R Inferno](https://www.burns-stat.com/pages/Tutor/R_inferno.pdf). These are often due
+to the power and flexibility of being a general purpose programming language and you
+will find similar cases in nearly all languages (computer or human based). Do not let 
+this put you off learning the language however as this just reinforces the importance
+of testing what you write, and if possible having it reviewed by a second pair of eyes.
+As you become more familiar with the language you should become better at spotting
+and avoiding these.
 
 ## Credits
 

@@ -396,4 +396,10 @@ You will once again see:
 >
 > [Answer](data_types_answer04.html)
 
+## Further reading
+* [Advanced R - Vectors](https://adv-r.hadley.nz/vectors-chap.html)
+* [Advanced R - Binding](https://adv-r.hadley.nz/names-values.html#binding-basics)
+* [R Language Definition - Vectors](https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Vector-objects)
+* [R Language Definition - Symbol Lookup](https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Symbol-lookup)
+
 ## [Previous](getting_started.html) | [Next](lists.html)

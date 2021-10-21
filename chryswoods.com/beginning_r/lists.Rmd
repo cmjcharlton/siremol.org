@@ -430,4 +430,13 @@ if possible, assigning the values as they are known, rather than appending new
 values as the script runs. This will result in your code running more efficiently
 and avoid unnecessary copying and memory allocations.
 
+## Further reading
+* [Advanced R - Lists](https://adv-r.hadley.nz/vectors-chap.html#lists)
+* [Advanced R - Subsetting](https://adv-r.hadley.nz/subsetting.html)
+* [Advanced R - Missing Values](https://adv-r.hadley.nz/vectors-chap.html#missing-values)
+* [R Language Definition - Lists](https://cran.r-project.org/doc/manuals/r-release/R-lang.html#List-objects) 
+* [R Language Definition - Indexing](https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Indexing)
+* [R Language Definition - NA](https://cran.r-project.org/doc/manuals/r-release/R-lang.html#NA-handling)
+* [R Language Definition - NULL](https://cran.r-project.org/doc/manuals/r-release/R-lang.html#NULL-object)
+
 ## [Previous](data_types.html) | [Next](loops.html)
