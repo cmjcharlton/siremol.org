@@ -7,14 +7,75 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Lists let you store lots of variables, and to access them by their location 
-in the list. However, there are times when you want to store lots of variables, 
-but access them using more complex relationships. One example is a dictionary, 
-which lets you store variables and access them using a key.
+If you used other programming languages before you may be familiar with the concept
+of a "dictionary",  "associative array" or "hash table" which allows the storage of 
+arbitrary values accessed by a "key". Outside addon packages (we will cover packages
+in the course "Intermediate R") the closest structure that R has to these is the
+`environment`. The main difference between this and traditional dictionaries is
+that keys have to be of string type, whereas dictionaries often allow the keys to
+be any hashable objects. If you require this functionality you can use the R
+addon package "digest" to hash the key into a string for you.
 
-Dictionaries in R are created by associating names (keys) with elements
-in a list. You thus create them using the same combine (`c`) function 
-as used to create a list.  Make a new file called `dict.R` and put this in it:
+To create a dictionary:
+
+```R
+my_dict <- new.env(hash = TRUE, parent = emptyenv(), size = NA)
+```
+
+`hash = TRUE` is the default for R versions higher than 2.12, so can usually be omitted.
+If you know approximately how many elements you are going to store you can set this
+via the `size` argument. If this is omitted, or set as NA or zero then the default
+is 29 in the current version of R.
+
+To add an item to the dictionary:
+```R
+my_dict[["cat"]] <- "meow"
+```
+
+where "cat" is the key and "meow" is the object you want to associate with it.
+
+To list the keys of the items in the dictionary:
+
+```R
+ls(my_dict)
+```
+
+To remove an item from a dictionary:
+
+```R
+rm(list = "cat", envir = my_dict)
+```
+
+Removes the item with the key "cat" from the dictionary "my_dict". Note that you
+can remove more than one item at a time by providing a longer character vector
+to the "list" argument.
+
+If you have encountered R before this structure may seem familiar to you. This is
+because R itself uses it to store all of its value bindings!
+
+## Lookup tables
+
+Sometimes you might have static set of values that you want to associate with
+particular names. This is often referred to as a lookup table and can easily
+be implemented with vectors, using the ability to name elements that we have
+seen before. In R, vectors where the elements have names assigned are often
+called "named vectors".
+
+Before we get into implementing this there are a few important things to note
+that make these behave differently to normal dictionaries:
+
+* All of the names have to be searched in sequence to find a match, rather than
+using hashing.
+* The same name can be assigned to more than one element, unlike keys in a
+dictionary. R will return the first element that matches the requested name.
+* Not all elements need to have a name associated. This can result in values that
+cannot be accessed by name.
+* Adding and removing elements results in a new copy of the vector being made,
+making this operation very inefficient. In a normal dictionary the storage is only
+resized when no more slots are available. Because of this it is particularly
+important that you avoid making changes to a dictionary within a loop.
+
+Make a new file called `dict.R` and put this in it:
 
 ```R
 sounds <- c("cat" = "meow", "dog" = "woof", "horse" = "neigh")
@@ -33,23 +94,25 @@ cat
 
 printed to the screen.
 
-What we did here was create a dictionary by adding names (keys) to the items
-in the list. The three items in the list are `meow`, `woof` and `neigh`. We have
-added names (keys) using the syntax `name = value`, so `meow` is given the name `cat`,
-`woof` is named `dog` and `neigh` is named `horse`.
+What we did here was create an approximation to a dictionary by adding names (keys) 
+to the items in the vector. The three items in the vector are `meow`, `woof` and `neigh`. 
+We have added names (keys) using the syntax `name = value`, so `meow` is given 
+the name `cat`, `woof` is named `dog` and `neigh` is named `horse`. Note that 
+assigning values to function arguments, as above, uses `=` rather than `<-` 
+and they are not interchangeable in this case.
 
-The value is the real data that we want to keep hold of and the name (also called key) 
-is how we can get at the data we want. The key and value are separated by an
+The value is the real data that we want to keep hold of and the name (representing 
+the key) is how we can get at the data we want. The name and value are separated by an
 equals sign, and each key-value pair is separated by a comma.
 
-On the next line we access the data in the dictionary sounds. Again, 
-like lists we use the square brackets to ask questions of our data. In 
-this case we're asking the dictionary to give us the value associated with 
-the key `cat` and so it will return to us `meow`.
+On the next line we access the data in our sounds vector. As before we indicate the
+position of the value we want to extract using square brackets, however as we have
+associated a string with each index we can use this instead. In this case we're asking 
+R to give us the value associated with the name `cat` and so it will return to us `meow`.
 
-Since dictionaries can be quite large and it can sometimes be hard to see 
-which parts are keys and which are values, it is possible to write 
-dictionaries over multiple lines, one line per key-value item:
+Once you start to add more values the line can get quite long and it can sometimes be 
+hard to see which parts are names and which are values, it is possible to write 
+the definition over multiple lines, one line per name-value item:
 
 ```R
 sounds <- c(
@@ -63,9 +126,13 @@ cat_sound <- sounds["cat"]
 print(cat_sound)
 ```
 
-Note that an R dictionary is just a list with named elements. This means you
-can still access the items by index, e.g. `sounds[1]` will return `cat`.
-This also means that you don't need to name every element!
+Note that as this is just a vector with named elements. This means you
+can still access the items by index, e.g. `sounds[1]` will return `cat` with the
+value `meow`. This also means that it is possible to add elements without an
+associated name! Beware that if you give more than one element the same name R 
+will only return the first one. This is because to look up a value based on the 
+name R will look through all of names until it finds one that matches and then 
+return the element corresponding to this.
 
 Also note that 
 
@@ -75,8 +142,8 @@ cat
 ```
 
 was printed to the screen as the value with its name (key) is returned.
-To get the value alone, you need to use `as.character` if the value
-is a string, or `as.numeric` if the value is a number, e.g.
+To get the value alone, you can use the `unname` function to remove the name
+from the return value, e.g.
 
 ```R
 sounds <- c(
@@ -85,9 +152,9 @@ sounds <- c(
   "horse" = "neigh"
 )
 
-cat_sound <- sounds["cat"]
+cat_sound <- unname(sounds["cat"])
 
-print(as.character(cat_sound))
+print(cat_sound)
 ```
 
 would print
@@ -95,6 +162,35 @@ would print
 ```
 [1] "meow"
 ```
+
+Note that the return value has only one element so using the `[[` notation
+would also have given the same result, however using the `unname` function
+makes the intent more explicit and works on vectors with more elements.
+
+If you are using the list data type to store your values there is one further
+way to access named elements, the `$` notation:
+
+```R
+employee <- list("name" = "Joe", "age" = 25L, "height" = 180.6)
+
+print(employee$age)
+```
+
+would print
+
+```
+[1] 25
+```
+
+Beware that by default the `$` notation will allow partial matching, so:
+
+```R
+employee <- list("name" = "Joe", "age" = 25L, "height" = 180.6)
+
+print(employee$ag)
+```
+
+would give the same result at above.
 
 > EXERCISE
 >
@@ -106,12 +202,14 @@ would print
 
 ## Adding new data into dictionaries
 
-As with lists, dictionaries are dynamic so we can add entries into a dictionary.
-Let's say that we want to add in a new sound for a cow into our sounds dictionary. 
-The key that the data will have will be "cow" and the value will be "moo". 
-To do so we put `sounds["cow"]` on the left-hand side of a variable assignment 
-expression, as if we're making a new variable. On the right goes the data 
-that we want to put into the dictionary:
+As we have seen with vectors before it is easy to add new entries. Let's say 
+that we want to add in a new sound for a cow into our sounds vector The name 
+that the data will have will be "cow" and the value will be "moo". To do so we 
+put `sounds["cow"]` on the left-hand side of a object assignment expression, as 
+if we're making a new object. On the right goes the data that we want to put 
+into the vector, the only difference with what we have seen before is that
+we use a string to indicate the position to add the element instead of a numeric
+index:
 
 ```R
 sounds <- c(
@@ -125,8 +223,11 @@ sounds["cow"] <- "moo"
 print(sounds)
 ```
 
-This is saying that we want the append the value `moo` onto the end of `sounds`, and to then
-associated it with the name (key) `cow`. This should print;
+This is saying that we want the append the value `moo` onto the end of `sounds`, 
+and to then associate it with the name (key) `cow`. If it cannot find the 
+name in the vector's existing names then R will automatically use the next 
+available index to store this at the end of the vector (creating a new vector
+and copying all the values). This should print;
 
 ```
     cat     dog   horse     cow 
@@ -140,14 +241,25 @@ associated it with the name (key) `cow`. This should print;
 >
 > [Answer](dictionaries_answer02.html)
 
+
+## Removing data from dictionaries
+If you want to remove an entry from a dictionary represented by a vector we can 
+use filtering as described in a previous chapter, e.g. to remove the entry for `dog`
+
+```R
+sounds <- sounds[names(sounds) != "dog"]
+```
+
+Note however as mentioned previously that this results in copying the whole vector 
+into a new shorter version which could be slow if the dictionary is large.
+
 ## Looping over dictionaries
 
-When discussing `for` loops you were told that R allows you to loop over lots 
-of different types of data such as lists and sequences. Since a dictionary is
-just a list (vector) with names, we can loop over dictionaries too.
+As we are using a vector to represent our dictionary we can also if we choose
+loop over the elements.
 
 To discover how it works, let's do the naïve thing first and just see what 
-happens when we loop over a dictionary:
+happens when we loop over our dictionary:
 
 ```R
 sounds <- c(
@@ -170,8 +282,8 @@ If you put this code into a file called `dict_loop.R` and run it you should see:
 ```
 
 Hopefully, you recognise those as the values from the dictionary. 
-So, it seems that when looping over a dictionary we will be given the *values*.
-This makes sense, as a dictionary is just a list with named values.
+So, it seems that when looping over our vector we will be given the *values*.
+This makes sense, as our dictionary is just or vector with named values.
 
 What if, for example, you wanted to loop over the *names* (keys) instead. 
 Well, there is a function called `names` which gives you just those so 
@@ -197,8 +309,8 @@ will print:
 [1] "horse"
 ```
 
-If we want to loop over the dictionary and get both the keys and the values,
-we can remember that a dictionary is just a list. Thus we can get both the name
+If we want to loop over our dictionary and get both the names and the values,
+we can remember that our dictionary is just a vector. Thus we can get both the name
 and value by looking up the item by its numeric index:
 
 ```R
@@ -208,17 +320,34 @@ sounds <- c(
   "horse" = "neigh"
 )
 
-for (i in seq(1, length(sounds))) {
+for (i in seq_along(sounds)) {
   sound <- sounds[i]
   print(paste(names(sound), "goes", sound))
 }
 ```
 
-The `length` function gives the number of items in the dictionary, which is passed
-to `seq` to generate a sequence of all of the numeric indices. For each index
+The `seq_along` function uses the length of the object referenced by its argument
+to create a sequence of all of the numeric indices. For each index
 we look up the `sound` as `sounds[i]`. This contains both the value (e.g.
 `meow`) and an associated name (e.g. `cat`). The name is extracted using
-the `names` function.
+the `names` function. Note that we could also have iterated over the name and
+then used this as the index when looking up the values, e.g.
+
+```R
+sounds <- c(
+  "cat" = "meow",
+  "dog" = "woof",
+  "horse" = "neigh"
+)
+
+for (name in names(sounds)) {
+  sound <- sounds[name]
+  print(paste(name, "goes", sound))
+}
+```
+
+However looking up a value from a name will be slower than using its index directly 
+as the whole names vector would need to be searched for each value looked up.
 
 > EXERCISE
 >

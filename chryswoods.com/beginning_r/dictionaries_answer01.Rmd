@@ -28,7 +28,7 @@ Rscript dict.R
 [1] "Horse goes neigh"
 ```
 
-If we edit our script so that it asks for a key that doesn't exist, 
+If we edit our script so that it asks for a name that doesn't exist, 
 we will see that is returns `NA`.
 
 ```R
@@ -49,10 +49,12 @@ Rscript dict.R
 [1] "Fish goes NA"
 ```
 
-As with lists, returning `NA` for a non-existent value can be a major
-source of bugs. You can test if a name (key) exists in a 
-dictionary by using the `%in%` keyword, to see if the name is
-in the `names()` of the dictionary;
+As we have seen before, returning `NA` for a non-existent value can be a major
+source of bugs. We could have used the `[[` notation when accessing the vector,
+but this would still have given a "subscript out of bounds" error. It is better
+to test for and handle the error before it happens. You can test if a name (key)
+exists in a dictionary by using the `%in%` keyword, to see if the name is
+in the `names()` of the vector;
 
 ```R
 sounds <- c(

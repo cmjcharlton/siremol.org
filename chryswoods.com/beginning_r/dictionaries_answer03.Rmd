@@ -15,7 +15,7 @@ capitals <- c(
     "Kenya" = "Nairobi"
 )
 
-for (i in seq(1, length(capitals))) {
+for (i in seq_along(capitals)) {
     capital <- capitals[i]
     country <- names(capital)
 
