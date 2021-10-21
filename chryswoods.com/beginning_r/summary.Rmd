@@ -11,11 +11,11 @@ Well done for getting this far! We've covered a lot in this course:
 
 * RStudio (introduction)
 * The `print()` function
-* Basic data types: strings and numerics (floats and integers)
-* Indexing, slicing and appending to lists
+* Basic data types: strings, logicals and numerics (floating point and integer)
+* Indexing, subsetting and appending to vectors
+* Looping over different vectors
 * Branching logic using `if` statements
-* Looping over different data structures such as lists, sequences, dictionaries and files
-* Creating, modifying and accessing dictionaries
+* Creating, modifying and accessing dictionaries and lookup tables
 * Reading files
 
 You're not expected to have committed all of this to memory already, 
