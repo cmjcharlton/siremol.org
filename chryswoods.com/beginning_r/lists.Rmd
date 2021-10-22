@@ -295,9 +295,9 @@ extra argument to `seq` that gives the step, e.g. `seq(from = 1, to = 9, by = 2)
 be the sequence of odd numbers between 1 and 9, while `seq(from = 10, to = 1)` 
 would be a countdown from 10 to 1.
 
-## Negative indicies and masking
+## Negative indicies and filtering
 
-You can use negative indices to mask out elements from a vector. For example:
+You can use negative indices to drop elements from a vector. For example:
 
 ```R
 my_vector <- c("red", "green", "blue")
@@ -319,7 +319,7 @@ This is because `my_vector[-1]` means "everything except the element at index 1"
 thus meaning `"green" "blue"`. Similarly, `my_vector[-3]` means 
 "everything except the element at index 3", thus meaning `"red" "green"`.
 
-You can mask out multiple indices at once, e.g.
+You can drop multiple indices at once, e.g.
 
 ```R
 my_vector <- c("red", "green", "blue")
@@ -327,9 +327,9 @@ my_vector <- c("red", "green", "blue")
 print(my_vector[c(-1, -2)])
 ```
 
-would print `[1] "blue"`, as we have masked out the items at indices 1 and 2.
+would print `[1] "blue"`, as we have dropped the items at indices 1 and 2.
 
-You can also mask by passing in a list of logicals (true or false values) 
+You can also filter by passing in a list of logicals (true or false values) 
 that has the same size as the list, e.g.
 
 ```R
@@ -347,8 +347,8 @@ my_vector <- c("red", "green", "blue")
 print(my_vector[c(TRUE, FALSE, TRUE)])
 ```
 
-would now print `[1] "red"  "blue"`, as the value `green` is masked by
-`FALSE`, while `red` and `blue` are both masked as `TRUE`.
+would now print `[1] "red"  "blue"`, as the value `green` is dropped by
+`FALSE`, while `red` and `blue` are both selected as `TRUE`.
 
 In practice you are unlikely to use indexing by a logical vector directly,
 instead it would typically be generated as the result of an expression. For
