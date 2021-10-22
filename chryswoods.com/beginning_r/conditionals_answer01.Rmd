@@ -12,13 +12,20 @@ my_number <- 74
 
 if (my_number > 100) {
     print(paste(my_number, "is large"))
+} else if (my_number < 0) {
+    print(paste(my_number, "is negative"))
+} else {
+    print(paste(my_number, "is not large"))
 }
 ```
 
-If `my_number` is smaller than `100` then the expression is `FALSE` and 
-so the `if` does not trigger and nothing is printed:
+If `my_number` is smaller than `100` and not negative then the first two
+expressions are `FALSE` and so the final `else` is triggered and 
+"74 is not large" is printed:
 
 ```
 Rscript if.R
+
+[1] "74 is not large"
 ```
 
