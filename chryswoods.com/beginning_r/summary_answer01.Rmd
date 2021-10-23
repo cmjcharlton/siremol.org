@@ -20,10 +20,7 @@ Starting with our data file, calc.txt:
 calc.R then looks like:
 
 ```R
-file_handle <- file("calc.txt")
-file_lines <- readLines(file_handle)
-close(file_handle)
-
+file_lines <- readLines("calc.txt")
 line_tokens <- strsplit(file_lines, " ")
 
 for (tokens in line_tokens) {

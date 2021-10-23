@@ -25,9 +25,7 @@ increases the scalar `total` by the value in the scalar `number`.
 Finally we print the total:
 
 ```R
-file_handle <- file("data.txt")
-file_lines <- readLines(file_handle)
-close(file_handle)
+file_lines <- readLines("data.txt")
 
 total <- 0
 

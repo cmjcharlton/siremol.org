@@ -24,9 +24,7 @@ The logic in this script is identical but instead of having `total`,
 into a single list:
 
 ```R
-file_handle <- file("data.txt")
-file_lines <- readLines(file_handle)
-close(file_handle)
+file_lines <- readLines("data.txt")
 
 stats <- list("sum" = 0, "count" = 0L)
 
