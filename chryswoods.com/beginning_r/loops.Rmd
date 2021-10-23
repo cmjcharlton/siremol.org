@@ -154,10 +154,11 @@ for (word in my_words) {
 }
 ```
 
-Finally, we get to a peculiarity of R in that it uses curly brackets to decide 
-what is in the body of the loop and what is not. Remember that it will 
-only repeat the code in the body. All code in the body must be 
-contained within the curly brackets.
+To allow more than one line to be repeated R uses curly brackets to decide what is in
+the body of the loop and what is not. Remember that it will only repeat the code in
+the body. While it is possible to omit the curly brackets if the loop only contains
+one statement, and R will use this statement as the body, this is strongly discouraged
+as it is a common source of errors.
 
 ```
                   open curly bracket
@@ -213,17 +214,22 @@ will print:
 See how the `...Goodbye` was repeated in the second example, this is because 
 it was inside the body of the loop since it was between the curly brackets.
 
-Note that it is convention to indent the lines within a body of a loop using 
+Note that it is convention to indent the lines within a body of a loop. The
+tidyverse style guide recommends using two spaces, but you may prefer to use
 four spaces. This makes it easier to see that these lines are in the body 
 of the loop. You don't have to do this, but you will make it easier for 
-people reading your code to understand what it does if you do.
+people reading your code to understand what it does if you do. You can set up
+RStudio to conform with this convention through the Tools→Global Options→Code
+menu, and setting "Tab Width" to 4.
 
 Also note that the placement of the curly brackets is also convention. 
 You can place them on any line you want, as long as the open curly bracket
 is before the body of the loop, and the close curly bracket is after
 the body. It is convention to place the open curly bracket on the 
 same line as `for`, and the close curly bracket on its own line directly
-after the last line of the body of the loop.
+after the last line of the body of the loop. If you want to ensure that your code
+formatting is in a consistent style RStudio provides a simple way to do this
+automatically via the Code→Reformat Code menu option.
 
 ## What can we loop over
 
@@ -243,17 +249,24 @@ can to be used for iteration. One example is the `seq` function, that can be use
 to create a vector containing a fixed set of numbers, which we can then iterate over:
 
 ```R
-for (i in seq(1, 10)) {
+for (i in seq(from = 1, to = 10)) {
     print(i)
 }
 
 
-for (i in seq(10, 1, -1)) {
+for (i in seq(from = 10, to = 1)) {
     print(i)
 }
 ```
 
 will print the numbers from 1 to 10, and then from 10 to 1.
+
+Note, you should be careful using the `seq` function in combination with `length`.
+If the object has a length less than the first argument then the sequence is
+reversed, e.g. seq(from = 1, to = length(my_words)) would produce c(1, 0) if
+`my_words` was empty. To avoid this error R provides the `seq_len` and `seq_along`
+functions. seq_len(length(my_words)) and seq_along(my_words) would both return an empty
+vector in this case.
 
 > EXERCISE
 > 
