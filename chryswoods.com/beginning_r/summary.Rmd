@@ -92,10 +92,11 @@ an original developer of S and part of the R core team.
 a talk given by Richard Becker, another of the original developers.
 
 As you would expect R comes with its own comprehensive set of manuals, the
-following two are of most use to someone starting to learn R:
+following are of most use to someone starting to learn R:
 
 * [An Introduction to R](https://cran.r-project.org/doc/manuals/r-release/R-intro.html)
 * [R Language Definition](https://cran.r-project.org/doc/manuals/r-release/R-lang.html)
+* [R Data Import/Export](https://cran.r-project.org/doc/manuals/r-release/R-data.html)
 
 Once you have completed this workshop and [Intermediate R](https://chryswoods.com/intermediate_r),
 you will be ready to take are future workshops, [Introduction to Data Analysis in R](https://chryswoods.com/data_analysis_r)

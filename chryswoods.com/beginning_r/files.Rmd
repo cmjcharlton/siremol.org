@@ -242,4 +242,8 @@ Running this new script will now print out our "processed" data:
 >
 > [Answer](files_answer07.html)
 
+## Further reading
+* [R for Data Science - Data Import](https://r4ds.had.co.nz/data-import.html)
+* [R Data Import/Export](https://cran.r-project.org/doc/manuals/r-release/R-data.html)
+
 ## [Previous](dictionaries.html) | [Next](summary.html)
