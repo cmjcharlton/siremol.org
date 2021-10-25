@@ -107,7 +107,7 @@ is a data set available as a CSV file that contains data about
 cats. You can find a (slightly modified) version of this 
 [dataset here](https://chryswoods.com/intermediate_r/data/cats.csv).
 
-`read.csv` can read CSV files from the filesystem (via their filename), 
+`read.csv` can read CSV files from the filesystem (via their file name), 
 or, if you have a URL, directly from the internet. To read this
 CSV file into a `data.frame` you should type;
 

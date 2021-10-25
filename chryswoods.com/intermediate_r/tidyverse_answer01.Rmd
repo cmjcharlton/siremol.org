@@ -35,4 +35,4 @@ This includes, for example, filtering, selecting, mutating and arranging
 data.
 * [forcats](https://forcats.tidyverse.org) - provides updated and more
 consistent tools for handling R factors (ways of representing 
-catagorical data).
+categorical data).

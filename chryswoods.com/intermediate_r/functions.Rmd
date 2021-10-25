@@ -195,7 +195,7 @@ If you run this now, you will see that R prints an error;
 Error in total + value : non-numeric argument to binary operator
 ```
 
-This isn't very descriptive of helpful. You can control how R will
+This isn't very descriptive or helpful. You can control how R will
 behave in an error condition by using `stop` or `warning`.
 
 You use `stop` if you want to stop the function from continuing,
