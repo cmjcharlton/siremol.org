@@ -180,7 +180,7 @@ the function, and assigned to the variable `average_height`.
 >
 > [Answer](functions_answer01.html)
 
-## Errors
+## Errors
 
 Your function works well, but what would happen if the wrong arguments
 were passed? What should we do if someone did this?
