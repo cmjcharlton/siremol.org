@@ -3,28 +3,28 @@ title: "Intermediate R"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```R
-calculate_max <- function(values){
+calculate_max <- function(values) {
     max_value <- NA
 
-    for (value in values){
+    for (value in values) {
         number <- as.numeric(value)
 
-        if (is.na(number)){
+        if (is.na(number)) {
             warning("Ignoring '", value,
                     "' as it is not a number")
         } else {
-            if (is.na(max_value) || value > max_value){
+            if (is.na(max_value) || value > max_value) {
                 max_value = value
             }
         }
     }
 
-    if (is.na(max_value)){
+    if (is.na(max_value)) {
         stop("You can only find the maximum of numeric values")
     }
 

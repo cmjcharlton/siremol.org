@@ -3,7 +3,7 @@ title: "Intermediate R - Packages and CRAN"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -151,11 +151,11 @@ old.packages()
 ```
 
 You can update all packages for which updates are available using
-`update.packages()`. Set `ask=FALSE` to update everything
+`update.packages()`. Set `ask = FALSE` to update everything
 without prompting, e.g.
 
 ```R
-update.packages(ask=FALSE)
+update.packages(ask = FALSE)
 ```
 
 Note that updating all of your packages could take a while if you haven't

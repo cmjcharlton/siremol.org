@@ -3,15 +3,15 @@ title: "Intermediate R"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```R
 cats %>%
-     filter(Sex=="M") %>%
-     filter(BodyWeight>=3.0) %>%
-     summarise(mean=calculate_mean(HeartWeight))
+     filter(Sex == "M") %>%
+     filter(BodyWeight >= 3.0) %>%
+     summarise(mean = calculate_mean(HeartWeight))
 ```
 
 ```

@@ -3,7 +3,7 @@ title: "Intermediate R - Tidyverse"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -158,7 +158,7 @@ cats$Bodyweight
 ```
 
 ```R
-cats[1,]
+cats[1, ]
 ```
 
 ```

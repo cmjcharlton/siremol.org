@@ -3,7 +3,7 @@ title: "Intermediate R - Functions"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -57,10 +57,10 @@ There are many ways this function could be written. Here is a
 possible solution;
 
 ```R
-calculate_mean <- function(values){
+calculate_mean <- function(values) {
      total <- 0.0
      count <- 0
-     for (value in values){
+     for (value in values) {
          total <- total + value
          count <- count + 1
      }
@@ -72,7 +72,7 @@ We can then use this function, to, e.g. calculate the average
 height of a group of people, by typing;
 
 ```R
-person_heights = c(1.62, 1.80, 1.56, 1.73, 1.91)
+person_heights <- c(1.62, 1.80, 1.56, 1.73, 1.91)
 
 average_height <- calculate_mean(person_heights)
 
@@ -138,10 +138,10 @@ used to return the output of the function back to the caller.
 ```R
                            Input(s)
                              ↓
-calculate_mean <- function(values){
+calculate_mean <- function(values) {
      total <- 0.0
      count <- 0
-     for (value in values){
+     for (value in values) {
          total <- total + value
          count <- count + 1
      }
@@ -204,17 +204,17 @@ we could use `is.numeric` to check if all of the values are
 numeric. If not, then we could `stop`;
 
 ```R
-calculate_mean <- function(values){
-     total <- 0.0
-     count <- 0
-     for (value in values){
-         if (!is.numeric(value)){
-             stop("Cannot calculate average of non-numeric values")
-         }
-         total <- total + value
-         count <- count + 1
-     }
-     return(total / count)
+calculate_mean <- function(values) {
+    total <- 0.0
+    count <- 0
+    for (value in values) {
+        if (!is.numeric(value)) {
+            stop("Cannot calculate average of non-numeric values")
+        }
+        total <- total + value
+        count <- count + 1
+    }
+    return(total / count)
 }
 ```
 
@@ -239,13 +239,13 @@ if non-numeric values are passed? We can do this using
 the `warning` function, e.g.
 
 ```R
-calculate_mean <- function(values){
+calculate_mean <- function(values) {
      total <- 0.0
      count <- 0
-     for (value in values){
+     for (value in values) {
          number <- as.numeric(value)
 
-         if (!is.na(number)){
+         if (!is.na(number)) {
              total <- total + number
              count <- count + 1
          } else {

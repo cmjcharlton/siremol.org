@@ -3,7 +3,7 @@ title: "Intermediate R - `%>%` Forward pipes"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -46,7 +46,7 @@ provides the function `filter`, for filtering data.
 So;
 
 ```R
-cats %>% filter(Sex=="F")
+cats %>% filter(Sex == "F")
 ```
 
 ```
@@ -72,13 +72,13 @@ a `tibble` that contains data only for female cats.
 This was identical to typing;
 
 ```R
-filter(cats, Sex=="F")
+filter(cats, Sex == "F")
 ```
 
 The power comes that we can now chain filters, e.g.
 
 ```R
-cats %>% filter(Sex=="F") %>% filter(BodyWeight > 2.5)
+cats %>% filter(Sex == "F") %>% filter(BodyWeight > 2.5)
 ```
 
 ```
@@ -104,9 +104,9 @@ row of this filtered data, e.g.
 
 ```R
 cats %>% 
-    filter(Sex=="F") %>% 
-    filter(BodyWeight>2.5) %>% 
-    summarise(mean=calculate_mean(HeartWeight))
+    filter(Sex == "F") %>% 
+    filter(BodyWeight > 2.5) %>% 
+    summarise(mean = calculate_mean(HeartWeight))
 ```
 
 will output
@@ -131,9 +131,9 @@ hence the full code should be;
 
 ```R
 average_heart_weight <- cats %>%
-    filter(Sex=="F") %>%
-    filter(BodyWeight>2.5) %>%
-    summarise(mean=calculate_mean(HeartWeight))
+    filter(Sex == "F") %>%
+    filter(BodyWeight > 2.5) %>%
+    summarise(mean = calculate_mean(HeartWeight))
 ```
 
 Yes, this is a very dense bit of code. This is typical for R. You will 

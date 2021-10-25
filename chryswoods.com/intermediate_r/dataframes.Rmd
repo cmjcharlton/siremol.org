@@ -3,7 +3,7 @@ title: "Intermediate R - `data.frame`"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -70,12 +70,12 @@ contains only the first column.
 To get a row, you need to add a comma (`,`) after the index, e.g.
 
 ```R
-pets[1,]
+pets[1, ]
 
   animal sound
 1    cat  meow
 
-pets[2,]
+pets[2, ]
 
   animal sound
 2    dog  woof

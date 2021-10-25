@@ -3,16 +3,16 @@ title: "Intermediate R"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```R
-calculate_max <- function(values){
+calculate_max <- function(values) {
     max_value <- NA
 
     for (value in values){
-        if (is.na(max_value) || value > max_value){
+        if (is.na(max_value) || value > max_value) {
             max_value = value
         }
     }

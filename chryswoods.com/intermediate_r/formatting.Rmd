@@ -3,7 +3,7 @@ title: "Intermediate R - String formatting"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -120,12 +120,12 @@ There are a lot of controls, which are
 ## Writing to a file
 
 You can use `cat` to write to a file. To do this specify the filename
-using the `file` argument. Use `append=TRUE` to append data to an existing
-file, or `append=FALSE` to overwrite and write to a new file.
+using the `file` argument. Use `append = TRUE` to append data to an existing
+file, or `append = FALSE` to overwrite and write to a new file.
 
 ```R
-cat("Writing to a new file\n", file="output.txt")
-cat("Appending another line...\n", file="output.txt", append=TRUE)
+cat("Writing to a new file\n", file = "output.txt")
+cat("Appending another line...\n", file = "output.txt", append = TRUE)
 ```
 
 will write two lines to the new file `output.txt` (in R's current working
