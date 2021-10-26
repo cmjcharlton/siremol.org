@@ -30,7 +30,7 @@ this as a vector, with each element in the vector being one
 line of the speech.
 
 ```{r}
-text = c("To be, or not to be--that is the question:",
+text_lines = c("To be, or not to be--that is the question:",
          "Whether 'tis nobler in the mind to suffer",
          "The slings and arrows of outrageous fortune",
          "Or to take arms against a sea of troubles",
@@ -45,8 +45,8 @@ to have two columns:
 2. `text` will hold each line of text.
 
 ```{r}
-text <- tibble(line = 1:5, text = text)
-text
+soliloquy <- tibble(line = 1:5, text = text_lines)
+soliloquy
 ```
 
 We now want to rearrange this tibble into a tidy text format. Remember,
@@ -91,7 +91,7 @@ the function [unnest_tokens](https://rdrr.io/cran/tidytext/man/unnest_tokens.htm
 which can automatically do this for us.
 
 ```{r}
-tokens <- text %>% unnest_tokens(word, text)
+tokens <- soliloquy %>% unnest_tokens(word, text)
 tokens
 ```
 
@@ -130,8 +130,8 @@ at [https://chryswoods.com/text_analysis_r/hamlet.txt](https://chryswoods.com/te
 We can load this via;
 
 ```{r}
-lines <- readLines("https://chryswoods.com/text_analysis_r/hamlet.txt")
-lines
+text_lines <- readLines("https://chryswoods.com/text_analysis_r/hamlet.txt")
+text_lines
 ```
 
 We will now convert this into a tibble. One column, called `line`, will
@@ -139,7 +139,7 @@ have the line number (from 1 to the number of lines), while the lines
 themselves will be placed into the column called `text`.
 
 ```{r}
-hamlet <- tibble(line = seq_along(lines), text = lines)
+hamlet <- tibble(line = seq_along(text_lines), text = text_lines)
 hamlet
 ```
 

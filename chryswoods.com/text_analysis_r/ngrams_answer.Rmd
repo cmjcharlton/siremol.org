@@ -49,8 +49,8 @@ bigram_graph %>% ggraph(layout = "fr") +
 ## Exercise 2
 
 ```{r}
-lines <- readLines("https://chryswoods.com/text_analysis_r/hamlet.txt")
-hamlet <- tibble(line = seq_along(lines), text = lines)
+text_lines <- readLines("https://chryswoods.com/text_analysis_r/hamlet.txt")
+hamlet <- tibble(line = seq_along(text_lines), text = text_lines)
 
 bigram_counts <- hamlet %>% 
     unnest_tokens(bigram, text, token = "ngrams", n = 2) %>%
