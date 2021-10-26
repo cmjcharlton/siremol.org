@@ -7,7 +7,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-According to [this page](https://vincentarelbundock.github.io/Rdatasets/doc/MASS/cats.html)
+According to [the MASS package documentation](https://www.rdocumentation.org/packages/MASS/versions/7.3-47/topics/cats)
 the body weight is in kilograms and the heart weight is in grams. As is normal for
 real-world data, there is little consistency in units...
 
