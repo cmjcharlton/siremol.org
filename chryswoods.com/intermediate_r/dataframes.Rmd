@@ -9,11 +9,28 @@ knitr::opts_chunk$set(echo = TRUE)
 
 R is a statistical programming language, designed primarily for 
 data analysis and visualisation. Key to this is in-built
-support for tables of data. A table of data is called
-a `data.frame`. A table has columns, which are given names,
-and there are rows, which contain data for each column.
+support for tabular data. To support this R provides the type `data.frame`.
+This is presented as a two dimensional table where each column is a "variable",
+representing a measurement in the data (for example age) and each row
+represents is an "observation".
 
-For example, let us create a table that contains animals
+If you have previously encountered other programming languages before R you may
+be surprised by the use of "variable", as after all once the data is read in
+it is unlikely to change. This term is used because the data is varying in
+value for each observation. If all of the observations had the same value (for
+example were all ones) then it would be referred to as a "constant". To avoid
+ambiguity what other languages call "variables" R refers to as "objects".
+
+R implements `data.frame` as a specialisation of the `list` type, where each
+element of the list represents a variable and has a name associated 
+with it. Each element contains a `vector` representing the observations for that
+variable. There is an additional constraint over `list` that all of the contained
+variables must be of the same length. Finally, objects of type `data.frame` can
+have a `row.names` attribute assigned which can be an integer or character vector
+naming the observations in the `data.frame`.
+
+A `data.frame` object is created in much the same way as a `list`,
+for example, let us create a `data.frame` that contains animals
 and their sounds;
 
 ```R
@@ -21,8 +38,8 @@ pets <- data.frame(animal = c("cat", "dog", "bird"),
                    sound = c("meow", "woof", "tweet"))
 ```
 
-This will create a `data.frame` with two columns; `animal`
-and `sound`. There are three rows. You can print `pets`
+This will create a `data.frame` with two variables; `animal`
+and `sound`. There are three observations. You can print `pets`
 to the screen by typing `print(pets)`, or, just by typing
 `pets`, e.g.
 
@@ -35,8 +52,16 @@ pets
 3   bird tweet
 ```
 
-You can access a column using `$` followed by the column name, 
-e.g.
+When you create a `data.frame` R will by default perform some additional steps.
+If the `check.names` option is set to TRUE (the default) it will adjust the
+variable names so that they are unique and syntactically valid. If the
+`stringsAsFactors` option is TRUE (the default prior to R version 4.0.0) then it
+will convert any character vectors to the `factor` type (not covered in this
+workshop).
+
+As this data type is still a `list` you can access the variables using all the
+same indexing methods as used in the previous module, for example `$` followed
+by the variable name, 
 
 ```R
 pets$animal
@@ -47,6 +72,9 @@ pets$sound
 
 [1] "meow"  "woof"  "tweet"
 ```
+
+Note that as with `list` using this syntax will also allow partial matching on
+the specified name.
 
 You can also use the index of the column, e.g.
 
@@ -67,33 +95,96 @@ The second version (`pets[[1]]`) returns the vector that holds the
 data, while the first version (`pets[1]`) returns a `data.frame` that
 contains only the first column.
 
-To get a row, you need to add a comma (`,`) after the index, e.g.
+The `data.frame` type further extends the `[` notation to work in two
+dimensions. To do this you put the row index into the brackets, followed by
+a comma (`,`) and then the column index. You can leave either side of the comma
+blank to select an entire row or column. As with normal vector indexing the
+index values that you use can themselves be integer or logical vectors, or
+contain the variable or observation names.
+
+For example to get the first row of data:
 
 ```R
 pets[1, ]
 
   animal sound
 1    cat  meow
+```
 
+Or the second:
+```R
 pets[2, ]
 
   animal sound
 2    dog  woof
 ```
 
-You can access a specific value using `row index, column index`, e.g.
+Or the first and third:
+```R
+pets[c(1, 3), ]
+
+  animal sound
+1    cat  meow
+3   bird tweet
+```
+
+You can also use this notation to get a single variable:
+
+```R
+pets[, "animal"]
+
+[1] "cat"  "dog"  "bird"
+```
+
+or many:
+```R
+pets[, c("animal", "sound")]
+
+  animal sound
+1    cat  meow
+2    dog  woof
+3   bird tweet
+```
+
+Did you notice anything unusual about the last two outputs? If the result of two
+dimensional indexing results in a single variable being returned R will provide
+the output as a vector instead of the expected data.frame. This is because the
+two dimensional bracket function has an extra argument `drop` (default value
+TRUE) which simplifies the returned value as much as possible. If we set this to
+FALSE:
+
+```R
+pets[, "animal", drop = FALSE]
+
+  animal
+1    cat
+2    dog
+3   bird
+```
+
+We can see that we now get the expected result.
+
+This inconsistency is a major source of error and was one of the primary
+motivations for the development of the `tibble` class, which we will be covering
+in the next chapter.
+
+You can of course provide values for both arguments using
+`row index, column index`, e.g.
 
 ```R
 pets[1, 1]
 
 [1] "cat"
-
-pets[1, 2]
-
-[1] "meow"
 ```
 
-## Reading data tables from files
+```R
+pets[1, 2, drop = FALSE]
+
+  sound
+1  meow
+```
+
+## Reading data.frame from files
 
 There are many methods in R that let you read data into a `data.frame`.
 We will cover them in much more detail in upcoming workshops.
@@ -114,6 +205,19 @@ CSV file into a `data.frame` you should type;
 ```R
 cats <- read.csv("https://chryswoods.com/intermediate_r/data/cats.csv")
 ```
+
+Note that if you try to display the contents of the data.frame, i.e.
+
+```R
+cats
+```
+
+the amount of data to display will quickly fill your console and scroll off the
+the top. This is still a relatively small amount of data, so this becomes more
+of a problem as your data files become larger. To avoid this R provides two
+handy functions `head` and `tail` which when you pass them a object will 
+display only the first or last few observations. If you check their help pages
+you will see that they offer a number of arguments to control what is displayed.
 
 > EXERCISE
 >
