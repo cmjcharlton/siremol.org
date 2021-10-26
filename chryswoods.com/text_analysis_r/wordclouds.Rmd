@@ -5,8 +5,8 @@ output:
     df_print: paged
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE, error=FALSE)
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, error = FALSE)
 ```
 
 # Word clouds
@@ -31,16 +31,17 @@ The Adventure of Sherlock Holmes. We start by downloading the text
 and tidying it up, as we did in the previous chapters.
 
 ```{r}
-sherlock <- gutenberg_download(1661) %>% 
-    mutate(linenumber=row_number()) %>% 
-    unnest_tokens(word, text) %>% anti_join(stop_words)
+sherlock <- gutenberg_download(1661) %>%
+    mutate(linenumber = row_number()) %>%
+    unnest_tokens(word, text) %>%
+    anti_join(stop_words)
 ```
 
 We want the size each word in the wordcloud to depend on the number
 of times it appears. We thus create a tibble of these counts.
 
 ```{r}
-sherlock_counts <- sherlock %>% count(word, sort=TRUE)
+sherlock_counts <- sherlock %>% count(word, sort = TRUE)
 ```
 
 The wordcloud function is very easy to use. You just need to pass in a 
@@ -48,31 +49,33 @@ column of words (`sherlock_counts$word`) and a column of their
 counts (`sherlock_counts$n`). We need to restrict the plot to only
 displaying the common words, or else we will end up overloading R. We
 do this by only displaying words that appear 25 or more times, using
-`min.freq=25`. The `random.order` argument is set to `FALSE` so that
+`min.freq = 25`. The `random.order` argument is set to `FALSE` so that
 the plot is reproducible (as much as possible - the option tells R
 to plot the words in order of descreasing frequency, rather than
 a random order).
 
 ```{r}
 wordcloud(sherlock_counts$word, sherlock_counts$n, 
-          min.freq=25, random.order=FALSE)
+          min.freq = 25, random.order = FALSE)
 ```
 
 You can also use the `with` function to make this part of a pipeline, e.g.
 
 ```{r}
-sherlock_counts %>% with(wordcloud(word, n, 
-                                   min.freq=25, random.order=FALSE))
+sherlock_counts %>%
+    with(wordcloud(word, n, min.freq = 25, random.order = FALSE))
 ```
 
 You can also colour the words from highest frequency to least by adding
 a colour palette, e.g.
 
 ```{r}
-sherlock_counts %>% with(wordcloud(word, n, 
-                                   min.freq=25, 
-                                   random.order=FALSE,
-                                   colors=brewer.pal(8, "Dark2")))
+sherlock_counts %>%
+    with(wordcloud(word, 
+                   n,
+                   min.freq = 25,
+                   random.order = FALSE,
+                   colors = brewer.pal(8, "Dark2")))
 ```
 
 All of the available colour palettes are listed here - http://applied-r.com/rcolorbrewer-palettes/
@@ -95,31 +98,35 @@ using the same procedure as the previous chapter.
 
 ```{r}
 sentiments <- get_sentiments("nrc")
-sherlock_sentiments <- sherlock %>% 
-                         inner_join(sentiments) %>% 
-                         count(word, sentiment, sort=TRUE) %>% 
-                         pivot_wider(names_from=sentiment, 
-                                     values_from=n, 
-                                     values_fill=0)
+sherlock_sentiments <- sherlock %>%
+    inner_join(sentiments) |>
+    count(word, sentiment, sort = TRUE) |>
+    pivot_wider(names_from = sentiment,
+                values_from = n,
+                values_fill = 0)
 ```
 
 We could now draw word clouds for specific sentiments by picking out
 specific columns, e.g. here are all of the common words associated with "joy".
 
 ```{r}
-sherlock_sentiments %>% with(wordcloud(word, joy, 
-                                       min.freq=10,
-                                       random.color = FALSE,
-                                       colors = brewer.pal(8, "PuOr")))
+sherlock_sentiments %>%
+    with(wordcloud(word,
+                   joy, 
+                   min.freq = 10,
+                   random.color = FALSE,
+                   colors = brewer.pal(8, "PuOr")))
 ```
 
 And here are the common words associated with "fear".
 
 ```{r}
-sherlock_sentiments %>% with(wordcloud(word, fear, 
-                                       min.freq=10,
-                                       random.color = FALSE,
-                                       colors = brewer.pal(12, "Paired")))
+sherlock_sentiments %>%
+    with(wordcloud(word,
+                   fear, 
+                   min.freq = 10,
+                   random.color = FALSE,
+                   colors = brewer.pal(12, "Paired")))
 ```
 
 ## Exercise

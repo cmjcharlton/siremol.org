@@ -5,8 +5,8 @@ output:
     df_print: paged
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE, error=FALSE)
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, error = FALSE)
 ```
 
 # Tokenising
@@ -45,7 +45,7 @@ to have two columns:
 2. `text` will hold each line of text.
 
 ```{r}
-text <- tibble(line=1:5, text=text)
+text <- tibble(line = 1:5, text = text)
 text
 ```
 
@@ -108,11 +108,11 @@ Now that the text is tidy, it is easy to count the number of occurrences
 of each word. We can do this using the 
 [count](https://dplyr.tidyverse.org/reference/count.html) function
 from the tidyverse's [dplyr](https://dplyr.tidyverse.org/index.html)
-package. We will pass `sort=TRUE` so that the resulting tibble is 
+package. We will pass `sort = TRUE` so that the resulting tibble is 
 sorted with the most common words at the top.
 
 ```{r}
-tokens %>% count(word, sort=TRUE)
+tokens %>% count(word, sort = TRUE)
 ```
 
 ## Reading text from a file
@@ -139,7 +139,7 @@ have the line number (from 1 to `length(lines)`), while the lines
 themselves will be placed into the column called `text`.
 
 ```{r}
-hamlet <- tibble(line=1:length(lines), text=lines)
+hamlet <- tibble(line = 1:length(lines), text = lines)
 hamlet
 ```
 
@@ -148,7 +148,7 @@ count the numbers;
 
 ```{r}
 hamlet_tokens <- hamlet %>% unnest_tokens(word, text)
-hamlet_tokens %>% count(word, sort=TRUE)
+hamlet_tokens %>% count(word, sort = TRUE)
 ```
 
 Analysis is made difficult because the text contains lots of short words,
@@ -177,7 +177,7 @@ important_hamlet_tokens
 Now, when we count the words, we will only get the meaningful words;
 
 ```{r}
-important_hamlet_tokens %>% count(word, sort=TRUE)
+important_hamlet_tokens %>% count(word, sort = TRUE)
 ```
 
 The top words, "sleep", "death", "die", "life", are a good insight into 
@@ -186,9 +186,10 @@ the meaning behind this speech.
 We can combine all of the above steps into a single pipeline;
 
 ```{r}
-hamlet %>% unnest_tokens(word, text) %>%
-  anti_join(stop_words) %>%
-  count(word, sort=TRUE)   
+hamlet %>%
+    unnest_tokens(word, text) %>%
+    anti_join(stop_words) %>%
+    count(word, sort = TRUE)
 ```
 
 ## Downloading texts
@@ -213,10 +214,10 @@ We can now perform the same analysis as above, namely tokenising by word,
 removing stop words, and then counting words to find the most common;
 
 ```{r}
-sherlock %>% 
-  unnest_tokens(word, text) %>%
-  anti_join(stop_words) %>% 
-  count(word, sort=TRUE)
+sherlock %>%
+    unnest_tokens(word, text) %>%
+    anti_join(stop_words) %>%
+    count(word, sort = TRUE)
 ```
 
 This has shown all words, including words that only appeared once. We can
@@ -225,11 +226,11 @@ function from [dplyr](https://dplyr.tidyverse.org/index.html) to filter in
 only words that appear more than 75 times;
 
 ```{r}
-counts <- sherlock %>% 
-            unnest_tokens(word, text) %>% 
-            anti_join(stop_words) %>% 
-            count(word, sort=TRUE) %>%
-            filter(n > 75)
+counts <- sherlock %>%
+    unnest_tokens(word, text) %>%
+    anti_join(stop_words) %>%
+    count(word, sort = TRUE) %>%
+    filter(n > 75)
 counts
 ```
 
@@ -251,7 +252,7 @@ the number of occurances on the x axis, the word on the y axis,
 using a `geom_col()` column plot, and not adding a label on the y-axis;
 
 ```{r}
-counts %>% ggplot(aes(n, word)) + geom_col() + labs(y=NULL)
+counts %>% ggplot(aes(n, word)) + geom_col() + labs(y = NULL)
 ```
 
 ## EXERCISE

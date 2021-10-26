@@ -5,8 +5,8 @@ output:
     df_print: paged
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE, error=FALSE)
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, error = FALSE)
 ```
 
 ```{r}
@@ -18,26 +18,30 @@ library(wordcloud)
 sentiments <- get_sentiments("nrc")
 
 hound <- gutenberg_download(2852)
-hound <- hound %>% 
-           unnest_tokens(word, text) %>%
-           anti_join(stop_words)
+hound <- hound %>%
+    unnest_tokens(word, text) %>%
+    anti_join(stop_words)
 
-hound_sentiments <- hound %>% 
-                      inner_join(sentiments) %>% 
-                      count(word, sentiment, sort=TRUE) %>% 
-                      pivot_wider(names_from=sentiment, 
-                                  values_from=n, 
-                                  values_fill=0)
+hound_sentiments <- hound %>%
+    inner_join(sentiments) %>%
+    count(word, sentiment, sort = TRUE) %>%
+    pivot_wider(names_from = sentiment, 
+                values_from = n, 
+                values_fill = 0)
 
-hound_sentiments %>% with(wordcloud(word, joy, 
-                                    min.freq=10,
-                                    random.color = FALSE,
-                                    colors = brewer.pal(8, "PuOr")))
+hound_sentiments %>%
+   with(wordcloud(word,
+                  joy, 
+                  min.freq = 10,
+                  random.color = FALSE,
+                  colors = brewer.pal(8, "PuOr")))
 
-hound_sentiments %>% with(wordcloud(word, fear, 
-                                    min.freq=10,
-                                    random.color = FALSE,
-                                    colors = brewer.pal(12, "Paired")))
+hound_sentiments %>%
+    with(wordcloud(word,
+                   fear, 
+                   min.freq = 10,
+                   random.color = FALSE,
+                   colors = brewer.pal(12, "Paired")))
 ```
 
 ## [Return](wordclouds.html)

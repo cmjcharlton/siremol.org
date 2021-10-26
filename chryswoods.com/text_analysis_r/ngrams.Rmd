@@ -5,8 +5,8 @@ output:
     df_print: paged
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE, error=FALSE)
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, error = FALSE)
 ```
 
 # n-grams
@@ -33,7 +33,7 @@ library(tidytext)
 library(gutenbergr)
 
 sherlock <- gutenberg_download(1661) %>% 
-              mutate(linenumber=row_number())
+    mutate(linenumber = row_number())
 ```
 
 The `unnest_tokens` function accepts an argument `token` that specifies
@@ -50,7 +50,7 @@ To tokenise by bigrams, we set `token` equal to `ngrams` and `n` equal to `2`.
 
 ```{r}
 sherlock_bigrams <- sherlock %>% 
-  unnest_tokens(bigram, text, token = "ngrams", n = 2)
+    unnest_tokens(bigram, text, token = "ngrams", n = 2)
 sherlock_bigrams
 ```
 
@@ -63,7 +63,7 @@ word1 and word2. Note that the separator of a bigram is always a space, so
 
 ```{r}
 sherlock_bigrams <- sherlock_bigrams %>%
-      separate(bigram, c("word1", "word2"), sep = " ") 
+    separate(bigram, c("word1", "word2"), sep = " ") 
 sherlock_bigrams
 ```
 
@@ -80,8 +80,8 @@ rows where `word2` is not in the `word` column of `stop_words`. Note that
 data(stop_words)
 
 sherlock_bigrams <- sherlock_bigrams %>%
-      filter(!word1 %in% stop_words$word) %>%
-      filter(!word2 %in% stop_words$word)
+    filter(!word1 %in% stop_words$word) %>%
+    filter(!word2 %in% stop_words$word)
 
 sherlock_bigrams
 ```
@@ -93,18 +93,18 @@ where `word2` is not `NA`.
 
 ```{r}
 sherlock_bigrams <- sherlock_bigrams %>%
-                      filter(!is.na(word1)) %>% 
-                      filter(!is.na(word2))
+    filter(!is.na(word1)) %>% 
+    filter(!is.na(word2))
 sherlock_bigrams
 ```
 
 Finally(!) we will rejoin the word1 and word2 columns into a single "bigram" column, 
 using the "unite" function. In this case, we join using a single space
-(`sep=" "`), as this is the default separator for n-grams.
+(`sep = " "`), as this is the default separator for n-grams.
 
 ```{r}
 sherlock_bigrams <- sherlock_bigrams %>%
-                      unite(bigram, word1, word2, sep=" ")
+    unite(bigram, word1, word2, sep = " ")
 sherlock_bigrams
 ```
 
@@ -112,13 +112,13 @@ Note that we could have written all of the above steps as a single pipeline;
 
 ```{r}
 sherlock_bigrams <- sherlock %>% 
-                      unnest_tokens(bigram, text, token = "ngrams", n = 2) %>%
-                      separate(bigram, c("word1", "word2"), sep = " ") %>%
-                      filter(!word1 %in% stop_words$word) %>%
-                      filter(!word2 %in% stop_words$word) %>%
-                      filter(!is.na(word1)) %>% 
-                      filter(!is.na(word2)) %>% 
-                      unite(bigram, word1, word2, sep=" ")
+    unnest_tokens(bigram, text, token = "ngrams", n = 2) %>%
+    separate(bigram, c("word1", "word2"), sep = " ") %>%
+    filter(!word1 %in% stop_words$word) %>%
+    filter(!word2 %in% stop_words$word) %>%
+    filter(!is.na(word1)) %>% 
+    filter(!is.na(word2)) %>% 
+    unite(bigram, word1, word2, sep = " ")
 
 sherlock_bigrams
 ```
@@ -129,7 +129,7 @@ etc., if you wanted to examine n-grams with a larger number of words.
 We can now count the bigrams as before, e.g.
 
 ```{r}
-bigram_counts <- sherlock_bigrams %>% count(bigram, sort=TRUE)
+bigram_counts <- sherlock_bigrams %>% count(bigram, sort = TRUE)
 bigram_counts
 ```
 
@@ -145,15 +145,15 @@ a regular expression to look for `st` or `street`;
 
 ```{r}
 sherlock_streets <- sherlock %>%
-                      unnest_tokens(bigram, text, token = "ngrams", n = 2) %>%
-                      separate(bigram, c("word1", "word2"), sep = " ") %>%
-                      filter(!word1 %in% stop_words$word) %>%
-                      filter(!word2 %in% stop_words$word) %>%
-                      filter(!is.na(word1)) %>% 
-                      filter(!is.na(word2)) %>% 
-                      filter(str_detect(word2, "^st(reet)?$")) %>%
-                      unite(bigram, word1, word2, sep=" ") %>%
-                      count(bigram, sort=TRUE)
+    unnest_tokens(bigram, text, token = "ngrams", n = 2) %>%
+    separate(bigram, c("word1", "word2"), sep = " ") %>%
+    filter(!word1 %in% stop_words$word) %>%
+    filter(!word2 %in% stop_words$word) %>%
+    filter(!is.na(word1)) %>% 
+    filter(!is.na(word2)) %>% 
+    filter(str_detect(word2, "^st(reet)?$")) %>%
+    unite(bigram, word1, word2, sep = " ") %>%
+    count(bigram, sort = TRUE)
 
 sherlock_streets
 ```
@@ -175,13 +175,13 @@ of times each `word1`-`word2` pair appears in the text;
 
 ```{r}
 bigram_counts <- sherlock %>% 
-                      unnest_tokens(bigram, text, token = "ngrams", n = 2) %>%
-                      separate(bigram, c("word1", "word2"), sep = " ") %>%
-                      filter(!word1 %in% stop_words$word) %>%
-                      filter(!word2 %in% stop_words$word) %>%
-                      filter(!is.na(word1)) %>% 
-                      filter(!is.na(word2)) %>% 
-                      count(word1, word2, sort=TRUE)
+    unnest_tokens(bigram, text, token = "ngrams", n = 2) %>%
+    separate(bigram, c("word1", "word2"), sep = " ") %>%
+    filter(!word1 %in% stop_words$word) %>%
+    filter(!word2 %in% stop_words$word) %>%
+    filter(!is.na(word1)) %>% 
+    filter(!is.na(word2)) %>% 
+    count(word1, word2, sort = TRUE)
 
 bigram_counts
 ```
@@ -200,8 +200,8 @@ that appear seven or more times (by filtering on `n >= 7`).
 library(igraph)
 
 bigram_graph <- bigram_counts %>%
-                  filter(n >= 7) %>%
-                  graph_from_data_frame()
+    filter(n >= 7) %>%
+    graph_from_data_frame()
 
 bigram_graph
 ```
@@ -225,10 +225,11 @@ comes from the `name` of each node.
 ```{r}
 library(ggraph)
 
-ggraph(bigram_graph, layout = "fr") +
-  geom_edge_link() +
-  geom_node_point() +
-  geom_node_text(aes(label = name), vjust = 1, hjust = 1)
+bigram_graph %>%
+    ggraph(layout = "fr") +
+    geom_edge_link() +
+    geom_node_point() +
+    geom_node_text(aes(label = name), vjust = 1, hjust = 1)
 ```
 
 This graph isn't very pretty. By looking online at the options to improve
@@ -237,13 +238,15 @@ ggraph, and comparing against graphs you like online
 can improve this to;
 
 ```{r}
-ggraph(bigram_graph, layout = "fr") +
-     geom_edge_link(aes(edge_alpha = n), show.legend = FALSE,
-                    arrow = grid::arrow(type = "closed", length = unit(2, "mm")), 
-                    end_cap = circle(1, "mm")) +
-     geom_node_point(color = "lightblue", size = 2) +
-     geom_node_text(aes(label = name), size = 2) +
-     theme_void()
+bigram_graph %>%
+    ggraph(layout = "fr") +
+    geom_edge_link(aes(edge_alpha = n),
+                   show.legend = FALSE,
+                   arrow = grid::arrow(type = "closed", length = unit(2, "mm")), 
+                   end_cap = circle(1, "mm")) +
+    geom_node_point(color = "lightblue", size = 2) +
+    geom_node_text(aes(label = name), size = 2) +
+    theme_void()
 ```
 
 The arrows show the direction of the correlation, with the weights of the arrows
@@ -261,13 +264,15 @@ bigram_graph <- bigram_counts %>%
     filter(n >= 3) %>%
     graph_from_data_frame()
 
-ggraph(bigram_graph, layout = "fr") +
-     geom_edge_link(aes(edge_alpha = n), show.legend = FALSE,
-                    arrow = grid::arrow(type = "closed", length = unit(1, "mm")), 
-                    end_cap = circle(0.5, "mm")) +
-     geom_node_point(color = "lightblue", size = 0.5) +
-     geom_node_text(aes(label = name), size = 1) +
-     theme_void()
+bigram_graph %>%
+    ggraph(layout = "fr") +
+    geom_edge_link(aes(edge_alpha = n),
+                   show.legend = FALSE,
+                   arrow = grid::arrow(type = "closed", length = unit(1, "mm")), 
+                   end_cap = circle(0.5, "mm")) +
+    geom_node_point(color = "lightblue", size = 0.5) +
+    geom_node_text(aes(label = name), size = 1) +
+    theme_void()
 ```
 
 Cool? :-)

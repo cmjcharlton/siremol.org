@@ -5,8 +5,8 @@ output:
     df_print: paged
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE, error=FALSE)
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, error = FALSE)
 ```
 
 # Regular Expressions
@@ -48,7 +48,7 @@ For example, let's first read Hamlet's soliloquy into a tibble.
 ```{r}
 library(tidyverse)
 lines <- readLines("https://chryswoods.com/text_analysis_r/hamlet.txt")
-text <- tibble(line=1:length(lines), text=lines)
+text <- tibble(line = 1:length(lines), text = lines)
 ```
 
 We can use `str_detect` to filter out lines that contain specific text,
@@ -62,7 +62,7 @@ We can do the opposite of this, i.e. filter all of the lines that don't
 contain `To` by negating the search.
 
 ```{r}
-text %>% filter(str_detect(text, "To", negate=TRUE))
+text %>% filter(str_detect(text, "To", negate = TRUE))
 ```
 
 At the moment, this is performing a case-sensitive search. We can use
@@ -70,7 +70,7 @@ At the moment, this is performing a case-sensitive search. We can use
 a case-insensitive way.
 
 ```{r}
-text %>% filter(str_detect(text, regex("To", ignore_case=TRUE)))
+text %>% filter(str_detect(text, regex("To", ignore_case = TRUE)))
 ```
 
 Regular expressions can do more than just search for specific text. They 
@@ -213,7 +213,7 @@ str_replace_all(line, "be", "banana")
 You can also choose to match the string to replace using a regex, e.g.
 
 ```{r}
-str_replace_all(line, regex("to be", ignore_case=TRUE), "ice-cream")
+str_replace_all(line, regex("to be", ignore_case = TRUE), "ice-cream")
 ```
 
 You need to use `mutate` to apply this change to all rows in a tibble.
@@ -224,7 +224,7 @@ text %>% mutate(text = str_replace_all(text, "be", "banana"))
 ```
 
 ```{r}
-text %>% mutate(text = str_replace_all(text, regex("\\bthe\\b", ignore_case=TRUE), "banana"))
+text %>% mutate(text = str_replace_all(text, regex("\\bthe\\b", ignore_case = TRUE), "banana"))
 ```
 
 ## Health Warning

@@ -5,8 +5,8 @@ output:
     df_print: paged
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE, error=FALSE)
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, error = FALSE)
 ```
 
 # Sentiment Analysis
@@ -76,8 +76,8 @@ library(gutenbergr)
 data(stop_words)
 
 sherlock <- gutenberg_download(1661) %>%
-              unnest_tokens(word, text) %>%
-              anti_join(stop_words)
+    unnest_tokens(word, text) %>%
+    anti_join(stop_words)
 sherlock
 ```
 
@@ -101,18 +101,18 @@ using [filter](https://dplyr.tidyverse.org/reference/filter.html)
 and count.
 
 ```{r}
-sherlock_sentiments %>% 
-  filter(sentiment=="positive") %>%
-  count(word, sort=TRUE)      
+sherlock_sentiments %>%
+    filter(sentiment == "positive") %>%
+    count(word, sort = TRUE)
 ```
 
 You could get the total number of words of each type using;
 
 ```{r}
 sherlock_sentiments %>%
-  filter(sentiment=="joy") %>%
-  count(word) %>% 
-  summarise(total=sum(n))
+    filter(sentiment == "joy") %>%
+    count(word) %>%
+    summarise(total = sum(n))
 ```
 
 Alternatively (and much more simply) we could just count the number of 
@@ -127,9 +127,9 @@ We could plot this using a similar technique as the last section
 
 ```{r}
 sherlock_sentiments %>%
-  count(sentiment) %>%
-  mutate(sentiment = reorder(sentiment, n)) %>%
-  ggplot(aes(n, sentiment)) + geom_col() + labs(y=NULL)
+    count(sentiment) %>%
+    mutate(sentiment = reorder(sentiment, n)) %>%
+    ggplot(aes(n, sentiment)) + geom_col() + labs(y = NULL)
 ```
 
 ## Exercise
@@ -152,17 +152,18 @@ the row number in the tibble (obtained via the
 function).
 
 ```{r}
-sherlock <- gutenberg_download(1661) %>% 
-              mutate(linenumber=row_number()) %>% 
-              unnest_tokens(word, text) %>% anti_join(stop_words)
+sherlock <- gutenberg_download(1661) %>%
+    mutate(linenumber = row_number()) %>%
+    unnest_tokens(word, text) %>%
+    anti_join(stop_words)
 sherlock
 ```
 
 We can now add in the sentiments...
 
 ```{r}
-sherlock_sentiments <- sherlock %>% 
-                         inner_join(sentiments)
+sherlock_sentiments <- sherlock %>%
+    inner_join(sentiments)
 sherlock_sentiments
 ```
 
@@ -178,8 +179,8 @@ line number by 80. Thus lines 0-79 will be assigned to block 0, lines
 80 to 159 to block 1 etc.
 
 ```{r}
-sherlock_blocks <- sherlock_sentiments %>% 
-                     count(block=linenumber%/%80, sentiment)
+sherlock_blocks <- sherlock_sentiments %>%
+    count(block = linenumber %/% 80, sentiment)
 sherlock_blocks
 ```
 
@@ -196,10 +197,10 @@ don't appear in a block, so we need to ensure that any missing
 sentiments are filled in with a default value of 0.
 
 ```{r}
-sherlock_blocks <- sherlock_blocks %>% 
-                     pivot_wider(names_from = sentiment, 
-                                 values_from = n, 
-                                 values_fill = 0)
+sherlock_blocks <- sherlock_blocks %>%
+    pivot_wider(names_from = sentiment, 
+                values_from = n, 
+                values_fill = 0)
 sherlock_blocks
 ```
 
@@ -209,7 +210,7 @@ into a new column called "sentiment";
 
 ```{r}
 sherlock_blocks <- sherlock_blocks %>%
-                         mutate(sentiment = positive - negative)
+    mutate(sentiment = positive - negative)
 sherlock_blocks
 ```
 

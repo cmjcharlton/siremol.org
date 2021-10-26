@@ -5,18 +5,18 @@ output:
     df_print: paged
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE, error=FALSE)
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, error = FALSE)
 ```
 
 ```{r}
 library(tidyverse)
 lines <- readLines("https://chryswoods.com/text_analysis_r/hamlet.txt")
-text <- tibble(line=1:length(lines), text=lines)
+text <- tibble(line = 1:length(lines), text = lines)
 
 text %>% mutate(text = str_replace_all(text, 
                                        regex("\\bthe\\s\\w+", 
-                                             ignore_case=TRUE), 
+                                             ignore_case = TRUE), 
                                        "the banana"))
 ```
 
@@ -25,12 +25,12 @@ replacements, e.g.
 
 ```{r}
 text %>% 
-  mutate(text = str_replace_all(text, 
-                                "\\bthe\\s\\w+", 
-                                "the banana")) %>%
-  mutate(text = str_replace_all(text,
-                                "\\bThe\\s\\w+",
-                                "The banana"))
+    mutate(text = str_replace_all(text, 
+                                  "\\bthe\\s\\w+", 
+                                  "the banana")) %>%
+    mutate(text = str_replace_all(text,
+                                  "\\bThe\\s\\w+",
+                                  "The banana"))
 ```
 
 
