@@ -56,7 +56,7 @@ Next, we will use `ggplot` to draw a graph (we will explain how
 this works after drawing).
 
 ```R
-ggplot(historical_temperature, aes(x = year, y = temperature)) + geom_point()
+historical_temperature %>% ggplot(aes(x = year, y = temperature)) + geom_point()
 ```
 
 You should see a graph similar to this;
@@ -78,7 +78,7 @@ There are three key components;
 These are entered via the general form;
 
 ```R
-ggplot( data, aesthetic ) + layer1 + layer2 + layer3...
+data %>% ggplot( aesthetic ) + layer1 + layer2 + layer3...
 ```
 
 The `data` is a tibble containing tidy data with one observation per row,
