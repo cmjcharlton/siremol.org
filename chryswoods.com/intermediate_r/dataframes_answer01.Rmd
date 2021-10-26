@@ -8,8 +8,9 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 The below image shows how I've loaded the cats dataset into a 
-`data.frame` called `cats`. When I type `cats$` I get a popup
-showing the possible completions, i.e. the columns available.
-These are `Sex`, `BodyWeight` and `HeartWeight`.
+`data.frame` called `cats`. You can see the dataset information displayed
+on the right-hand side of the RStudio window under "Data". This information
+also pops up when I type `cats$`, showing the possible completions (i.e. the 
+variables available). These are `Sex`, `BodyWeight` and `HeartWeight`.
 
 ![](images/dataframes01.png)

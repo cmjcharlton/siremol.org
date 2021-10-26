@@ -120,7 +120,9 @@ cats <- read.csv("https://chryswoods.com/intermediate_r/data/cats.csv")
 > Read the cats data set into a `data.frame`. What are the three
 > columns in this data?
 >
-> Hint - type `cats$` and wait for a popup to come up.
+> Hint - if you can use the `str` or `summary` functions to examine the contents
+> of an object, or if you are using RStudio simply look in the "Data" section
+> in the Enviroment" tab.
 >
 > [Answer](dataframes_answer01.html)
 >
