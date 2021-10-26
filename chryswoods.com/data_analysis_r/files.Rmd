@@ -180,7 +180,7 @@ year    London  Paris   Rome
 The next issue is that you can see that the year has been read in as a
 floating point (double) number, rather than as an integer. Each column
 is read using a parser, that converts the text data in the file into
-data of the appropriate type. R will guess which parser to use, with
+data of the appropriate type. `read_delim` will guess which parser to use, with
 this helpfully reported to the R console;
 
 ```
