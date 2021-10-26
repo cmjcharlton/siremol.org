@@ -133,7 +133,8 @@ hence the full code should be;
 average_heart_weight <- cats %>%
     filter(Sex == "F") %>%
     filter(BodyWeight > 2.5) %>%
-    summarise(mean = calculate_mean(HeartWeight))
+    summarise(mean = calculate_mean(HeartWeight)) %>%
+    pull()
 ```
 
 Yes, this is a very dense bit of code. This is typical for R. You will 
@@ -143,8 +144,8 @@ As you can see, it is important that you name your variables, data,
 columns and functions clearly, so that it is easier for future 
 readers of your code to understand what is going on. 
 
-Finally, note that `average_heart_weight` is a 1x1 `tibble`. You can extract
-the actual numeric value by typing `as.numeric(average_heart_weight)`.
+Finally, note that we have used the `pull` function to extract the final answer
+from a 1x1 `tibble` into a scalar before storing it into`average_heart_weight`.
 
 > EXERCISE
 >
