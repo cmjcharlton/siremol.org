@@ -205,12 +205,12 @@ numeric. If not, then we could `stop`;
 
 ```R
 calculate_mean <- function(values) {
+    if (!is.numeric(values)) {
+        stop("Cannot calculate average of non-numeric values")
+    }
     total <- 0.0
     count <- 0L
     for (value in values) {
-        if (!is.numeric(value)) {
-            stop("Cannot calculate average of non-numeric values")
-        }
         total <- total + value
         count <- count + 1L
     }
