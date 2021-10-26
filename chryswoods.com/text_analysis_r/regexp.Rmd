@@ -239,7 +239,9 @@ your regular expressions and explain in English exactly what you intended to
 match when you wrote them. Once you have memorised the rules, you will find
 regular expressions are very easy to read, use and are extremely powerful. 
 However, without comments, they will be completely unintelligible to everyone 
-else who looks at or relies on your code.
+else who looks at or relies on your code. If you don't believe me then
+have a read through [this](https://stackoverflow.com/questions/201323/how-can-i-validate-an-email-address-using-a-regular-expression)
+stack overflow discussion on validating email address using regular expressions.
 
 ## Exercise
 
