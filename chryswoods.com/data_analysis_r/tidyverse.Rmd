@@ -202,9 +202,15 @@ see that error. Also, if we sorted by month then they would sort
 alphabetically (APR before JAN), instead of in the correct month order.
 
 To solve this, we need to convert the month into a factor. A factor
-is used to represent categorical data. A factor must have a value
-that corresponds to one of its levels. For example, lets now
-create the levels for a factor to represent months of the year;
+is used to represent categorical data and is implemented as an sequential
+(1..N) integer vector where each possible value (level) is associated with
+a textual label. Factors come in two variants factor (unordered - an example
+of which might represent countries) and ordered (which might for example
+represent a something like exam grades). Most of the time these behave the
+same, but R functions can check which sort you have chosen and possibly
+behave differently based on this.
+
+Let's now create the levels for a factor to represent months of the year;
 
 ```R
 month_levels <- c("JAN", "FEB", "MAR", "APR", "MAY", "JUN",
@@ -221,19 +227,25 @@ function which is included in base R. The general syntax is;
 factor(data, levels)
 ```
 
+Where data is a character vector containing the whole input variable and levels is
+an optional vector containing the unique values that are valid for data in the
+required order. Any values in data which do not occur in levels will be replaced
+with `NA` in the final vector. If you do not specify levels then R will use the
+unique values in data, sorted alphabetically.
+
 This would return the passed `data` factored into one of the levels specified
 in `levels`.
 
 In our case, we will need to perform
 
 ```R
-factor(data, month_levels)
+factor(month, month_levels)
 ```
 
-one each of the values of the month variable for each observation.
+to encode the values of the month variable for each observation.
 
 To do this, we need to edit our data to translate each month string into a
-month factor. Editing of a tibble is performed by the 
+month factor level. Editing of a tibble is performed by the 
 [mutate](https://dplyr.tidyverse.org/reference/mutate.html)
 function, e.g.
 
