@@ -15,7 +15,7 @@ R is great at representing and manipulating tabular data.
 In "traditional" R, this was handled in `data.frame`, while
 in modern "tidyverse" R this is handled via a `tibble`.
 
-A `tibble` is a two (or possibly more) dimensional table of data.
+A `tibble` represents a two dimensional table of data.
 
 ```R
 library(tidyverse)
@@ -31,9 +31,9 @@ census <- tibble("City" = c("Paris", "Paris", "Paris", "Paris",
                          2.547, 2.627, 2.734, 2.627))
 ```
 
-This has created a `tibble` that we have assigned to the variable `census`.
+This has created a `tibble` that we have assigned to the object `census`.
 The column names are the keys (`City`, `year` and `pop`), while the 
-data for each column is given in the values (the lists).
+data for each column is given in the values (the vectors).
 
 You can print a summary of the tibble via;
 

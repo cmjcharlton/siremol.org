@@ -71,7 +71,7 @@ with http://, https://, ftp://, or ftps:// will be automatically downloaded.
 Remote gz files can also be automatically downloaded and decompressed.
 ```
 
-This means that we can take our URL and pass it directly (or via a variable) to the function:
+This means that we can take our URL and pass it directly (or via an object) to the function:
 
 ```R
 city_pop_file <- "https://chryswoods.com/data_analysis_r/city_pop.csv"
@@ -231,7 +231,7 @@ year    London  Paris   Rome
 2015    8.615   NA      NA
 ```
 
-Finally, we want to assign this `tibble` to a variable, called `census`;
+Finally, we want to assign this `tibble` to an object, called `census`;
 
 ```R
 census <- read_delim(

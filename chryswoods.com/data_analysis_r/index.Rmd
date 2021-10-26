@@ -120,9 +120,9 @@ and then click "Run". You should now see;
 
 ![](images/notebook06.png)
 
-The R blocks in a notebook are linked together so a variable defined in one 
+The R blocks in a notebook are linked together so an object defined in one 
 is available in all the R blocks from that point on. So in the second cell 
-you can use the variables `a` and `b`:
+you can use the objects `a` and `b`:
 
 ```
 a - b

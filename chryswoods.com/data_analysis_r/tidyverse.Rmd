@@ -211,7 +211,7 @@ month_levels <- c("JAN", "FEB", "MAR", "APR", "MAY", "JUN",
                   "JUL", "AUG", "SEP", "OCT", "NOV", "DEC")
 ```
 
-This list of strings sets the valid values of the factor, and the 
+This vector of strings sets the valid values of the factor, and the 
 order in which they should be arranged.
 
 To factor data, we use the [factor](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/factor)
@@ -241,9 +241,9 @@ function, e.g.
 mutate(temperature = temperature + 5)
 ```
 
-would edit the "temperature" column variable, and add "5" to every single value 
-in this column. In our case, we want to factor each value of the 
-month column variable, so we need 
+would edit the "temperature" variable, and add "5" to every single value 
+in this variable. In our case, we want to encode each value of the 
+month variable, so we need 
 
 ```R
 mutate(month = factor(month, month_levels))
