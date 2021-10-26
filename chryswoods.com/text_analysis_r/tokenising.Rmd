@@ -235,7 +235,7 @@ counts
 ```
 
 To plot this data, we need to convert the words from being stored as text,
-to be represented as [factors](https://www.w3schools.com/r/r_factors.asp).
+to be represented as [factors](https://r4ds.had.co.nz/factors.html).
 We do this using the core R [reorder](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/reorder.default)
 function. This will order the factors according to the number of occurrences
 of each word. As we are changing the tibble, we need to use the dplyr 
