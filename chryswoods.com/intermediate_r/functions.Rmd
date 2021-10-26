@@ -59,10 +59,10 @@ possible solution;
 ```R
 calculate_mean <- function(values) {
      total <- 0.0
-     count <- 0
+     count <- 0L
      for (value in values) {
          total <- total + value
-         count <- count + 1
+         count <- count + 1L
      }
      return(total / count)
 }
@@ -140,10 +140,10 @@ used to return the output of the function back to the caller.
                              ↓
 calculate_mean <- function(values) {
      total <- 0.0
-     count <- 0
+     count <- 0L
      for (value in values) {
          total <- total + value
-         count <- count + 1
+         count <- count + 1L
      }
      return(total / count)
         ↑
@@ -206,13 +206,13 @@ numeric. If not, then we could `stop`;
 ```R
 calculate_mean <- function(values) {
     total <- 0.0
-    count <- 0
+    count <- 0L
     for (value in values) {
         if (!is.numeric(value)) {
             stop("Cannot calculate average of non-numeric values")
         }
         total <- total + value
-        count <- count + 1
+        count <- count + 1L
     }
     return(total / count)
 }
@@ -241,13 +241,13 @@ the `warning` function, e.g.
 ```R
 calculate_mean <- function(values) {
      total <- 0.0
-     count <- 0
+     count <- 0L
      for (value in values) {
          number <- as.numeric(value)
 
          if (!is.na(number)) {
              total <- total + number
-             count <- count + 1
+             count <- count + 1L
          } else {
              warning("Skipping '", value, 
                      "' as it is not numeric")
