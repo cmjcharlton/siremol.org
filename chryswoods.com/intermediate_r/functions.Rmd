@@ -48,7 +48,9 @@ returning the string that has been created.
 
 You can write your own functions in R! For example, let's try to
 write a function that calculates the mean average of a numeric
-vector.
+vector. This is of course for illustration purposes only
+because as you would expect R includes a built-in `mean` function
+which you would use instead in real analysis.
 
 As input, the function will take a numeric vector. It should 
 output a number which is the mean of those numbers.
@@ -104,7 +106,9 @@ calculate_average <- function(...
 Next, we have the keyword `function`, that says that this is some
 data that is of type function. This means that the data will contain
 code. The arguments to `function` are the arguments you would like
-to use as input for your new function;
+to use as input for your new function. You can provide
+a default value for these by using the `=` syntax, as you would
+when calling the function.
 
 ```R
                      keyword  arguments
@@ -114,8 +118,8 @@ calculate_average <- function(values) {
 
 Next, you need the body of the function. This body is the lines
 of code that will be run when your function is called. Just like
-with `for` loops or `if` statements, the body of code
-is contained within curly brackets
+with `for` loops or `if` statements, the body of code must be
+contained within curly brackets if it has more than one statement.
 
 ```R
                                   Open curly brackets
@@ -134,6 +138,12 @@ Our code will loop through all of the values in `values` to
 calculate the mean average. Once we have finished, we reach
 the final part of the function, which is `return`. This is
 used to return the output of the function back to the caller.
+If you omit `return` R will instead return the last value
+referenced in the function. The tidyverse style guide recommends
+only using return if you want to end the function before
+reaching the end, but this is not an opinion shared by all.
+I have chosen to ignore this advice here, and the important
+thing is to be consistent with your style to help later readers.
 
 ```R
                            Input(s)
@@ -169,6 +179,10 @@ is referred to as `values`. This data is looped over, the mean average
 calculated, resulting in an output that is returned at the end of
 the function, and assigned to the object `average_height`.
 
+Note that unlike loops the objects that are defined within a function are
+not available after it has run unless you explicitly return them. This is because
+the function is run within its own local environment.
+
 > EXERCISE
 >
 > Write a function, called `calculate_max`, that returns the largest value.
@@ -176,7 +190,8 @@ the function, and assigned to the object `average_height`.
 >
 > Hint - start by using an object called `max_value` and setting that
 > equal to `NA`. Then use `if (is.na(max_value) || value > max_value)`
-> to test whether a `value` in `values` is greater. The `||` means "or"
+> to test whether a `value` in `values` is greater. The `||` means "or" and
+> is used when both of its arguments are scalar.
 >
 > [Answer](functions_answer01.html)
 
