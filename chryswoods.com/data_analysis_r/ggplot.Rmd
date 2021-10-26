@@ -47,7 +47,8 @@ historical_temperature <- temperature %>%
     pivot_longer(c("JAN", "FEB", "MAR", "APR", "MAY", "JUN",
                    "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"),
                  names_to = "month",
-                 values_to = "temperature") %>%
+                 values_to = "temperature",
+                 values_drop_na = TRUE) %>%
     rename(year = DATE) %>%
     mutate(month = factor(month, month_levels))
 ```

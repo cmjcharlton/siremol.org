@@ -25,7 +25,8 @@ historical_temperature <- temperature %>%
     pivot_longer(c("JAN", "FEB", "MAR", "APR", "MAY", "JUN",
                    "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"),
                  names_to = "month",
-                 values_to = "temperature") %>%
+                 values_to = "temperature",
+                 values_drop_na = TRUE) %>%
     rename(year = DATE) %>%
     mutate(month = factor(month, month_levels))
 ```
@@ -46,7 +47,7 @@ Graph that shows the average maximum temperature per month...
 ```{r}
 historical_temperature %>%
     group_by(month) %>%
-    summarise(max_temp = max(temperature, na.rm = TRUE)) %>%
+    summarise(max_temp = max(temperature)) %>%
     ggplot(aes(x = month, y = max_temp, group = "month")) + 
     geom_line()
 ```
@@ -57,7 +58,7 @@ Change in average temperature in December per decade.
 historical_temperature %>%
     filter(month == "DEC") %>%
     group_by(decade) %>%
-    summarise(average = mean(temperature, na.rm = TRUE)) %>%
+    summarise(average = mean(temperature)) %>%
     ggplot(aes(x = decade, y = average)) + 
     geom_point() +
     geom_smooth()
@@ -68,7 +69,7 @@ Change in average temperature per century, plus a smooth trend line
 ```{r}
 historical_temperature %>%
     group_by(century) %>%
-    summarise(average = mean(temperature, na.rm = TRUE)) %>%
+    summarise(average = mean(temperature)) %>%
     ggplot(aes(x = century, y = average)) + 
     geom_point() + 
     geom_smooth(span = 2.0)

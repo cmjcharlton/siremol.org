@@ -42,7 +42,7 @@ For example, we can calculate the mean average temperature using;
 
 ```R
 historical_temperature %>% 
-    summarise("average temperature" = mean(temperature, na.rm = TRUE))
+    summarise("average temperature" = mean(temperature))
 ```
 
 ```
@@ -51,8 +51,6 @@ historical_temperature %>%
                   <dbl>
 1                  9.25
 ```
-
-(note that we used `na.rm = TRUE` to tell the function to ignore `NA` values)
 
 This has created a new tibble, where the column called "average temperature"
 contains the mean average temperature.
@@ -70,7 +68,7 @@ function to calculate the average temperature for each year;
 ```R
 historical_temperature %>% 
     group_by(year) %>%
-    summarise("average temperature" = mean(temperature, na.rm = TRUE))
+    summarise("average temperature" = mean(temperature))
 ```
 
 ```
@@ -95,7 +93,7 @@ or, we could calculate the average temperature for each month via;
 ```R
 historical_temperature %>%
     group_by(month) %>%
-    summarise("average temperature" = mean(temperature, na.rm = TRUE))
+    summarise("average temperature" = mean(temperature))
 ```
 
 ```
@@ -127,7 +125,7 @@ and calculate the average monthly temperatures then via;
 historical_temperature %>%
     filter(year < 1800 & year >= 1700) %>%
     group_by(month) %>%
-    summarise("18th Century" = mean(temperature, na.rm = TRUE))
+    summarise("18th Century" = mean(temperature))
 ```
 
 ```
@@ -154,7 +152,7 @@ We could then repeat this for the 21st Century...
 historical_temperature %>%
     filter(year >= 2000) %>%
     group_by(month) %>%
-    summarise("21st Century" = mean(temperature, na.rm = TRUE))
+    summarise("21st Century" = mean(temperature))
 ```
 
 ```

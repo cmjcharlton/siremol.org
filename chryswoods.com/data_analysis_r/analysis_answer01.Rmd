@@ -35,7 +35,8 @@ historical_temperature <- temperature %>%
     pivot_longer(c("JAN", "FEB", "MAR", "APR", "MAY", "JUN",
                    "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"),
                  names_to = "month",
-                 values_to = "temperature") %>%
+                 values_to = "temperature",
+                 values_drop_na = TRUE) %>%
     rename(year = DATE) %>%
     mutate(month = factor(month, month_levels))
 ```
@@ -46,7 +47,7 @@ Calculate the mean monthly temperatures in the 17th Century
 c17th <- historical_temperature %>%
     filter(year < 1700 & year >= 1600) %>%
     group_by(month) %>%
-    summarise("temperature" = mean(temperature, na.rm = TRUE))
+    summarise("temperature" = mean(temperature))
 ```
 
 Calculate the mean monthly temperatures in the 21st Century
@@ -55,7 +56,7 @@ Calculate the mean monthly temperatures in the 21st Century
 c21st <- historical_temperature %>%
     filter(year >= 2000) %>%
     group_by(month) %>%
-    summarise("temperature" = mean(temperature, na.rm = TRUE))
+    summarise("temperature" = mean(temperature))
 ```
 
 Now add the difference to the c21st table and print it out
@@ -75,11 +76,11 @@ We will now repeat this for the maximum and minimum temperatures...
 c17th_max <- historical_temperature %>%
     filter(year < 1700 & year >= 1600) %>%
     group_by(month) %>%
-    summarise("temperature" = max(temperature, na.rm = TRUE))
+    summarise("temperature" = max(temperature))
 c21st_max <- historical_temperature %>%
     filter(year >= 2000) %>%
     group_by(month) %>%
-    summarise("temperature" = max(temperature, na.rm = TRUE))
+    summarise("temperature" = max(temperature))
 c21st_max <- c21st_max %>% 
     mutate(change = temperature - (c17th_max %>% select(temperature) %>% pull()))
 c21st_max
@@ -89,11 +90,11 @@ c21st_max
 c17th_min <- historical_temperature %>%
     filter(year < 1700 & year >= 1600) %>%
     group_by(month) %>%
-    summarise("temperature" = min(temperature, na.rm = TRUE))
+    summarise("temperature" = min(temperature))
 c21st_min <- historical_temperature %>%
     filter(year >= 2000) %>%
     group_by(month) %>%
-    summarise("temperature" = min(temperature, na.rm = TRUE))
+    summarise("temperature" = min(temperature))
 c21st_min <- c21st_min %>% 
     mutate(change = temperature - (c17th_min %>% select(temperature) %>% pull()))
 c21st_min

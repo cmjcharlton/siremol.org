@@ -113,7 +113,10 @@ pivot_longer(c("JAN", "FEB", "MAR"),
 
 would move the values of the "JAN", "FEB" and "MAR" columns into a new
 column called "temperature", and the actual month names will be moved
-into a new column called "month".
+into a new column called "month". As there may be months where no value
+was recorded (for example in the most recent year) there is an aditional
+`values_drop_na` option that automatically removes these as part of the
+pivoting process.
 
 For our data set, we would use;
 
@@ -123,7 +126,8 @@ temperature %>%
     pivot_longer(c("JAN", "FEB", "MAR", "APR", "MAY", "JUN",
                    "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"),
                  names_to = "month",
-                 values_to = "temperature")
+                 values_to = "temperature",
+                 values_drop_na = TRUE)
 ```
 
 ```
@@ -164,7 +168,8 @@ temperature %>%
     pivot_longer(c("JAN", "FEB", "MAR", "APR", "MAY", "JUN",
                    "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"),
                  names_to = "month",
-                 values_to = "temperature") %>%
+                 values_to = "temperature",
+                 values_drop_na = TRUE) %>%
     rename(year = DATE)
 ```
 
@@ -253,7 +258,8 @@ historical_temperature <- temperature %>%
     pivot_longer(c("JAN", "FEB", "MAR", "APR", "MAY", "JUN",
                    "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"),
                  names_to = "month",
-                 values_to = "temperature") %>%
+                 values_to = "temperature",
+                 values_drop_na = TRUE) %>%
     rename(year = DATE) %>%
     mutate(month = factor(month, month_levels))
 
