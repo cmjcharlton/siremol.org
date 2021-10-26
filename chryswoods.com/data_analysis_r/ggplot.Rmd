@@ -159,7 +159,7 @@ Note how the group aesthetic has to be set only for the violin plot.
 
 You can save your plots to a file using the 
 [ggsave](https://ggplot2.tidyverse.org/reference/ggsave.html) function.
-This will save the last plot drawn to a file, with filename, size,
+This will save the last plot drawn to a file, with file name, size,
 format etc. all controlled via arguments to this function, e.g.
 
 ```R

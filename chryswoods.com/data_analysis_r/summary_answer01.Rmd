@@ -70,7 +70,7 @@ to write `°C`. Text labels can be written in unicode, so can include emojis.
 Remember to be professional and restrain yourself from adding too many (or any?)
 to production-quality graphs 😉.
 
-Next, we can change the color of the points to red by changing the `colour` in 
+Next, we can change the colour of the points to red by changing the `colour` in 
 its aesthetic.
 
 ```{r}

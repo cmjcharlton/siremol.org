@@ -47,7 +47,7 @@ blocks of text to explain what you're doing and embed output such
 as graphs directly into the page.
 
 To get started, launch RStudio. In the menu, select "File | New File | R Notebook".
-This will open a new R Notebook, which should look somethign like this;
+This will open a new R Notebook, which should look something like this;
 
 ![](images/notebook01.png)
 
@@ -154,7 +154,7 @@ will plot the graph of that dataset.
 Finally, this document can be rendered to a nice web page or a good-looking
 PDF or Word file. You can do this by clicking the "Preview" button.
 
-It is becomming common for people to use R notebooks as a sort of lab notebook 
+It is becoming common for people to use R notebooks as a sort of lab notebook 
 where they document their processes, interspersed with code. This style of 
 working where you give prose and code equal weight is sometimes called 
 *literate programming*.
@@ -187,7 +187,7 @@ and see how they work.
 
 Note that R markdown notebooks are very powerful and support more than just 
 R. You can embed a whole range of languages, including Python, Fortran,
-Julia etc. and can generate books, websites, powerpoint presentations etc. 
+Julia etc. and can generate books, websites, PowerPoint presentations etc. 
 
 For more information please take a look at this free
 online book, [R Markdown: The definitive guide, by Yihui Xie, 

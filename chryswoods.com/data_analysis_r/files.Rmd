@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 One of the most common situations is that you have some data file containing 
 the data you want to read. Perhaps this is data you've produced yourself or 
-maybe it's from a collegue. In an ideal world the file will be perfectly 
+maybe it's from a colleague. In an ideal world the file will be perfectly 
 formatted and will be trivial to import into R but since this is so often 
 not the case, R provides a number of features to make your life easier.
 
@@ -94,7 +94,7 @@ year;London;Paris;Rome
 ```
 
 We can see that by default it's done a fairly bad job of parsing the file 
-(this is mostly because I've construsted the `city_pop.csv` file to be as 
+(this is mostly because I've constructed the `city_pop.csv` file to be as 
 obtuse as possible). It's making a lot of assumptions about the structure 
 of the file but in general it's taking quite a naïve approach.
 

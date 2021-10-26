@@ -187,7 +187,7 @@ historical_temperature %>%
 > minimum and maximum temperatures for each month.
 >
 > Finally, what is the average increase in maximum monthly temperatures
-> between the 16th and 21st Centuries?
+> between the 17th and 21st Centuries?
 >
 > [Answer](analysis_answer01.html)
 
