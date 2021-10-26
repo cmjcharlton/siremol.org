@@ -137,6 +137,20 @@ average_heart_weight <- cats %>%
     pull()
 ```
 
+Note that the tidyverse style guide also suggests using the right assignment
+operator (`->`) as an alternative to keep the flow going from left to right, i.e.:
+
+```R
+cats %>%
+    filter(Sex == "F") %>%
+    filter(BodyWeight > 2.5) %>%
+    summarise(mean = calculate_mean(HeartWeight)) %>%
+    pull() ->
+    average_heart_weight
+```
+
+The important thing is to be consistent to help future readers of your code.
+
 Yes, this is a very dense bit of code. This is typical for R. You will 
 often see very dense blocks of code that use forward pipes to push
 data through several functions, resulting in a final output result.
