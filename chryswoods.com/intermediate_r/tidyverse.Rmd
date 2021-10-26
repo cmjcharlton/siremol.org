@@ -8,23 +8,30 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 As mentioned before, R is an old programming language that was written
-as a re-implementation of the even older language, S. Over the years
-this has meant that R has gained many different layers and methods
-of doing things. This has created lots of inconsistencies and cruft, 
-with R sometimes behaving in strange and unexpected ways that can be 
-confusing for new users, and not suited to applications in 
-modern data science.
+as a re-implementation of the even older language, S. Computing environments
+have evolved a lot over the years and a lot of assumptions regarding the available
+computing facilities and types of analysis are no longer valid. As R is an open
+extensible environment addon packages have been written independently by a huge
+number of people, often motivated by their own research and therefore a lot of
+inconsistencies in terminology and expected behaviour have emerged. This can be
+confusing and can mean that code can sometimes not behave as its author expects.
 
-The tidyverse is a coherent collection of modern R packages that
-solves this problem. It is a coherent system of packages for data manipulation, 
-exploration and visualization that share a common design philosophy.
-The packages were originally mostly developed by Hadley Wickham,
-but have been expanded by several contributers and has now developed
-into a thriving and highly supportive community.
+As tens of thousands of packages, and many times more user written scripts rely
+on the functions in base R it is impossible for these to be updated into a
+consistent structure without breaking a lot of existing code. To solve this
+problem the tidyverse packages were developed by Hadley Wickham, Chief Scientist
+at RStudio. These build on the data structures that we have previously described
+to provide replacements for the base R functions that are designed to
+work together and behave in a consistent way and with a common philosophy.
 
-Modern R is the tidyverse, and I strongly recommend that you use
-the tidyverse when you use R for data science, manipulation and
-visualisation.
+I strongly recommend that if you are doing data analysis that you use the
+tidyverse where possible when starting new work as this should greatly reduce
+the scope for errors and make the scripts more readable. It is important however
+to have some familiarly with the base R functions as much of the existing code
+you encounter will use this and most packages outside of the tidyverse will be
+written using base R. As the tidyverse is under active development some aspects
+are considered experimental and are subject to change. It is therefore even more
+important that you record the versions of the tidyverse packages that you use.
 
 There is lots of information about the tidyverse on the web, e.g.
 
@@ -64,8 +71,10 @@ This shows that the seven core tidyverse modules have been loaded
 and [forcats](https://forcats.tidyverse.org)).
 
 It also shows how the modern `dplyr::filter` and `dplyr::lag`
-functions replace the older `stats::filter` and 
-`stats::lag` functions.
+functions mask the older `stats::filter` and `stats::lag` functions.
+If for some reason you still need to use these functions you can still
+call them using the `::` namespace syntax. The functions being masked
+just means that if you omit the namespace you will get the `dplyr` version.
 
 > EXERCISE
 >
@@ -77,15 +86,41 @@ functions replace the older `stats::filter` and
 ## Tibbles and readr
 
 We will learn and use the tidyverse in much more depth in future 
-workshops. For today, we will look at `tibble`. A `tibble` is the
-modern tidyverse version of a `data.frame`. A `tibble` is a `data.frame`,
-and so can be used in the same way. But it comes with more powerful
-features and removes inconsistent and confusing behaviour.
+workshops. For today, we will look at `tibble`. A `tibble` is a modernised
+variant of  the `data.frame` designed to work with the tidyverse. While you
+might think that this would make them more complicated in fact the opposite is
+true. The goal of the `tibble` was to remove any unexpected automatic behaviour
+and to be a simple as possible. The authors describe this as being "lazy and surly",
+i.e. they do less and complain more than the `data.frame` type on which they are
+based.
+
+In particular, compared with a `data.frame` they never change the names of
+variables, they don't automatically coerce string to factors (base R changed
+its behaviour to match this in version 4.0.0), they don't allow row names to
+be specified and two dimensional indexing of a `tibble` always returns a new
+`tibble` (equivalent to `drop = FALSE` in `data.frame`). The other change relating
+to indexing is that the `tibble` no longer allows partial matching when using `$`
+for indexing. This greatly reduces that chances that the wrong variable will be
+selected.
+
+The other major user-facing difference is when `tibble` is printed to the screen.
+Rather than displaying all of the data it behaves like a combination of the `head`
+and `str` functions, showing only the first few rows of data, along with their
+data type.
+
+As the `tibble` is simply an extension of the `data.frame` class most existing
+functions and packages that work with `data.frame` will also work with `tibble`
+(and vice versa) as long as they do not rely on any of the changed behaviour.
+If you do find this to be a problem you can easily convert your data using
+the `as.data.frame` or `as_tibble` functions.
 
 In the same way, `readr` provides modern tidyverse replacements 
 for R's standard reading functions. `readr` provides `read_csv`,
 which is a better way of reading csv files than R's standard
-`read.csv`.
+`read.csv`. This was originally developed to make reading csv files faster
+and remove some inconsistencies such as string variables being automatically
+converted to `factor` (this particular behaviour has now been changed in base
+R version 4.0.0 onwards to match tidyverse).
 
 Let's now use the tidyverse to `read_csv` the cats data set
 into a `tibble`.
@@ -169,6 +204,9 @@ cats[1, ]
 ```
 
 etc.
+
+In addition to these the `dplyr` tidyverse package provides a number of extra
+access methods for data retrieval which we will cover in the next module.
 
 > EXERCISE
 >
