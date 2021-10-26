@@ -38,7 +38,7 @@ Here is the answer from the last section that has the "unpretty" graph...
 historical_temperature %>%
     filter(month == "DEC") %>%
     group_by(decade) %>%
-    summarise(average = mean(temperature, na.rm = TRUE), .groups = "drop") %>%
+    summarise(average = mean(temperature, na.rm = TRUE)) %>%
     ggplot(aes(x = decade, y = average)) + 
     geom_point() +
     geom_smooth()
@@ -55,7 +55,7 @@ The most useful for labelling the x and y axes is using
 historical_temperature %>%
     filter(month == "DEC") %>%
     group_by(decade) %>%
-    summarise(average = mean(temperature, na.rm = TRUE), .groups = "drop") %>%
+    summarise(average = mean(temperature, na.rm = TRUE)) %>%
     ggplot(aes(x = decade, y = average)) + 
     geom_point() +
     geom_smooth() +
@@ -77,7 +77,7 @@ its aesthetic.
 historical_temperature %>%
     filter(month == "DEC") %>%
     group_by(decade) %>%
-    summarise(average = mean(temperature, na.rm = TRUE), .groups="drop") %>%
+    summarise(average = mean(temperature, na.rm = TRUE)) %>%
     ggplot(aes(x = decade, y = average)) + 
     geom_point(color = "red") +
     geom_smooth() +
@@ -97,7 +97,7 @@ data if that was appropriate.
 historical_temperature %>%
     filter(month == "DEC") %>%
     group_by(decade) %>%
-    summarise(average = mean(temperature, na.rm = TRUE), .groups = "drop") %>%
+    summarise(average = mean(temperature, na.rm = TRUE)) %>%
     ggplot(aes(x = decade, y = average, color = average)) + 
     geom_point() +
     geom_smooth() +
@@ -122,7 +122,7 @@ temperature is continuous, we use `scale_colour_distiller`.
 historical_temperature %>%
     filter(month == "DEC") %>%
     group_by(decade) %>%
-    summarise(average = mean(temperature, na.rm = TRUE), .groups = "drop") %>%
+    summarise(average = mean(temperature, na.rm = TRUE)) %>%
     ggplot(aes(x = decade, y = average, color = average)) + 
     geom_point() +
     geom_smooth() +
@@ -141,7 +141,7 @@ in the [themes chapter of the ggplot book](https://ggplot2-book.org/polishing.ht
 historical_temperature %>%
     filter(month == "DEC") %>%
     group_by(decade) %>%
-    summarise(average = mean(temperature, na.rm = TRUE), .groups = "drop") %>%
+    summarise(average = mean(temperature, na.rm = TRUE)) %>%
     ggplot(aes(x = decade, y = average, color = average)) + 
     geom_point() +
     geom_smooth() +
