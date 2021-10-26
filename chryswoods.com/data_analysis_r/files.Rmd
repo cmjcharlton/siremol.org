@@ -3,7 +3,7 @@ title: "Introduction to Data Analysis in R"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -107,7 +107,7 @@ to the function to which we give an integer giving the number of rows to skip:
 ```R
 read_csv(
     city_pop_file,
-    skip=5
+    skip = 5
 )
 ```
 
@@ -133,8 +133,8 @@ We can set the separator to `;` by changing to `read_delim` and setting
 ```R
 read_delim(
     city_pop_file,
-    skip=5,
-    delim=";"
+    skip = 5,
+    delim = ";"
 )
 ```
 
@@ -159,9 +159,9 @@ after the fact but it is simplest to do it at import-time using the `na` argumen
 ```R
 read_delim(    
     city_pop_file,
-    skip=5,
-    delim=";",
-    na="-1"
+    skip = 5,
+    delim = ";",
+    na = "-1"
 )
 ```
 
@@ -209,10 +209,10 @@ so;
 ```R
 read_delim(    
     city_pop_file,
-    skip=5,
-    delim=";",
-    na="-1",
-    col_types=cols("year"=col_integer())
+    skip = 5,
+    delim = ";",
+    na = "-1",
+    col_types = cols("year" = col_integer())
 )
 ```
 
@@ -236,10 +236,10 @@ Finally, we want to assign this `tibble` to a variable, called `census`;
 ```R
 census <- read_delim(
     city_pop_file,
-    skip=5,
-    delim=";",
-    na="-1",
-    col_types=cols("year"=col_integer())
+    skip = 5,
+    delim = ";",
+    na = "-1",
+    col_types = cols("year" = col_integer())
 )
 ```
 

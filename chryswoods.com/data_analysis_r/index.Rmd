@@ -3,7 +3,7 @@ title: "Introduction to Data Analysis in R"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -165,14 +165,14 @@ working where you give prose and code equal weight is sometimes called
 > it with documentation explaining what each part does using text:
 
 ```r
-prices <- c("apple"=0.40, "banana"=0.50)
+prices <- c("apple" = 0.40, "banana" = 0.50)
 my_purchase <- c(
-    "apple"=1,
-    "banana"=6
+    "apple" = 1,
+    "banana" = 6
 )
 grocery_bill <- 0
-for (fruit in names(my_purchase)){
-    grocery_bill <- grocery_bill + prices[fruit]*my_purchase[fruit]
+for (fruit in names(my_purchase)) {
+    grocery_bill <- grocery_bill + prices[fruit] * my_purchase[fruit]
 }
 cat(sprintf("I owe the grocer %.2f\n", grocery_bill))
 ```

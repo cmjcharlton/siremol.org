@@ -3,7 +3,7 @@ title: "Introduction to Data Analysis in R"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -20,13 +20,13 @@ A `tibble` is a two (or possibly more) dimensional table of data.
 ```R
 library(tidyverse)
 
-census <- tibble("City"=c("Paris", "Paris", "Paris", "Paris",
+census <- tibble("City" = c("Paris", "Paris", "Paris", "Paris",
                           "London", "London", "London", "London",
                           "Rome", "Rome", "Rome", "Rome"),
-                 "year"=c(2001, 2008, 2009, 2010,
+                 "year" = c(2001, 2008, 2009, 2010,
                           2001, 2006, 2011, 2015,
                           2001, 2006, 2009, 2012),
-                 "pop"=c(2.148, 2.211, 2.234, 2.244,
+                 "pop" = c(2.148, 2.211, 2.234, 2.244,
                          7.322, 7.657, 8.174, 8.615,
                          2.547, 2.627, 2.734, 2.627))
 ```
@@ -64,13 +64,13 @@ the year. A better choice would be an integer. To force this, use `as.integer`
 to set the data type for the year column;
 
 ```R
-census <- tibble("City"=c("Paris", "Paris", "Paris", "Paris",
+census <- tibble("City" = c("Paris", "Paris", "Paris", "Paris",
                           "London", "London", "London", "London",
                           "Rome", "Rome", "Rome", "Rome"),
-                 "year"=as.integer(c(2001, 2008, 2009, 2010,
+                 "year" = as.integer(c(2001, 2008, 2009, 2010,
                                      2001, 2006, 2011, 2015,
                                      2001, 2006, 2009, 2012)),
-                 "pop"=c(2.148, 2.211, 2.234, 2.244,
+                 "pop" = c(2.148, 2.211, 2.234, 2.244,
                          7.322, 7.657, 8.174, 8.615,
                          2.547, 2.627, 2.734, 2.627))
 
@@ -182,7 +182,7 @@ would return the `City` column data for the first row.
 We can start to ask questions of our data using the `filter` function.
 
 ```R
-census %>% filter(City=="Paris")
+census %>% filter(City == "Paris")
 ```
 
 ```
@@ -203,7 +203,7 @@ This has returned a new `tibble`, which you can then access using the same
 methods as above, e.g.
 
 ```R
-(census %>% filter(City=="Paris"))["year"]
+(census %>% filter(City == "Paris"))["year"]
 ```
 
 You can also test if the rows of a `tibble` match a condition, e.g.

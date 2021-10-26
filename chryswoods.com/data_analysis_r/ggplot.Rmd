@@ -3,7 +3,7 @@ title: "Introduction to Data Analysis in R"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -34,9 +34,9 @@ section;
 ```R
 temperature <- read_table(
     "https://chryswoods.com/data_analysis_r/cetml1659on.txt",
-    skip=6,
-    na=c("-99.99", "-99.9"),
-    col_types=cols("DATE"=col_integer())
+    skip = 6,
+    na = c("-99.99", "-99.9"),
+    col_types = cols("DATE" = col_integer())
 )
 
 month_levels <- c("JAN", "FEB", "MAR", "APR", "MAY", "JUN",
@@ -46,10 +46,10 @@ historical_temperature <- temperature %>%
     select(-YEAR) %>%
     pivot_longer(c("JAN", "FEB", "MAR", "APR", "MAY", "JUN",
                    "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"),
-                 names_to="month",
-                 values_to="temperature") %>%
-    rename(year=DATE) %>%
-    mutate(month=factor(month, month_levels))
+                 names_to = "month",
+                 values_to = "temperature") %>%
+    rename(year = DATE) %>%
+    mutate(month = factor(month, month_levels))
 ```
 
 Next, we will use `ggplot` to draw a graph (we will explain how 
@@ -97,10 +97,10 @@ You can combine analysis with plotting, e.g. here we plot the average
 yearly temperature as a line graph;
 
 ```R
-ggplot(historical_temperature %>%
-           group_by(year) %>%
-           summarise(temperature=mean(temperature)), 
-       aes(x = year, y = temperature)) +
+historical_temperature %>%
+    group_by(year) %>%
+    summarise(temperature = mean(temperature)) %>%
+    ggplot(aes(x = year, y = temperature)) +
     geom_line() + 
     geom_smooth()
 ```
@@ -124,11 +124,11 @@ This enables us to draw a line graph of the average temperature
 each decade;
 
 ```R
-ggplot(historical_temperature %>%
-           group_by(decade) %>%
-           summarise(temperature=mean(temperature)), 
-       aes(x = decade, y = temperature)) + 
-       geom_line()
+historical_temperature %>%
+    group_by(decade) %>%
+    summarise(temperature = mean(temperature)) %>%
+    ggplot(aes(x = decade, y = temperature)) + 
+    geom_line()
 ```
 
 A line chart is not a good choice for this plot, as it doesn't
@@ -137,9 +137,9 @@ box-and-whisker or violin plot would be better. To use this,
 we need to specify the grouping in the aesthetic, e.g.
 
 ```R
-ggplot(historical_temperature, 
-       aes(x = decade, y = temperature, group=decade)) + 
-       geom_violin()
+historical_temperature %>%
+    ggplot(aes(x = decade, y = temperature, group = decade)) + 
+    geom_violin()
 ```
 
 Finally, the global aesthetic set in `ggplot` can be overridden by 
@@ -147,10 +147,10 @@ setting it in the layers themselves. For example, here we overlay
 a smooth line over the violin plot;
 
 ```R
-ggplot(historical_temperature, 
-       aes(x=year, y = temperature)) + 
-       geom_violin(aes(group=decade)) + 
-       geom_smooth()
+historical_temperature %>%
+    ggplot(aes(x = year, y = temperature)) + 
+    geom_violin(aes(group = decade)) + 
+    geom_smooth()
 ```
 
 Note how the group aesthetic has to be set only for the violin plot.
@@ -163,7 +163,7 @@ This will save the last plot drawn to a file, with filename, size,
 format etc. all controlled via arguments to this function, e.g.
 
 ```R
-ggsave("violin.pdf", device="pdf", dpi="print")
+ggsave("violin.pdf", device = "pdf", dpi = "print")
 ```
 
 would save the plot to a file called `violin.pdf`, in PDF format,
@@ -173,7 +173,7 @@ using a resolution (dpi) that is suitable for printing.
 >
 > Create a graph that shows the average maximum temperature
 > by month. Draw this as a line graph. Note
-> that you may need to add `group="decade"` to the aesthetic
+> that you may need to add `group = "decade"` to the aesthetic
 > so that the line layer can join together the points.
 >
 > Create a graph that shows the change in average temperature

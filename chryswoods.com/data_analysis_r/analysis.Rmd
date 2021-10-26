@@ -3,7 +3,7 @@ title: "Introduction to Data Analysis in R"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -42,7 +42,7 @@ For example, we can calculate the mean average temperature using;
 
 ```R
 historical_temperature %>% 
-    summarise("average temperature"=mean(temperature, na.rm=TRUE))
+    summarise("average temperature" = mean(temperature, na.rm = TRUE))
 ```
 
 ```
@@ -52,7 +52,7 @@ historical_temperature %>%
 1                  9.25
 ```
 
-(note that we used `na.rm=TRUE` to tell the function to ignore `NA` values)
+(note that we used `na.rm = TRUE` to tell the function to ignore `NA` values)
 
 This has created a new tibble, where the column called "average temperature"
 contains the mean average temperature.
@@ -70,7 +70,7 @@ function to calculate the average temperature for each year;
 ```R
 historical_temperature %>% 
     group_by(year) %>%
-    summarise("average temperature"=mean(temperature, na.rm=TRUE))
+    summarise("average temperature" = mean(temperature, na.rm = TRUE))
 ```
 
 ```
@@ -95,7 +95,7 @@ or, we could calculate the average temperature for each month via;
 ```R
 historical_temperature %>%
     group_by(month) %>%
-    summarise("average temperature"=mean(temperature, na.rm=TRUE))
+    summarise("average temperature" = mean(temperature, na.rm = TRUE))
 ```
 
 ```
@@ -120,14 +120,14 @@ historical_temperature %>%
 
 We can then use the [filter](https://dplyr.tidyverse.org/reference/filter.html),
 also from dplyr, to filter observations (rows) before we group. For example,
-we could filter the years in the 18th Century (`year<1800 & year>=1700`)
+we could filter the years in the 18th Century (`year < 1800 & year >= 1700`)
 and calculate the average monthly temperatures then via;
 
 ```R
 historical_temperature %>%
-    filter(year<1800 & year>=1700) %>%
+    filter(year < 1800 & year >= 1700) %>%
     group_by(month) %>%
-    summarise("18th Century"=mean(temperature, na.rm=TRUE))
+    summarise("18th Century" = mean(temperature, na.rm = TRUE))
 ```
 
 ```
@@ -152,9 +152,9 @@ We could then repeat this for the 21st Century...
 
 ```R
 historical_temperature %>%
-    filter(year>=2000) %>%
+    filter(year >= 2000) %>%
     group_by(month) %>%
-    summarise("21st Century"=mean(temperature, na.rm=TRUE))
+    summarise("21st Century" = mean(temperature, na.rm = TRUE))
 ```
 
 ```

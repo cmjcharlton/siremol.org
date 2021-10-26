@@ -3,7 +3,7 @@ title: "Introduction to Data Analysis in R"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -103,8 +103,8 @@ e.g.
 
 ```R
 pivot_longer(c("JAN", "FEB", "MAR"), 
-             names_to="month",
-             values_to="temperature")
+             names_to = "month",
+             values_to = "temperature")
 ```
 
 would move the values of the "JAN", "FEB" and "MAR" columns into a new
@@ -118,8 +118,8 @@ temperature %>%
     select(-YEAR) %>%
     pivot_longer(c("JAN", "FEB", "MAR", "APR", "MAY", "JUN",
                    "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"),
-                 names_to="month",
-                 values_to="temperature")
+                 names_to = "month",
+                 values_to = "temperature")
 ```
 
 ```
@@ -149,7 +149,7 @@ a column using the [rename](https://dplyr.tidyverse.org/reference/rename.html)
 function. The general format is;
 
 ```R
-rename(new_name=old_name)
+rename(new_name = old_name)
 ```
 
 and so, for our data we could use;
@@ -159,9 +159,9 @@ temperature %>%
     select(-YEAR) %>%
     pivot_longer(c("JAN", "FEB", "MAR", "APR", "MAY", "JUN",
                    "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"),
-                 names_to="month",
-                 values_to="temperature") %>%
-    rename(year=DATE)
+                 names_to = "month",
+                 values_to = "temperature") %>%
+    rename(year = DATE)
 ```
 
 ```
@@ -229,7 +229,7 @@ month factor. Editing of a tibble is performed by the
 function, e.g.
 
 ```R
-mutate(temperature=temperature+5)
+mutate(temperature = temperature + 5)
 ```
 
 would edit the "temperature" column variable, and add "5" to every single value 
@@ -237,7 +237,7 @@ in this column. In our case, we want to factor each value of the
 month column variable, so we need 
 
 ```R
-mutate(month=factor(month, month_levels))
+mutate(month = factor(month, month_levels))
 ```
 
 Putting this together with what we have before, and assigning the tibble
@@ -248,10 +248,10 @@ historical_temperature <- temperature %>%
     select(-YEAR) %>%
     pivot_longer(c("JAN", "FEB", "MAR", "APR", "MAY", "JUN",
                    "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"),
-                 names_to="month",
-                 values_to="temperature") %>%
-    rename(year=DATE) %>%
-    mutate(month=factor(month, month_levels))
+                 names_to = "month",
+                 values_to = "temperature") %>%
+    rename(year = DATE) %>%
+    mutate(month = factor(month, month_levels))
 
 historical_temperature
 ```
