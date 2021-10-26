@@ -44,7 +44,7 @@ but not limited to;
 * `ngrams` - tokenise on n-grams. Use `n` to specify the number of words
 * `lines` - tokenise by lines
 * `sentences` - tokenise by sentence
-* `tweets` - tokenise by word, preserving usernames, hashtags and URLs.
+* `tweets` - tokenise by word, preserving user names, hashtags and URLs.
 
 To tokenise by bigrams, we set `token` equal to `ngrams` and `n` equal to `2`.
 

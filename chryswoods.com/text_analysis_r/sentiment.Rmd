@@ -49,7 +49,7 @@ For example, "badly" is classified as both "negative" and "sadness", which,
 in my opinion, wouldn't capture the sentiment in sentences such as
 "I badly want that!". Equally, "backwards" is classified as "disgust" and 
 "negative", which is not how I would see it in sentences such as 
-"they skillfully drove backwards around the course". So, when using these
+"they skilfully drove backwards around the course". So, when using these
 dictionaries, be mindful of how they were created, the linguistic style
 that they were generated against, and whether or not they would be 
 appropriate for your text. You should also be careful of license, 
@@ -69,7 +69,7 @@ sentiments %>% count(sentiment)
 
 We can perform a sentiment analysis by attaching a sentiment to every
 word in a block of text. For example, let's recreate the tidy text tibble
-of all of the non-stopwords in the Advertures of Sherlock Holmes;
+of all of the non-stopwords in the Adventures of Sherlock Holmes;
 
 ```{r}
 library(gutenbergr)
@@ -168,7 +168,7 @@ sherlock_sentiments
 ```
 
 What we want to do now is to count the number of words with different sentiments
-for differnet blocks of the text. One way to do this is to divide the text
+for different blocks of the text. One way to do this is to divide the text
 up into blocks of, e.g 80 lines. We can count the number of sentiments
 in each block, and then track how this count changes from block to block
 in the text. Note that our choice of block size of 80 lines is arbitrary.

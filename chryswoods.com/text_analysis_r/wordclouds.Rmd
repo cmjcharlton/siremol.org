@@ -51,7 +51,7 @@ displaying the common words, or else we will end up overloading R. We
 do this by only displaying words that appear 25 or more times, using
 `min.freq = 25`. The `random.order` argument is set to `FALSE` so that
 the plot is reproducible (as much as possible - the option tells R
-to plot the words in order of descreasing frequency, rather than
+to plot the words in order of decreasing frequency, rather than
 a random order).
 
 ```{r}

@@ -237,7 +237,7 @@ counts
 To plot this data, we need to convert the words from being stored as text,
 to be represented as [factors](https://www.w3schools.com/r/r_factors.asp).
 We do this using the core R [reorder](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/reorder.default)
-function. This will order the factors according to the number of occurances
+function. This will order the factors according to the number of occurrences
 of each word. As we are changing the tibble, we need to use the dplyr 
 [mutate](https://dplyr.tidyverse.org/reference/mutate.html) to edit
 the column in place;
@@ -248,7 +248,7 @@ counts <- counts %>% mutate(word = reorder(word, n))
 
 The data is now ready to be rendered as a bar graph. We can do this using
 [ggplot](https://ggplot2.tidyverse.org), using the aesthetic of placing
-the number of occurances on the x axis, the word on the y axis,
+the number of occurrences on the x axis, the word on the y axis,
 using a `geom_col()` column plot, and not adding a label on the y-axis;
 
 ```{r}
