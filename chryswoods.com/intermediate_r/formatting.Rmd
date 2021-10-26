@@ -67,6 +67,12 @@ function by typing into the console;
 ?sprintf
 ```
 
+Note that as this function is a direct call into a C function you may find that
+its behaviour varies slightly between different platforms, depending on the
+underlying C implementation. It is also possible to crash R by providing invalid
+input to this function, although the R wrapper does its best to avoid this by
+checking the input parameters.
+
 The function works by creating a string with placeholders, such 
 as `%s`, `%d` and `%f`, into which it will format data. For example,
 type into the console;
@@ -82,7 +88,9 @@ My num is 42
 ```
 
 The placeholder, `%d` is replaced by the value stored in the variable
-`my_num`. The `%d` means "format this value as a digit (integer)".
+`my_num`. The `%d` means "format this value as a digit (integer)". Although
+`my_num` is being stored as a double type R has recognised that there is 
+nothing after the decimal place and automatically coerced it to an integer.
 You can also choose to format as a floating point number (`%f`) 
 or as a string (`%s`).
 
