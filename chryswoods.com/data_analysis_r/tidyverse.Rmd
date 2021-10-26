@@ -317,4 +317,8 @@ they can be converted or you may want to analyse the variable as text, as
 demonstrated in the [Text and Sentiment Analysis in R](https://chryswoods.com/text_analysis_r/index.html)
 workshop.
 
+## Further reading
+* [Advanced R - Factor](https://adv-r.hadley.nz/vectors-chap.html#factors)
+* [R Language Definition - Factor](https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Factors)
+
 ## [Previous](files.html) | [Next](analysis.html)
