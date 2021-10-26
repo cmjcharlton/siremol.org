@@ -82,7 +82,8 @@ These are entered via the general form;
 data %>% ggplot( aesthetic ) + layer1 + layer2 + layer3...
 ```
 
-The `data` is a tibble containing tidy data with one observation per row,
+The `data` is a `tibble` (although providing a `data.frame` here works
+equally well) containing tidy data with one observation per row,
 and one variable per column.
 
 The `aesthetic` is a mapping specified via the `aes` function, which
