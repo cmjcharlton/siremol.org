@@ -19,8 +19,12 @@ It is very common that you want to tokenise using tokens that represent
 pairs of words. This is because words correlate with one another, and the
 choice of first word can significantly change the meaning of the second
 word. For example, putting "not" before "happy" significantly changes
-the meaning! A pair of words is called a "bigram". More generally, a token
-comprising `n` words is called an "n-gram" (or "ngram"). Tokenising on
+the meaning!
+
+An n-gram is a contiguous sequence of items from a sample of text or
+speech. These items can be phonemes, syllables, letters or words. An
+n-gram of size one is called a "unigram", size two a "bigram", etc. A
+pair of words is therefore a "bigram". Tokenising on
 bigrams or n-grams enable you to capture examine the correlations, and 
 more importantly, the immediate context around each word.
 
