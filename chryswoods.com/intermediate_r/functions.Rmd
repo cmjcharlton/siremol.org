@@ -47,10 +47,10 @@ returning the string that has been created.
 ## Writing your own functions
 
 You can write your own functions in R! For example, let's try to
-write a function that calculates the mean average of a list 
-of numbers.
+write a function that calculates the mean average of a numeric
+vector.
 
-As input, the function will take a list of numbers. It should 
+As input, the function will take a numeric vector. It should 
 output a number which is the mean of those numbers.
 
 There are many ways this function could be written. Here is a 
@@ -89,14 +89,14 @@ The average height is 1.72 m
 
 To explain how this worked, we need to look at how this function
 was defined. There is some scaffolding that is common to all functions.
-First, we define the function name. In R, this is a variable that holds
-the code of the function. We define this variable and assign data to
+First, we define the function name. In R, this is an object that holds
+the code of the function. We define this object and bind data to
 it in the same way as if this was assigning a number to a numeric
-variable, or a string to a string variable, namely using the
-syntax `variable <- value`:
+vector, or a string to a character vector, namely using the
+syntax `object <- value`:
 
 ```R
-   Variable    assigned  value 
+   Object      assigned  value 
       ↓           ↓      ↓
 calculate_average <- function(...
 ```
@@ -153,7 +153,7 @@ calculate_mean <- function(values) {
 
 Finally, when we call the function, the arguments that pass
 to the function are used as the input. The output is then
-returned and assigned to the result variable. So, in this case;
+returned and assigned to the result object. So, in this case;
 
 ```
                 Call function      with input(s)
@@ -167,14 +167,14 @@ average_height <- calculate_mean(person_heights)
 to by `person_heights` is passed to `calculate_mean` and in this function
 is referred to as `values`. This data is looped over, the mean average
 calculated, resulting in an output that is returned at the end of
-the function, and assigned to the variable `average_height`.
+the function, and assigned to the object `average_height`.
 
 > EXERCISE
 >
 > Write a function, called `calculate_max`, that returns the largest value.
 > Use this to find the largest height in the list of heights above.
 >
-> Hint - start by using a variable called `max_value` and setting that
+> Hint - start by using an object called `max_value` and setting that
 > equal to `NA`. Then use `if (is.na(max_value) || value > max_value)`
 > to test whether a `value` in `values` is greater. The `||` means "or"
 >
@@ -200,7 +200,7 @@ behave in an error condition by using `stop` or `warning`.
 
 You use `stop` if you want to stop the function from continuing,
 and to print an error message for the user. For example,
-we could use `is.numeric` to check if all of the values are
+we could use `is.numeric` to check if the passed in vector is
 numeric. If not, then we could `stop`;
 
 ```R
@@ -234,9 +234,11 @@ Error in calculate_mean(c("cat", "dog", "horse")) :
 ```
 
 However, what if instead of stopping, we want to calculate
-the average of any numeric values, and just warn the user 
-if non-numeric values are passed? We can do this using
-the `warning` function, e.g.
+the average of any values that could be coerced to numeric, 
+and just warn the user if non-numeric values are passed?
+This would allow us to pass in a character vector where the
+elements are strings representing numbers.
+We can do this using the `warning` function, e.g.
 
 ```R
 calculate_mean <- function(values) {

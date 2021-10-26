@@ -98,16 +98,18 @@ text for the function:
 Next, type into the console
 
 ```R
-my_list <- c(1, 2, 3)
+my_vector <- c(1, 2, 3)
 ```
 
-and hit return. This will create a list. You will see this list appear
+and hit return. This will create a vector. You will see this vector appear
 in the Environment pane on the top right;
 
 ![](images/rstudio07.png)
 
-This pane shows the values of all of the variables that are active in 
-your session, which can be very useful.
+This pane shows the values of all of the objects that are stored in each
+environment, which can be very useful. By default this shows the global
+environment, but you can click the drop-down and choose from a list of currently
+active environments to view.
 
 Next to the Environment tab is the History tab. Click on this to 
 reveal the History pane. This is the history of all of the commands
