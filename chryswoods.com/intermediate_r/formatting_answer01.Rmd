@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 Padding a 2-character width integer with zeroes
 
 ```R
-for (i in seq(1, 10)) {
+for (i in seq_len(10)) {
     cat(sprintf("Padding with zeroes: %02d\n", i))
 }
 ```
