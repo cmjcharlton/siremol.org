@@ -7,31 +7,29 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-The string formatting in R can feel old fashioned because R is an 
-old programming language. R was created in 1995 to be a better
-version of an even older programming language called 
-[S](https://en.wikipedia.org/wiki/S_(programming_language)),
-which was created in 1976. The clunkiness of parts of R
-when compared to modern languages is due to this heritage.
+When R was initially developed its primary focus was on the manipulation and
+analysis of numeric data. As a consequence of this it lacks much of the
+functionality that might be desirable for the easy manipulation and output of
+textual data. Fortunately R has a very flexible system to support loading of
+packages developed by third parties that can provide these missing pieces.
 
-Fortunately, R is not stuck in the past. R comes with a lot of packages
-that extend the core functionality, and provide a more modern
-interface to its most powerful functionality. When we use
-R with these packages, we are using "modern R".
-
-For example, the [Stringr](https://cran.r-project.org/web/packages/stringr/index.html)
-package provides a set of modern functions for manipulating and 
+One such package is [stringr](https://cran.r-project.org/web/packages/stringr/index.html)
+which wraps the [stringi](https://cran.r-project.org/web/packages/stringi/index.html)
+package to provide a consistent set of commonly used functions for manipulating and
 formatting strings.
 
-To use `Stringr`, we first need to install the package. You install
+To use `stringr`, we first need to install the package. You install
 packages in R using `install.packages`, e.g. type into your console;
 
 ```R
 install.packages("stringr")
 ```
 
-and hit return. If your user account has permission to install packages then
-you should see something like;
+and hit return. If your user account has permission to install packages into the
+R installation directory it will proceed to start to download the necessary files. 
+If not then it instead ask you whether it should install the files into a
+personal directory, creating it if necessary. Either way you should eventually
+see something like;
 
 ```
 trying URL 'https://cran.rstudio.com/bin/macosx/contrib/4.0/stringr_1.4.0.tgz'
@@ -46,7 +44,8 @@ The downloaded binary packages are in
 
 Notice that this will automatically get the right package for your operating
 system (in my case `macosx`). Also note that you only have to do this once,
-as once installed, this package is available for everyone.
+as once installed, this package is available for everyone if you installed into
+the R directory, or just your user account otherwise.
 
 ## Using a package
 
@@ -66,23 +65,23 @@ Error in library(stringr) : there is no package called ‘stringr’
 
 then this means that `stringr` is not installed properly.
 
-To get help on a package type `?` before its name, e.g.
+To get help on a package after it is loaded type `?` before its name, e.g.
 
 ```R
 ?stringr
 ```
 
-All of the functions in `stringr` start with `str_` and take 
-a string (or vector/list of strings) as the first argument.
+Most of the functions in `stringr` start with `str_` and take 
+a string (character vector) as the first argument.
 
 Key functions are;
 
-* `str_c` : Modern replacement for `cat`
-* `str_length` : Count the number of characters in a string
-* `str_sub` : Extract substrings
+* `str_c` : Equivalent to `paste`
+* `str_length` : Count the number of code points in a string
+* `str_sub` : Extract and replace substrings from a character vector
 * `str_trim` : Remove trailing and leading whitespace
 * `str_pad` : Pad a string
-* `str_wrap` : Wrap a string into a paragraph
+* `str_wrap` : Wrap a string into a nicely formatted paragraph
 
 > EXERCISE
 >
@@ -105,11 +104,18 @@ publish a package on CRAN by reading [R Packages](https://r-pkgs.org)
 by Hadley Wickham and Jennifer Bryan. This excellent online book
 provides complete detail of how to write and publish an R package.
 
-A good way to find the package you want is to use an R search
-service, such as [rseek](https://rseek.org). You can search
-for individual package names, or even the kind of thing you
-want to do. As most R packages come with vignettes (web pages
-that show examples of how to use the package) this means
+A good first place to check when looking for a package to cover your needs is
+the [CRAN Task Views](https://cran.r-project.org/web/views/). This is a list
+of packages classified into topics and while this doesn't attempt to recommend
+a "best" package for an application it does give a good overview of what is
+available.
+
+If you need to find a package for a topic that is not covered by this, or you
+want to explore a wider range of packages (CRAN currently contains almost 20,000
+active packages) then you might find an R search service, such as
+[rseek](https://rseek.org) useful. You can search for individual package names, 
+or even the kind of thing you want to do. As many R packages come with vignettes 
+(long form documentation, often the the form of a short paper) this means
 you can quickly find both the package that achieves your goal,
 plus really clear documentation and examples. 
 
@@ -150,6 +156,19 @@ using `old.packages()`, e.g.
 old.packages()
 ```
 
+Although it is a good ideas to keep your packages up to date and keep up with
+the most recent bug fixes and new features it is a good idea to check what
+has changed in the new version prior to updating. This is because package
+updates can include changes that change or break how your existing scripts work.
+This is particularly true if they have a version less than one, or if there is
+a change in major version number. Most packages include a `NEWS` file detailing
+the changes between versions and you can usually find this by looking up the
+package on CRAN. For an example of this see the [NEWS](https://cran.r-project.org/web/packages/dplyr/news/news.html)
+file for dplyr. Notice that when it got to version 1.0.0 a number of breaking
+changes were introduced that could require changes to old scripts to allow them
+to run as before. Because of this you should generally ensure that you have
+sufficient time available to re-test your scripts after updating your packages.
+
 You can update all packages for which updates are available using
 `update.packages()`. Set `ask = FALSE` to update everything
 without prompting, e.g.
@@ -160,5 +179,16 @@ update.packages(ask = FALSE)
 
 Note that updating all of your packages could take a while if you haven't
 done it recently...
+
+## Reproducability
+
+R packages (and R itself) are frequently updated with new versions. It is therefore
+important that you record the versions of packages that you use so that anyone
+re-running your scripts in future (including yourself) are able to obtain the
+same answers that you had originally. For this purpose R includes the 
+`sessionInfo()` function that lists the version of R in use, the platform it is
+running on, along with all the currently loaded packages. It is highly
+recommended that you make a note of this output, perhaps as a comment at the
+beginning of your script.
 
 ## [Previous](formatting.html) | [Next](functions.html)
