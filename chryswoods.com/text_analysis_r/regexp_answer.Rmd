@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, error = FAL
 ```{r}
 library(tidyverse)
 lines <- readLines("https://chryswoods.com/text_analysis_r/hamlet.txt")
-text <- tibble(line = 1:length(lines), text = lines)
+text <- tibble(line = seq_along(lines), text = lines)
 
 text %>% mutate(text = str_replace_all(text, 
                                        regex("\\bthe\\s\\w+", 

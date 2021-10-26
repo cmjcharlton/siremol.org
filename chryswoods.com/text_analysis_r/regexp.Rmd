@@ -48,7 +48,7 @@ For example, let's first read Hamlet's soliloquy into a tibble.
 ```{r}
 library(tidyverse)
 lines <- readLines("https://chryswoods.com/text_analysis_r/hamlet.txt")
-text <- tibble(line = 1:length(lines), text = lines)
+text <- tibble(line = seq_along(lines), text = lines)
 ```
 
 We can use `str_detect` to filter out lines that contain specific text,

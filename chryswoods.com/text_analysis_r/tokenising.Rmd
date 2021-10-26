@@ -135,11 +135,11 @@ lines
 ```
 
 We will now convert this into a tibble. One column, called `line`, will
-have the line number (from 1 to `length(lines)`), while the lines
+have the line number (from 1 to the number of lines), while the lines
 themselves will be placed into the column called `text`.
 
 ```{r}
-hamlet <- tibble(line = 1:length(lines), text = lines)
+hamlet <- tibble(line = seq_along(lines), text = lines)
 hamlet
 ```
 
