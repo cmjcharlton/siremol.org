@@ -191,4 +191,11 @@ running on, along with all the currently loaded packages. It is highly
 recommended that you make a note of this output, perhaps as a comment at the
 beginning of your script.
 
+## Further reading
+
+* [R Packages](https://r-pkgs.org/)
+* [An Introduction to R - Packages](https://cran.r-project.org/doc/manuals/r-release/R-intro.html#Packages)
+* [Writing R Extensions](https://cran.r-project.org/doc/manuals/r-release/R-exts.html)
+* [R for Data Science - Strings](https://r4ds.had.co.nz/strings.html)
+
 ## [Previous](formatting.html) | [Next](functions.html)

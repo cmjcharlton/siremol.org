@@ -222,4 +222,9 @@ access methods for data retrieval which we will cover in the next module.
 >
 > [Answer](tidyverse_answer02.html)
 
+## Further reading
+
+* [R for Data Science - Tibbles](https://r4ds.had.co.nz/tibbles.html)
+* [R for Data Science - Data Import](https://r4ds.had.co.nz/data-import.html)
+
 ## [Previous](dataframes.html) | [Next](magrittr.html)

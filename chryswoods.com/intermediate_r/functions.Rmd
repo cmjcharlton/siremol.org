@@ -288,4 +288,10 @@ a warning that we are skipping this value if it isn't a number.
 >
 > [Answer](functions_answer02.html)
 
+## Further reading
+
+* [Advanced R - Functions](https://adv-r.hadley.nz/functions.html)
+* [R Language Definition - Functions](https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Functions)
+* [An Introduction to R - Writing your own functions](https://cran.r-project.org/doc/manuals/r-release/R-intro.html#Writing-your-own-functions)
+
 ## [Previous](packages.html) | [Next](dataframes.html)

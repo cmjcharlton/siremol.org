@@ -237,4 +237,9 @@ you will see that they offer a number of arguments to control what is displayed.
 >
 > [Answer](dataframes_answer02.html)
 
+## Further reading
+
+* [Advanced R - Data Frames and Tibbles](https://adv-r.hadley.nz/vectors-chap.html#tibble)
+* [An Introduction to R - Data Frames](https://cran.r-project.org/doc/manuals/r-release/R-intro.html#Data-frames)
+
 ## [Previous](functions.html) | [Next](tidyverse.html)

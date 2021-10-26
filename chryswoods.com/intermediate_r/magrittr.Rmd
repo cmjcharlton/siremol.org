@@ -180,4 +180,9 @@ from a 1x1 `tibble` into a scalar before storing it into`average_heart_weight`.
 > Have a go at installing packages that you don't recognise, and 
 > using `?` in RStudio to get help on the functions that are new to you.
 
+## Further reading
+
+* [R for Data Science - Pipes](https://r4ds.had.co.nz/pipes.html)
+* [The new R pipe](https://www.r-bloggers.com/2021/05/the-new-r-pipe/)
+
 ## [Previous](tidyverse.html) | [Next](summary.html)
