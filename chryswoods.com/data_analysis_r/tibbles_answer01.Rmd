@@ -31,7 +31,9 @@ We can see that the smallest population was in Paris that year but
 let's try to extract it using R.
 
 ```{r}
-pop <- (census %>% filter(year == 2001))$pop
+pop <- census %>%
+    filter(year == 2001) %>%
+    pull(pop)
 pop
 ```
 
@@ -45,24 +47,29 @@ min_pop
 We can now use this minimum population to further filter the census data;
 
 ```{r}
-census %>% filter(year == 2001) %>% filter(pop == min_pop)
+census %>%
+    filter(year == 2001, pop == min_pop)
 ```
 
 Finally(!) we can extract the City column
 
 ```{r}
-(census %>% filter(year == 2001) %>% filter(pop == min_pop))["City"]
+census %>%
+    filter(year == 2001, pop == min_pop) %>%
+    select(City)
 ```
  
 All of this could be combined into a single (dense) expression, e.g.
 
 ```{r}
-city <- (census %>%
-           filter(year == 2001) %>%
-           filter(pop == min((census %>% filter(year == 2001))["pop"]))
-         )["City"]
+city <- census %>%
+    filter(year == 2001) %>%
+    filter(pop == min(pop)) %>%
+    select(City)
 city
 ```
 
+Note that we have to use two filters here, as we want the minimum population
+for the year 2001, rather than the whole tibble.
  
  

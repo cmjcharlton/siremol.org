@@ -36,16 +36,13 @@ negative_jan
 ```
 
 ```{r}
-num_negative_jan <- as.numeric(count(negative_jan))
+num_negative_jan <- negative_jan %>% nrow()
 num_negative_jan
 ```
 
 What was the average temperature in June over the years in the data set?
 
 ```{r}
-jun_average <- mean(temperature[["JUN"]])
+jun_average <- temperature %>% pull(JUN) %>% mean()
 jun_average
 ```
-
-(note that we have to get the column data, and not a 1-column tibble, 
-hence why we use `[[ ]]`)

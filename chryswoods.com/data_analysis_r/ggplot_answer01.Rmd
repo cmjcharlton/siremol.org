@@ -34,9 +34,11 @@ Next, add in the "decade" and "century" variables (columns) as we will
 be using them later...
 
 ```{r}
-historical_temperature["decade"] <- (historical_temperature["year"] %/% 10) * 10
-historical_temperature["century"] <- (historical_temperature["year"] %/% 100) * 100
-historical_temperature
+historical_temperature <- historical_temperature %>%
+    mutate(
+           decade  = (year %/% 10) * 10, 
+           century = (year %/% 100) * 100
+          )
 ```
 
 Graph that shows the average maximum temperature per month...

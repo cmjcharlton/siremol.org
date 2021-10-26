@@ -114,7 +114,8 @@ We could do more. For example, here we add a new variable (column)
 to the data that is the decade in which the observation was taken;
 
 ```R
-historical_temperature["decade"] <- (historical_temperature["year"] %/% 10) * 10
+historical_temperature <- historical_temperature %>%
+    mutate(decade = (year %/% 10) * 10)
 ```
 
 (`%/%` means "integer division", so `1655 %/% 10` equals `165`, which

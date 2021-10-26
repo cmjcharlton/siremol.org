@@ -29,7 +29,8 @@ historical_temperature <- temperature %>%
     rename(year = DATE) %>%
     mutate(month = factor(month, month_levels))
 
-historical_temperature["decade"] <- (historical_temperature["year"] %/% 10) * 10
+historical_temperature <- historical_temperature %>%
+    mutate(decade = (year %/% 10) * 10)
 ```
 
 Here is the answer from the last section that has the "unpretty" graph...

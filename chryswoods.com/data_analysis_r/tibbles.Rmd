@@ -97,7 +97,7 @@ Rome    2006    2.627
 You access the contents of a `tibble` mostly by column, e.g.
 
 ```R
-census["City"]
+census %>% select(City)
 ```
 
 will return a `tibble` of just a single column containing the `City` data.
@@ -105,23 +105,23 @@ will return a `tibble` of just a single column containing the `City` data.
 You can also access the columns by their index, e.g.
 
 ```R
-census[1]
+census %>% select(1)
 ```
 
-will return the first column, so is identical to `census["City"]`.
+will return the first column, so is identical to `census %>% select(City)`.
 
-You can also extract multiple columns by specifying them via `c( )`, e.g.
+You can also extract multiple columns by specifying more than one, e.g.
 
 ```R
-census[c("City", "year")]
+census %>% select(City, year)
 ```
 
 will return a `tibble` with the `City` and `year` columns.
 
-To access data by rows, you need to pass in the row index followed by a comma, e.g.
+To access data by rows, you need to use the slice function, e.g.
 
 ```R
-census[1, ]
+census %>% slice(1)
 ```
 
 will return a `tibble` containing just the first row of data.
@@ -129,50 +129,57 @@ will return a `tibble` containing just the first row of data.
 You can use ranges to get several rows, e.g.
 
 ```R
-census[1:5, ]
+census %>% slice(1:5)
 ```
 
 would return the first five rows, while
 
 ```R
-census[seq(2, 10, 2), ]
+census %>% slice(seq(2, 10, 2))
 ```
 
 would return the even rows from 2 to 10.
 
-You can access specific rows and columns via `[row, column]`, e.g.
+You can combine these to specific rows and columns, e.g.
 
 ```R
-census[1, 1]
+census %>%
+    select(1) %>%
+    slice(1)
 ```
 
 returns a `tibble` containing just the first row and first column, while
 
 ```R
-census[seq(2, 10, 2), "year"]
+census %>%
+    select(year) %>%
+    slice(seq(2, 10, 2))
 ```
 
 would return the `year` column of the even rows from 2 to 10, and
 
 ```R
-census[5, 2:3]
+census %>%
+    select(2:3) %>%
+    slice(5)
 ```
 
 would return the second and third columns of the fifth row.
 
 The above functions all return a `tibble` that is a subset of the whole `tibble`. You 
-can extract the data for a single column as a list via `[[ ]]` or `$`, e.g.
+can extract the data for a single column as a vector via the `pull` function, e.g.
 
 ```R
-census[[1]]
-census[["City"]]
-census$City
+census %>% pull(City)
+census %>% pull(1)
 ```
 
-and can then extract data from those lists via sub-indexing, e.g.
+and can then extract data from those vectors by combining these functions, e.g.
 
 ```R
-census$City[1]
+census %>%
+    slice(1) %>%
+    pull(City)
 ```
 
 would return the `City` column data for the first row.
@@ -203,13 +210,17 @@ This has returned a new `tibble`, which you can then access using the same
 methods as above, e.g.
 
 ```R
-(census %>% filter(City == "Paris"))["year"]
+census %>%
+    filter(City == "Paris") %>%
+    select(year)
 ```
 
 You can also test if the rows of a `tibble` match a condition, e.g.
 
 ```R
-census["City"] == "Paris"
+census %>%
+    select(City) %>%
+    mutate(City = (City == "Paris"))
 ```
 
 returns a set of `TRUE` / `FALSE` values for each row, depending on whether
@@ -233,11 +244,11 @@ the `City` value of that row was equal to `Paris`.
 
 ## Adding new columns
 
-New columns can be added to a `tibble` simply by assigning them by 
-index (as you would for a dictionary);
+New columns can be added to a `tibble` simply by using the mutate function;
 
 ```R
-census["continental"] <- census["City"] != "London"
+census <- census %>%
+    mutate(continental = (City != "London"))
 census
 ```
 
