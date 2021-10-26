@@ -96,7 +96,9 @@ year;London;Paris;Rome
 We can see that by default it's done a fairly bad job of parsing the file 
 (this is mostly because I've constructed the `city_pop.csv` file to be as 
 obtuse as possible). It's making a lot of assumptions about the structure 
-of the file but in general it's taking quite a naïve approach.
+of the file but in general it's taking quite a naïve approach (this is in keeping
+with the tidyverse philosophy of functions being "Lazy", forcing the user to be
+explicit with what they want it to do).
 
 The first thing we notice is that it's treating the text at the top of the 
 file as though it's data. Checking the 
@@ -124,7 +126,8 @@ year;London;Paris;Rome
 ```
 
 The next most obvious problem is that it is not separating the columns at all. 
-This is because `read_csv` is a special case of the more general `read_delim`
+This is because I have used `read_csv`, which assumes variable values are
+separated by commas. This is a special case of the more general `read_delim`
 that sets the separator (also called the delimiter) `delim` to a comma `,`.
 
 We can set the separator to `;` by changing to `read_delim` and setting 
@@ -196,6 +199,10 @@ cols(
 In this case, R has guessed that all of the columns contain floating point
 numbers, and so it has used the `col_double()` specification, which calls the `parse_double()` 
 function to convert the text from those columns from the file into numbers.
+This is sensible because the double data type allows storing a larger range of
+integer values and so is much less likely to truncate the input. We know however
+in this case that the year will take a fairly small range of values and we can
+therefore save some memory by using the integer type.
 
 The tidyverse supplies many parsers, e.g. `parse_integer()`, `parse_date()`
 etc. More detail about these parsers (including how to parse different date

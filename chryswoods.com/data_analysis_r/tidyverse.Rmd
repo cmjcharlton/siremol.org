@@ -23,6 +23,16 @@ So, what is "tidy data". This is detailed very clearly in
 2. Each observation has its own row
 3. Each value must have its own cell
 
+If you have ever used a relational database you may notice the similarities
+with this. In fact the tidyverse includes a package named `dbplyr` which
+allows you to operate directly on database tables in a very similar way
+to how it does with tibbles.
+
+It should be noted that the opposite of "tidy" data is not "messy" data. There
+are often a number of reasons to store data in non-tidy structures, but doing so
+makes a good default starting point. You can read a discussion of this at the
+page [Non-tidy data](https://simplystatistics.org/2016/02/17/non-tidy-data/).
+
 Let's look at how this applies to the 
 [Met Office data set](https://chryswoods.com/data_analysis_r/cetml1659on.txt)
 we saw in the last section.
@@ -296,5 +306,15 @@ historical_temperature
 ```
 
 As you can see, the data type for "month" is now "fct", which is short for "factor".
+
+You may wonder why character variables are not automatically converted for you
+when initially loading the data file. This was the default in base R prior to
+version 4.0.0, and you can do so by specifying `col_factor()` as the `col_types`
+when using `readr`. This is another example of the tidyverse "Lazy" philosophy
+where such operations must be explicitly specified by the user. This makes sense
+for a number of reasons, for example you might need to tidy the values before they
+they can be converted or you may want to analyse the variable as text, as
+demonstrated in the [Text and Sentiment Analysis in R](https://chryswoods.com/text_analysis_r/index.html)
+workshop.
 
 ## [Previous](files.html) | [Next](analysis.html)
