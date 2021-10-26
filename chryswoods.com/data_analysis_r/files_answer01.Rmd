@@ -31,7 +31,7 @@ temperature
 How many years had a negative average temperature in January?
 
 ```{r}
-negative_jan <- temperature %>% filter(temperature["JAN"] < 0)
+negative_jan <- temperature %>% filter(JAN < 0)
 negative_jan
 ```
 
