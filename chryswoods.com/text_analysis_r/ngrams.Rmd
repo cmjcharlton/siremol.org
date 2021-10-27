@@ -74,31 +74,30 @@ sherlock_bigrams
 In this case we have placed the two words into columns `word1` and `word2`
 respectively. Next we need to filter only the rows where neither `word1`
 or `word2` have a word in `stop_words`. We can't use `anti_join` directly,
-so instead have to apply the filter twice, first including rows where
-`word1` is not in the `word` column of `stop_words`, and then including
-rows where `word2` is not in the `word` column of `stop_words`. Note that
-`%in%` is the operator to see if a value is in a column of values.
+so instead have to apply the filter, excluding rows where
+`word1` is in the `word` column of `stop_words`
+or where `word2` is in the `word` column of `stop_words`. Note that
+`%in%` is an operator that returns a vector of logical values indicating
+whether each elements in the first vector exists in the second.
 
 
 ```{r}
 data(stop_words)
 
 sherlock_bigrams <- sherlock_bigrams |>
-    filter(!word1 %in% stop_words$word) |>
-    filter(!word2 %in% stop_words$word)
+    filter(!(word1 %in% stop_words$word | word2 %in% stop_words$word))
 
 sherlock_bigrams
 ```
 
 Next, we can see that there are a lot of NAs in the tibble. These are caused
 by blank lines or other tokenisation issues. We can remove them by
-filtering twice again, including rows only where `word1` is not `NA`, and
-where `word2` is not `NA`.
+using the function `drop_na`, which when called without arguments removes
+any rows that contain an `NA`.
 
 ```{r}
 sherlock_bigrams <- sherlock_bigrams |>
-    filter(!is.na(word1)) |>
-    filter(!is.na(word2))
+    drop_na()
 sherlock_bigrams
 ```
 
@@ -118,10 +117,8 @@ Note that we could have written all of the above steps as a single pipeline;
 sherlock_bigrams <- sherlock |>
     unnest_tokens(bigram, text, token = "ngrams", n = 2) |>
     separate(bigram, c("word1", "word2"), sep = " ") |>
-    filter(!word1 %in% stop_words$word) |>
-    filter(!word2 %in% stop_words$word) |>
-    filter(!is.na(word1)) |>
-    filter(!is.na(word2)) |>
+    filter(!(word1 %in% stop_words$word | word2 %in% stop_words$word)) |>
+    drop_na() |>
     unite(bigram, word1, word2, sep = " ")
 
 sherlock_bigrams
@@ -151,10 +148,8 @@ a regular expression to look for `st` or `street`;
 sherlock_streets <- sherlock |>
     unnest_tokens(bigram, text, token = "ngrams", n = 2) |>
     separate(bigram, c("word1", "word2"), sep = " ") |>
-    filter(!word1 %in% stop_words$word) |>
-    filter(!word2 %in% stop_words$word) |>
-    filter(!is.na(word1)) |>
-    filter(!is.na(word2)) |>
+    filter(!(word1 %in% stop_words$word | word2 %in% stop_words$word)) |>
+    drop_na() |>
     filter(str_detect(word2, "^st(reet)?$")) |>
     unite(bigram, word1, word2, sep = " ") |>
     count(bigram, sort = TRUE)
@@ -181,10 +176,8 @@ of times each `word1`-`word2` pair appears in the text;
 bigram_counts <- sherlock |>
     unnest_tokens(bigram, text, token = "ngrams", n = 2) |>
     separate(bigram, c("word1", "word2"), sep = " ") |>
-    filter(!word1 %in% stop_words$word) |>
-    filter(!word2 %in% stop_words$word) |>
-    filter(!is.na(word1)) |>
-    filter(!is.na(word2)) |>
+    filter(!(word1 %in% stop_words$word | word2 %in% stop_words$word)) |>
+    drop_na() |>
     count(word1, word2, sort = TRUE)
 
 bigram_counts
