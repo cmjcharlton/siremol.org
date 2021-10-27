@@ -73,9 +73,18 @@ sherlock_bigrams
 
 In this case we have placed the two words into columns `word1` and `word2`
 respectively. Next we need to filter only the rows where neither `word1`
-or `word2` have a word in `stop_words`. We can't use `anti_join` directly,
-so instead have to apply the filter, excluding rows where
-`word1` is in the `word` column of `stop_words`
+or `word2` have a word in `stop_words`. While we could use `anti_join` again:
+
+```{r}
+data(stop_words)
+
+sherlock_bigrams |>
+    anti_join(stop_words, by = c("word1" = "word")) |>
+    anti_join(stop_words, by = c("word2" = "word")) 
+```
+
+This involves joining twice. We can instead apply a single
+filter, excluding rows where `word1` is in the `word` column of `stop_words`
 or where `word2` is in the `word` column of `stop_words`. Note that
 `%in%` is an operator that returns a vector of logical values indicating
 whether each elements in the first vector exists in the second.
