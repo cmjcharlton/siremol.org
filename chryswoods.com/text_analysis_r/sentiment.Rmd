@@ -83,7 +83,7 @@ sherlock
 
 We can classify each word by sentiment by joining together the tidy text
 `sherlock` tibble with the dictionary of sentiments in `sentiments`. We do
-this using dplyr's [inner_join](https://dplyr.tidyverse.org/reference/join.html)
+this using dplyr's [inner_join](https://dplyr.tidyverse.org/reference/filter-joins.html)
 function. This will join together two tibbles via their common column 
 (in this case, `word`), creating new rows as needed if a word appears twice.
 
