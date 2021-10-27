@@ -14,7 +14,7 @@ library(tidyverse)
 text_lines <- readLines("https://chryswoods.com/text_analysis_r/hamlet.txt")
 hamlet <- tibble(line = seq_along(text_lines), text = text_lines)
 
-hamlet %>% mutate(text = str_replace_all(text, 
+hamlet |> mutate(text = str_replace_all(text, 
                                        regex("\\bthe\\s\\w+", 
                                              ignore_case = TRUE), 
                                        "the banana"))
@@ -24,10 +24,10 @@ If you wanted to preserve the case of `The` then you would perform two
 replacements, e.g.
 
 ```{r}
-hamlet %>% 
+hamlet |>
     mutate(text = str_replace_all(text, 
                                   "\\bthe\\s\\w+", 
-                                  "the banana")) %>%
+                                  "the banana")) |>
     mutate(text = str_replace_all(text,
                                   "\\bThe\\s\\w+",
                                   "The banana"))

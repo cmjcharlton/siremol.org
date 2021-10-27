@@ -36,7 +36,7 @@ library(tidyverse)
 library(tidytext)
 library(gutenbergr)
 
-sherlock <- gutenberg_download(1661) %>% 
+sherlock <- gutenberg_download(1661) |>
     mutate(linenumber = row_number())
 ```
 
@@ -53,7 +53,7 @@ but not limited to;
 To tokenise by bigrams, we set `token` equal to `ngrams` and `n` equal to `2`.
 
 ```{r}
-sherlock_bigrams <- sherlock %>% 
+sherlock_bigrams <- sherlock |>
     unnest_tokens(bigram, text, token = "ngrams", n = 2)
 sherlock_bigrams
 ```
@@ -66,7 +66,7 @@ word1 and word2. Note that the separator of a bigram is always a space, so
 `sep = " "` is safe to use.
 
 ```{r}
-sherlock_bigrams <- sherlock_bigrams %>%
+sherlock_bigrams <- sherlock_bigrams |>
     separate(bigram, c("word1", "word2"), sep = " ") 
 sherlock_bigrams
 ```
@@ -83,8 +83,8 @@ rows where `word2` is not in the `word` column of `stop_words`. Note that
 ```{r}
 data(stop_words)
 
-sherlock_bigrams <- sherlock_bigrams %>%
-    filter(!word1 %in% stop_words$word) %>%
+sherlock_bigrams <- sherlock_bigrams |>
+    filter(!word1 %in% stop_words$word) |>
     filter(!word2 %in% stop_words$word)
 
 sherlock_bigrams
@@ -96,8 +96,8 @@ filtering twice again, including rows only where `word1` is not `NA`, and
 where `word2` is not `NA`.
 
 ```{r}
-sherlock_bigrams <- sherlock_bigrams %>%
-    filter(!is.na(word1)) %>% 
+sherlock_bigrams <- sherlock_bigrams |>
+    filter(!is.na(word1)) |>
     filter(!is.na(word2))
 sherlock_bigrams
 ```
@@ -107,7 +107,7 @@ using the "unite" function. In this case, we join using a single space
 (`sep = " "`), as this is the default separator for n-grams.
 
 ```{r}
-sherlock_bigrams <- sherlock_bigrams %>%
+sherlock_bigrams <- sherlock_bigrams |>
     unite(bigram, word1, word2, sep = " ")
 sherlock_bigrams
 ```
@@ -115,13 +115,13 @@ sherlock_bigrams
 Note that we could have written all of the above steps as a single pipeline;
 
 ```{r}
-sherlock_bigrams <- sherlock %>% 
-    unnest_tokens(bigram, text, token = "ngrams", n = 2) %>%
-    separate(bigram, c("word1", "word2"), sep = " ") %>%
-    filter(!word1 %in% stop_words$word) %>%
-    filter(!word2 %in% stop_words$word) %>%
-    filter(!is.na(word1)) %>% 
-    filter(!is.na(word2)) %>% 
+sherlock_bigrams <- sherlock |>
+    unnest_tokens(bigram, text, token = "ngrams", n = 2) |>
+    separate(bigram, c("word1", "word2"), sep = " ") |>
+    filter(!word1 %in% stop_words$word) |>
+    filter(!word2 %in% stop_words$word) |>
+    filter(!is.na(word1)) |>
+    filter(!is.na(word2)) |>
     unite(bigram, word1, word2, sep = " ")
 
 sherlock_bigrams
@@ -133,7 +133,7 @@ etc., if you wanted to examine n-grams with a larger number of words.
 We can now count the bigrams as before, e.g.
 
 ```{r}
-bigram_counts <- sherlock_bigrams %>% count(bigram, sort = TRUE)
+bigram_counts <- sherlock_bigrams |> count(bigram, sort = TRUE)
 bigram_counts
 ```
 
@@ -148,15 +148,15 @@ names of important streets in the book will be called "something st" or
 a regular expression to look for `st` or `street`;
 
 ```{r}
-sherlock_streets <- sherlock %>%
-    unnest_tokens(bigram, text, token = "ngrams", n = 2) %>%
-    separate(bigram, c("word1", "word2"), sep = " ") %>%
-    filter(!word1 %in% stop_words$word) %>%
-    filter(!word2 %in% stop_words$word) %>%
-    filter(!is.na(word1)) %>% 
-    filter(!is.na(word2)) %>% 
-    filter(str_detect(word2, "^st(reet)?$")) %>%
-    unite(bigram, word1, word2, sep = " ") %>%
+sherlock_streets <- sherlock |>
+    unnest_tokens(bigram, text, token = "ngrams", n = 2) |>
+    separate(bigram, c("word1", "word2"), sep = " ") |>
+    filter(!word1 %in% stop_words$word) |>
+    filter(!word2 %in% stop_words$word) |>
+    filter(!is.na(word1)) |>
+    filter(!is.na(word2)) |>
+    filter(str_detect(word2, "^st(reet)?$")) |>
+    unite(bigram, word1, word2, sep = " ") |>
     count(bigram, sort = TRUE)
 
 sherlock_streets
@@ -178,13 +178,13 @@ back into a single `bigram` column. Instead, we leave `word1` and
 of times each `word1`-`word2` pair appears in the text;
 
 ```{r}
-bigram_counts <- sherlock %>% 
-    unnest_tokens(bigram, text, token = "ngrams", n = 2) %>%
-    separate(bigram, c("word1", "word2"), sep = " ") %>%
-    filter(!word1 %in% stop_words$word) %>%
-    filter(!word2 %in% stop_words$word) %>%
-    filter(!is.na(word1)) %>% 
-    filter(!is.na(word2)) %>% 
+bigram_counts <- sherlock |>
+    unnest_tokens(bigram, text, token = "ngrams", n = 2) |>
+    separate(bigram, c("word1", "word2"), sep = " ") |>
+    filter(!word1 %in% stop_words$word) |>
+    filter(!word2 %in% stop_words$word) |>
+    filter(!is.na(word1)) |>
+    filter(!is.na(word2)) |>
     count(word1, word2, sort = TRUE)
 
 bigram_counts
@@ -203,8 +203,8 @@ that appear seven or more times (by filtering on `n >= 7`).
 ```{r}
 library(igraph)
 
-bigram_graph <- bigram_counts %>%
-    filter(n >= 7) %>%
+bigram_graph <- bigram_counts |>
+    filter(n >= 7) |>
     graph_from_data_frame()
 
 bigram_graph
@@ -229,7 +229,7 @@ comes from the `name` of each node.
 ```{r}
 library(ggraph)
 
-bigram_graph %>%
+bigram_graph |>
     ggraph(layout = "fr") +
     geom_edge_link() +
     geom_node_point() +
@@ -242,7 +242,7 @@ ggraph, and comparing against graphs you like online
 can improve this to;
 
 ```{r}
-bigram_graph %>%
+bigram_graph |>
     ggraph(layout = "fr") +
     geom_edge_link(aes(edge_alpha = n),
                    show.legend = FALSE,
@@ -264,11 +264,11 @@ Also, with this finer control we can reduce the font sizes and
 other details sufficiently that we can look at more bigram associations, e.g.
 
 ```{r}
-bigram_graph <- bigram_counts %>%
-    filter(n >= 3) %>%
+bigram_graph <- bigram_counts |>
+    filter(n >= 3) |>
     graph_from_data_frame()
 
-bigram_graph %>%
+bigram_graph |>
     ggraph(layout = "fr") +
     geom_edge_link(aes(edge_alpha = n),
                    show.legend = FALSE,

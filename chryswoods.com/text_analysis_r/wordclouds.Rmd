@@ -31,9 +31,9 @@ The Adventure of Sherlock Holmes. We start by downloading the text
 and tidying it up, as we did in the previous chapters.
 
 ```{r}
-sherlock <- gutenberg_download(1661) %>%
-    mutate(linenumber = row_number()) %>%
-    unnest_tokens(word, text) %>%
+sherlock <- gutenberg_download(1661) |>
+    mutate(linenumber = row_number()) |>
+    unnest_tokens(word, text) |>
     anti_join(stop_words)
 ```
 
@@ -41,7 +41,7 @@ We want the size each word in the wordcloud to depend on the number
 of times it appears. We thus create a tibble of these counts.
 
 ```{r}
-sherlock_counts <- sherlock %>% count(word, sort = TRUE)
+sherlock_counts <- sherlock |> count(word, sort = TRUE)
 ```
 
 The wordcloud function is very easy to use. You just need to pass in a 
@@ -62,7 +62,7 @@ wordcloud(sherlock_counts$word, sherlock_counts$n,
 You can also use the `with` function to make this part of a pipeline, e.g.
 
 ```{r}
-sherlock_counts %>%
+sherlock_counts |>
     with(wordcloud(word, n, min.freq = 25, random.order = FALSE))
 ```
 
@@ -70,7 +70,7 @@ You can also colour the words from highest frequency to least by adding
 a colour palette, e.g.
 
 ```{r}
-sherlock_counts %>%
+sherlock_counts |>
     with(wordcloud(word, 
                    n,
                    min.freq = 25,
@@ -98,7 +98,7 @@ using the same procedure as the previous chapter.
 
 ```{r}
 sentiments <- get_sentiments("nrc")
-sherlock_sentiments <- sherlock %>%
+sherlock_sentiments <- sherlock |>
     inner_join(sentiments) |>
     count(word, sentiment, sort = TRUE) |>
     pivot_wider(names_from = sentiment,
@@ -110,7 +110,7 @@ We could now draw word clouds for specific sentiments by picking out
 specific columns, e.g. here are all of the common words associated with "joy".
 
 ```{r}
-sherlock_sentiments %>%
+sherlock_sentiments |>
     with(wordcloud(word,
                    joy, 
                    min.freq = 10,
@@ -121,7 +121,7 @@ sherlock_sentiments %>%
 And here are the common words associated with "fear".
 
 ```{r}
-sherlock_sentiments %>%
+sherlock_sentiments |>
     with(wordcloud(word,
                    fear, 
                    min.freq = 10,

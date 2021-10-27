@@ -91,7 +91,7 @@ the function [unnest_tokens](https://rdrr.io/cran/tidytext/man/unnest_tokens.htm
 which can automatically do this for us.
 
 ```{r}
-tokens <- soliloquy %>% unnest_tokens(word, text)
+tokens <- soliloquy |> unnest_tokens(word, text)
 tokens
 ```
 
@@ -112,7 +112,7 @@ package. We will pass `sort = TRUE` so that the resulting tibble is
 sorted with the most common words at the top.
 
 ```{r}
-tokens %>% count(word, sort = TRUE)
+tokens |> count(word, sort = TRUE)
 ```
 
 ## Reading text from a file
@@ -147,8 +147,8 @@ We can now tokenise the text using `unnest_tokens` again, and then
 count the numbers;
 
 ```{r}
-hamlet_tokens <- hamlet %>% unnest_tokens(word, text)
-hamlet_tokens %>% count(word, sort = TRUE)
+hamlet_tokens <- hamlet |> unnest_tokens(word, text)
+hamlet_tokens |> count(word, sort = TRUE)
 ```
 
 Analysis is made difficult because the text contains lots of short words,
@@ -170,14 +170,14 @@ in the second tibble. We use the [anti-join](https://dplyr.tidyverse.org/referen
 function that is part of [dplyr](https://dplyr.tidyverse.org/index.html).
 
 ```{r}
-important_hamlet_tokens <- hamlet_tokens %>% anti_join(stop_words)
+important_hamlet_tokens <- hamlet_tokens |> anti_join(stop_words)
 important_hamlet_tokens
 ```
 
 Now, when we count the words, we will only get the meaningful words;
 
 ```{r}
-important_hamlet_tokens %>% count(word, sort = TRUE)
+important_hamlet_tokens |> count(word, sort = TRUE)
 ```
 
 The top words, "sleep", "death", "die", "life", are a good insight into 
@@ -187,8 +187,8 @@ We can combine all of the above steps into a single pipeline;
 
 ```{r}
 hamlet %>%
-    unnest_tokens(word, text) %>%
-    anti_join(stop_words) %>%
+    unnest_tokens(word, text) |>
+    anti_join(stop_words) |>
     count(word, sort = TRUE)
 ```
 
@@ -215,8 +215,8 @@ removing stop words, and then counting words to find the most common;
 
 ```{r}
 sherlock %>%
-    unnest_tokens(word, text) %>%
-    anti_join(stop_words) %>%
+    unnest_tokens(word, text) |>
+    anti_join(stop_words) |>
     count(word, sort = TRUE)
 ```
 
@@ -226,10 +226,10 @@ function from [dplyr](https://dplyr.tidyverse.org/index.html) to filter in
 only words that appear more than 75 times;
 
 ```{r}
-counts <- sherlock %>%
-    unnest_tokens(word, text) %>%
-    anti_join(stop_words) %>%
-    count(word, sort = TRUE) %>%
+counts <- sherlock |>
+    unnest_tokens(word, text) |>
+    anti_join(stop_words) |>
+    count(word, sort = TRUE) |>
     filter(n > 75)
 counts
 ```
@@ -243,7 +243,7 @@ of each word. As we are changing the tibble, we need to use the dplyr
 the column in place;
 
 ```{r}
-counts <- counts %>% mutate(word = reorder(word, n))
+counts <- counts |> mutate(word = reorder(word, n))
 ```
 
 The data is now ready to be rendered as a bar graph. We can do this using
@@ -252,7 +252,7 @@ the number of occurrences on the x axis, the word on the y axis,
 using a `geom_col()` column plot, and not adding a label on the y-axis;
 
 ```{r}
-counts %>% ggplot(aes(n, word)) + geom_col() + labs(y = NULL)
+counts |> ggplot(aes(n, word)) + geom_col() + labs(y = NULL)
 ```
 
 ## EXERCISE

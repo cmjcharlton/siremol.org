@@ -55,14 +55,14 @@ We can use `str_detect` to filter out lines that contain specific text,
 e.g. here we will filter out all of the lines that contain the text `To`.
 
 ```{r}
-hamlet %>% filter(str_detect(text, "To"))
+hamlet |> filter(str_detect(text, "To"))
 ```
 
 We can do the opposite of this, i.e. filter all of the lines that don't
 contain `To` by negating the search.
 
 ```{r}
-hamlet %>% filter(str_detect(text, "To", negate = TRUE))
+hamlet |> filter(str_detect(text, "To", negate = TRUE))
 ```
 
 At the moment, this is performing a case-sensitive search. We can use
@@ -70,7 +70,7 @@ At the moment, this is performing a case-sensitive search. We can use
 a case-insensitive way.
 
 ```{r}
-hamlet %>% filter(str_detect(text, regex("To", ignore_case = TRUE)))
+hamlet |> filter(str_detect(text, regex("To", ignore_case = TRUE)))
 ```
 
 Regular expressions can do more than just search for specific text. They 
@@ -82,7 +82,7 @@ then search for `\\bthe\\b` to search for `word boundary` followed by
 `the` followed by `word boundary`.
 
 ```{r}
-hamlet %>% filter(str_detect(text, "\\bthe\\b"))
+hamlet |> filter(str_detect(text, "\\bthe\\b"))
 ```
 
 What about if we wanted to find all lines that contain `the` where `the` is
@@ -90,7 +90,7 @@ part of a word? In this case, we could use `\\w` to mean "any letter", and
 thus `the\\w` would mean `the` followed by `any letter`.
 
 ```{r}
-hamlet %>% filter(str_detect(text, "the\\w"))
+hamlet |> filter(str_detect(text, "the\\w"))
 ```
 
 This has picked up `whether`, `rather` etc. What if we wanted all words that start
@@ -98,7 +98,7 @@ with `the`? We could combine `\\b` and `\\w` to search for lines that
 contain `word boundary` followed by `the` followed by `any letter`, i.e.
 
 ```{r}
-hamlet %>% filter(str_detect(text, "\\bthe\\w"))
+hamlet |> filter(str_detect(text, "\\bthe\\w"))
 ```
 
 This has matched `them`, `there's` and `their`.
@@ -120,7 +120,7 @@ square brackets. For example, `[aiy]` would mean match any of `a`, `i` or `y`.
 Thus `th[aiy]` means match `th` followed by `a`, `i` or `y`.
 
 ```{r}
-hamlet %>% filter(str_detect(text, "th[aiy]"))
+hamlet |> filter(str_detect(text, "th[aiy]"))
 ```
 
 You can control which characters are matched in the square brackets using;
@@ -145,7 +145,7 @@ You can also use repetition in your matching.
 We can use this to find all lines that contain words with 10-12 characters, by typing;
 
 ```{r}
-hamlet %>% filter(str_detect(text, "\\w{10,12}"))
+hamlet |> filter(str_detect(text, "\\w{10,12}"))
 ```
 
 You can also use this with sequences of characters, by putting them in 
@@ -153,14 +153,14 @@ round brackets. This is particularly useful when combined with `|`, which
 means "or", e.g.
 
 ```{r}
-hamlet %>% filter(str_detect(text, "(monologue)|(dream)"))
+hamlet |> filter(str_detect(text, "(monologue)|(dream)"))
 ```
 
 has matched `monologue` or `dream`. You can combine this with the modifiers
 above, e.g.
 
 ```{r}
-hamlet %>% filter(str_detect(text, "\\b(T|t)he(re)?\\b"))
+hamlet |> filter(str_detect(text, "\\b(T|t)he(re)?\\b"))
 ```
 
 matches a word boundary, followed by `T` or `t`, followed by `he` followed
@@ -172,14 +172,14 @@ line using `^`. This means match at the start of the line. Here we get
 all of the lines that start with `The`.
 
 ```{r}
-hamlet %>% filter(str_detect(text, "^The"))
+hamlet |> filter(str_detect(text, "^The"))
 ```
 
 Similarly, use `$` to mean match at the end of the line. Here we get
 all lines that end with `on`.
 
 ```{r}
-hamlet %>% filter(str_detect(text, "on$"))
+hamlet |> filter(str_detect(text, "on$"))
 ```
 
 Regular expressions are really powerful. There is great
@@ -220,11 +220,11 @@ You need to use `mutate` to apply this change to all rows in a tibble.
 For example;
 
 ```{r}
-hamlet %>% mutate(text = str_replace_all(text, "be", "banana"))
+hamlet |> mutate(text = str_replace_all(text, "be", "banana"))
 ```
 
 ```{r}
-hamlet %>% mutate(text = str_replace_all(text, regex("\\bthe\\b", ignore_case = TRUE), "banana"))
+hamlet |> mutate(text = str_replace_all(text, regex("\\bthe\\b", ignore_case = TRUE), "banana"))
 ```
 
 ## Health Warning
