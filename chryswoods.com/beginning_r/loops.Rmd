@@ -214,6 +214,23 @@ will print:
 See how the `...Goodbye` was repeated in the second example, this is because 
 it was inside the body of the loop since it was between the curly brackets.
 
+If you have some experience with other programming languages you may be
+surprised that all the objects created within a loop are still available after
+it has ended, for example if you ran the code:
+
+```R
+print(word)
+```
+
+After running the loop above you would see the output:
+
+```
+[1] "R"
+```
+
+which is the last value this item contained. This happens because loops in R do
+not run in their own environment unless you wrap them with the `local` function.
+
 Note that it is convention to indent the lines within a body of a loop. The
 tidyverse style guide recommends using two spaces, but you may prefer to use
 four spaces. This makes it easier to see that these lines are in the body 
