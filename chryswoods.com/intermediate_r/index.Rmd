@@ -23,7 +23,7 @@ You can jump ahead to any chapter:
 3. [Functions](functions.html) - [walkthrough video](https://youtu.be/fu-7l-JTjQc)
 4. [data.frame](dataframes.html) - [walkthrough video](https://youtu.be/IyMF1gSkx_A)
 5. [Tidyverse](tidyverse.html) - [walkthrough video](https://youtu.be/SS4ZGImDDa4)
-6. [`%>%` Forward pipe](magrittr.html) - [walkthrough video](https://youtu.be/VsCnuMRZH4M)
+6. [`|>` Forward pipe](magrittr.html) - [walkthrough video](https://youtu.be/VsCnuMRZH4M)
 7. [Summary](summary.html) - [walkthrough video](https://youtu.be/jzB-llM9_ZQ)
 
 For the purposes of this workshop we will be using RStudio. If you haven't

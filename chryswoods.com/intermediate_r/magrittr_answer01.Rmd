@@ -9,8 +9,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```R
 cats %>%
-     filter(Sex == "M") %>%
-     filter(BodyWeight >= 3.0) %>%
+     filter(Sex == "M") |>
+     filter(BodyWeight >= 3.0) |>
      summarise(mean = calculate_mean(HeartWeight))
 ```
 

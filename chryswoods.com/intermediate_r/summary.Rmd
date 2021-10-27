@@ -18,7 +18,7 @@ In this workshop we have covered:
 * How to find, install and load R packages
 * What is the tidyverse, and how it is the basis of modern R
 * How to read CSV files into tibbles
-* How to use forward pipes (`%>%`) to chain together data processing functions
+* How to use forward pipes (`|>`) to chain together data processing functions
 
 ## What's next?
 

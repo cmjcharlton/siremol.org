@@ -8,14 +8,14 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```R
-max_male <- cats %>%
-   filter(Sex == "M") %>%
-   filter(HeartWeight <= 9.0) %>%
+max_male <- cats |>
+   filter(Sex == "M") |>
+   filter(HeartWeight <= 9.0) |>
    summarise(max = calculate_max(BodyWeight))
 
-max_female <- cats %>%
-   filter(Sex == "F") %>%
-   filter(HeartWeight <= 9.0) %>%
+max_female <- cats |>
+   filter(Sex == "F") |>
+   filter(HeartWeight <= 9.0) |>
    summarise(max = calculate_max(BodyWeight))
 
 cat(sprintf("Maximum body weight: male = %.2f kg, female = %.2f kg\n",
