@@ -59,12 +59,24 @@ wordcloud(sherlock_counts$word, sherlock_counts$n,
           min.freq = 25, random.order = FALSE)
 ```
 
-You can also use the `with` function to make this part of a pipeline, e.g.
+You could alternatively use `%$%`, the "exposition" pipe, from
+magrittr:
+
+```{r}
+library(magrittr)
+sherlock_counts %$%
+    wordcloud(word, n, min.freq = 25, random.order = FALSE)
+```
+
+Or the `with` function from base R to make this part of a pipeline, e.g.
 
 ```{r}
 sherlock_counts |>
     with(wordcloud(word, n, min.freq = 25, random.order = FALSE))
 ```
+
+Note that this has to be at the end of the pipeline as the data is not
+passed further on after these.
 
 You can also colour the words from highest frequency to least by adding
 a colour palette, e.g.
