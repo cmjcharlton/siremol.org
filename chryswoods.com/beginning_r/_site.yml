@@ -1,0 +1,22 @@
+name: "beginning_r"
+navbar:
+  title: "Beginning R"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Getting started"
+      href: getting_started.html
+    - text: "Data Types"
+      href: data_types.html
+    - text: "Lists"
+      href: lists.html
+    - text: "Loops"
+      href: loops.html
+    - text: "Conditionals"
+      href: conditionals.html
+    - text: "Dictionaries"
+      href: dictionaries.html
+    - text: "Files"
+      href: files.html
+    - text: "Summary"
+      href: summary.html
