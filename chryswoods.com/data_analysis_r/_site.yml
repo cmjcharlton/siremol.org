@@ -1,0 +1,18 @@
+name: "data_analysis_r"
+navbar:
+  title: "Data Analysis in R"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Tibbles"
+      href: tibbles.html
+    - text: "Reading from files"
+      href: files.html
+    - text: "Tidy data"
+      href: tidyverse.html
+    - text: "Data analysis"
+      href: analysis.html
+    - text: "Plotting data"
+      href: ggplot.html
+    - text: "Summary"
+      href: summary.html
