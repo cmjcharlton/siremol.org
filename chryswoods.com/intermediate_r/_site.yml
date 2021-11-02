@@ -1,0 +1,20 @@
+name: "intermediate_r"
+navbar:
+  title: "Intermediate R"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "String formatting"
+      href: formatting.html
+    - text: "Packages and CRAN"
+      href: packages.html
+    - text: "Functions"
+      href: functions.html
+    - text: "Data Frames"
+      href: dataframes.html
+    - text: "Tidyverse"
+      href: tidyverse.html
+    - text: "Forward pipes"
+      href: magrittr.html
+    - text: "Summary"
+      href: summary.html
