@@ -236,14 +236,15 @@ counts
 
 To plot this data, we need to convert the words from being stored as text,
 to be represented as [factors](https://r4ds.had.co.nz/factors.html).
-We do this using the core R [reorder](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/reorder.default)
-function. This will order the factors according to the number of occurrences
+We do this using the [fct_reorder](https://forcats.tidyverse.org/reference/fct_reorder.html)
+function from tidyverse's [forcats](https://forcats.tidyverse.org/index.html) package.
+This will order the factors according to the number of occurrences
 of each word. As we are changing the tibble, we need to use the dplyr 
 [mutate](https://dplyr.tidyverse.org/reference/mutate.html) to edit
 the column in place;
 
 ```{r}
-counts <- counts |> mutate(word = reorder(word, n))
+counts <- counts |> mutate(word = fct_reorder(word, n))
 ```
 
 The data is now ready to be rendered as a bar graph. We can do this using

@@ -30,7 +30,7 @@ hound_sentiments <- hound |> inner_join(sentiments)
                       
 hound_sentiments |>
     count(sentiment) |>
-    mutate(sentiment = reorder(sentiment, n)) |>
+    mutate(sentiment = fct_reorder(sentiment, n)) |>
     ggplot(aes(n, sentiment)) + geom_col() + labs(y = NULL)
 ```
 

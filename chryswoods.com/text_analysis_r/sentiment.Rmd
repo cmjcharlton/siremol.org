@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Text and Sentiment Analysis in R"
 output:
   html_document:
@@ -128,7 +128,7 @@ We could plot this using a similar technique as the last section
 ```{r}
 sherlock_sentiments |>
     count(sentiment) |>
-    mutate(sentiment = reorder(sentiment, n)) |>
+    mutate(sentiment = fct_reorder(sentiment, n)) |>
     ggplot(aes(n, sentiment)) + geom_col() + labs(y = NULL)
 ```
 

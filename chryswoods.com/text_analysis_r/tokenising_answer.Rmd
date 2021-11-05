@@ -24,7 +24,7 @@ counts <- hound |>
     filter(n > 75)
 
 counts <- counts |>
-    mutate(word = reorder(word, n))
+    mutate(word = fct_reorder(word, n))
 
 counts |> ggplot(aes(n, word)) + geom_col() + labs(y = NULL)
 ```
