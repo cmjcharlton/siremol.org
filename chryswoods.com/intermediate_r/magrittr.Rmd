@@ -164,6 +164,14 @@ As you can see, it is important that you name your variables, data,
 columns and functions clearly, so that it is easier for future 
 readers of your code to understand what is going on. 
 
+It is of course important not to take this concept too far. Hadley WIckham
+suggests that you should avoid or break up pipes with more than ten steps as
+these can make debugging much harder. Pipes should also be avoided if you have
+more than one input or output, or if there is a complex dependency structure. If
+an intermediate result has an obvious description that you may want to use
+elsewhere then it is often worth breaking the pipe and assigning this to its
+own object.
+
 Finally, note that we have used the `pull` function to extract the final answer
 from a 1x1 `tibble` into a scalar before storing it into`average_heart_weight`.
 
