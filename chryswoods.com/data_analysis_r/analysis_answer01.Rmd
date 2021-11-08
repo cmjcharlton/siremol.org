@@ -109,3 +109,32 @@ c21st |>
     pull() |>
     mean()
 ```
+
+We could alternatively perform all of the calculations to produce a summary table within one dense pipeline, using what we have learnt previously:
+```{r}
+monthly_summary <- historical_temperature |>
+    mutate(century = cut(year, 
+                         seq(from = 1600, to = 2100, by = 100), 
+                         labels = paste0("c", 17:21), 
+                         right = FALSE, 
+                         orderd_result = TRUE)
+                        ) |>
+    filter(century == "c17" | century == "c21") |>
+    select(-year) |>
+    group_by(century, month) |>
+    summarise(mean = mean(temperature), min = min(temperature), max = max(temperature), .groups = 'drop') |>
+    pivot_wider(names_from = century, values_from = c(mean, min, max)) |>
+    mutate(mean_change = mean_c21 - mean_c17, 
+           min_change = min_c21 - min_c17, 
+           max_change = max_c21 - max_c17
+          )
+monthly_summary
+```
+
+And use this to calculate the mean change:
+
+```{r}
+monthly_summary |>
+    summarise(mean_change = mean(mean_change)) |>
+    pull()
+```
