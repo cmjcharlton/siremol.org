@@ -53,7 +53,12 @@ historical_temperature |>
 ```
 
 This has created a new tibble, where the column called "average temperature"
-contains the mean average temperature.
+contains the mean average temperature. Notice the back ticks in the output
+column name. This is because we have chosen a variable name that is not
+syntactically valid (it contains a space). Tibbles allow this, but you may
+encounter problems if you then use this output for further analysis. If you want
+to ensure that a name is valid then R provides a [make.names](https://rdrr.io/r/base/make.names.html)
+function for this purpose.
 
 ## Grouping data
 
