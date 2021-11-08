@@ -30,13 +30,13 @@ month_levels <- c("JAN", "FEB", "MAR", "APR", "MAY", "JUN",
 Tidy the data...
 
 ```{r}
-historical_temperature <- temperature %>%
-    select(-YEAR) %>%
+historical_temperature <- temperature |>
+    select(-YEAR) |>
     pivot_longer(c("JAN", "FEB", "MAR", "APR", "MAY", "JUN",
                    "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"),
                  names_to = "month",
                  values_to = "temperature",
-                 values_drop_na = TRUE) %>%
+                 values_drop_na = TRUE) |>
     rename(year = DATE) %>%
     mutate(month = factor(month, month_levels))
 ```
@@ -44,26 +44,26 @@ historical_temperature <- temperature %>%
 Calculate the mean monthly temperatures in the 17th Century
 
 ```{r}
-c17th <- historical_temperature %>%
-    filter(year < 1700 & year >= 1600) %>%
-    group_by(month) %>%
+c17th <- historical_temperature |>
+    filter(year < 1700 & year >= 1600) |>
+    group_by(month) |>
     summarise("temperature" = mean(temperature))
 ```
 
 Calculate the mean monthly temperatures in the 21st Century
 
 ```{r}
-c21st <- historical_temperature %>%
-    filter(year >= 2000) %>%
-    group_by(month) %>%
+c21st <- historical_temperature |>
+    filter(year >= 2000) |>
+    group_by(month) |>
     summarise("temperature" = mean(temperature))
 ```
 
 Now add the difference to the c21st table and print it out
 
 ```{r}
-c21st <- c21st %>% 
-    mutate(change = temperature - (c17th %>% select(temperature) %>% pull()))
+c21st <- c21st |>
+    mutate(change = temperature - (c17th |> select(temperature) |> pull()))
 c21st
 ```
 
@@ -73,30 +73,30 @@ months.
 We will now repeat this for the maximum and minimum temperatures...
 
 ```{r}
-c17th_max <- historical_temperature %>%
-    filter(year < 1700 & year >= 1600) %>%
-    group_by(month) %>%
+c17th_max <- historical_temperature |>
+    filter(year < 1700 & year >= 1600) |>
+    group_by(month) |>
     summarise("temperature" = max(temperature))
-c21st_max <- historical_temperature %>%
-    filter(year >= 2000) %>%
-    group_by(month) %>%
+c21st_max <- historical_temperature |>
+    filter(year >= 2000) |>
+    group_by(month) |>
     summarise("temperature" = max(temperature))
-c21st_max <- c21st_max %>% 
-    mutate(change = temperature - (c17th_max %>% select(temperature) %>% pull()))
+c21st_max <- c21st_max |>
+    mutate(change = temperature - (c17th_max |> select(temperature) |> pull()))
 c21st_max
 ```
 
 ```{r}
-c17th_min <- historical_temperature %>%
-    filter(year < 1700 & year >= 1600) %>%
-    group_by(month) %>%
+c17th_min <- historical_temperature |>
+    filter(year < 1700 & year >= 1600) |>
+    group_by(month) |>
     summarise("temperature" = min(temperature))
-c21st_min <- historical_temperature %>%
-    filter(year >= 2000) %>%
-    group_by(month) %>%
+c21st_min <- historical_temperature |>
+    filter(year >= 2000) |>
+    group_by(month) |>
     summarise("temperature" = min(temperature))
-c21st_min <- c21st_min %>% 
-    mutate(change = temperature - (c17th_min %>% select(temperature) %>% pull()))
+c21st_min <- c21st_min |> 
+    mutate(change = temperature - (c17th_min |> select(temperature) |> pull()))
 c21st_min
 ```
 
@@ -104,8 +104,8 @@ Finally, we can get the average increase in monthly temperatures by calculating
 the mean of the `change` column in `c21st`
 
 ```{r}
-c21st %>% 
-    select(change) %>% 
-    pull() %>%
+c21st |> 
+    select(change) |>
+    pull() |>
     mean()
 ```

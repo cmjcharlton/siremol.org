@@ -31,18 +31,18 @@ temperature
 How many years had a negative average temperature in January?
 
 ```{r}
-negative_jan <- temperature %>% filter(JAN < 0)
+negative_jan <- temperature |> filter(JAN < 0)
 negative_jan
 ```
 
 ```{r}
-num_negative_jan <- negative_jan %>% nrow()
+num_negative_jan <- negative_jan |> nrow()
 num_negative_jan
 ```
 
 What was the average temperature in June over the years in the data set?
 
 ```{r}
-jun_average <- temperature %>% pull(JUN) %>% mean()
+jun_average <- temperature |> pull(JUN) |> mean()
 jun_average
 ```

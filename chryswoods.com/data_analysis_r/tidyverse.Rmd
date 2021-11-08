@@ -70,12 +70,12 @@ makes it easier to select (and deselect) one or more columns (variables)
 from a tibble. The general format is;
 
 ```R
-data %>% select(column_name)           # selects a single column
-data %>% select(c(column1, column2))   # selects multiple column
-data %>% select(-column_name)          # selects all columns except a single column
-data %>% select(-c(column1, column2))  # selects except multiple columns
-data %>% select(c(-column1, -column2)) # selects except multiple columns
-data %>% select(!c(column1, column2))  # negates a selection
+data |> select(column_name)           # selects a single column
+data |> select(c(column1, column2))   # selects multiple column
+data |> select(-column_name)          # selects all columns except a single column
+data |> select(-c(column1, column2))  # selects except multiple columns
+data |> select(c(-column1, -column2)) # selects except multiple columns
+data |> select(!c(column1, column2))  # negates a selection
 ```
 
 For the full list of selection operators see `?dplyr_tidy_select`
@@ -84,7 +84,7 @@ In our case, the `YEAR` column contains a derived value (the mean average) and
 should be removed as it is not a variable of an observation. We can do this using;
 
 ```R
-temperature %>% select(-YEAR)
+temperature |> select(-YEAR)
 ```
 
 ```
@@ -131,8 +131,8 @@ pivoting process.
 For our data set, we would use;
 
 ```R
-temperature %>%
-    select(-YEAR) %>%
+temperature |> 
+    select(-YEAR) |>
     pivot_longer(c("JAN", "FEB", "MAR", "APR", "MAY", "JUN",
                    "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"),
                  names_to = "month",
@@ -173,13 +173,13 @@ rename(new_name = old_name)
 and so, for our data we could use;
 
 ```R
-temperature %>%
-    select(-YEAR) %>%
+temperature |>
+    select(-YEAR) |>
     pivot_longer(c("JAN", "FEB", "MAR", "APR", "MAY", "JUN",
                    "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"),
                  names_to = "month",
                  values_to = "temperature",
-                 values_drop_na = TRUE) %>%
+                 values_drop_na = TRUE) |>
     rename(year = DATE)
 ```
 
@@ -275,14 +275,14 @@ Putting this together with what we have before, and assigning the tibble
 to a new variable called `historical_temperature`, we now get;
 
 ```R
-historical_temperature <- temperature %>%
-    select(-YEAR) %>%
+historical_temperature <- temperature |>
+    select(-YEAR) |>
     pivot_longer(c("JAN", "FEB", "MAR", "APR", "MAY", "JUN",
                    "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"),
                  names_to = "month",
                  values_to = "temperature",
-                 values_drop_na = TRUE) %>%
-    rename(year = DATE) %>%
+                 values_drop_na = TRUE) |>
+    rename(year = DATE) |>
     mutate(month = factor(month, month_levels))
 
 historical_temperature

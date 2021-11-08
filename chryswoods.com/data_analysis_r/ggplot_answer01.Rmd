@@ -20,14 +20,14 @@ temperature <- read_table(
 month_levels <- c("JAN", "FEB", "MAR", "APR", "MAY", "JUN",
                   "JUL", "AUG", "SEP", "OCT", "NOV", "DEC")
 
-historical_temperature <- temperature %>%
-    select(-YEAR) %>%
+historical_temperature <- temperature |>
+    select(-YEAR) |>
     pivot_longer(c("JAN", "FEB", "MAR", "APR", "MAY", "JUN",
                    "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"),
                  names_to = "month",
                  values_to = "temperature",
-                 values_drop_na = TRUE) %>%
-    rename(year = DATE) %>%
+                 values_drop_na = TRUE) |>
+    rename(year = DATE) |>
     mutate(month = factor(month, month_levels))
 ```
 
@@ -35,7 +35,7 @@ Next, add in the "decade" and "century" variables (columns) as we will
 be using them later...
 
 ```{r}
-historical_temperature <- historical_temperature %>%
+historical_temperature <- historical_temperature |>
     mutate(
            decade  = (year %/% 10) * 10, 
            century = (year %/% 100) * 100
@@ -45,9 +45,9 @@ historical_temperature <- historical_temperature %>%
 Graph that shows the average maximum temperature per month...
 
 ```{r}
-historical_temperature %>%
-    group_by(month) %>%
-    summarise(max_temp = max(temperature)) %>%
+historical_temperature |>
+    group_by(month) |>
+    summarise(max_temp = max(temperature)) |>
     ggplot(aes(x = month, y = max_temp, group = "month")) + 
     geom_line()
 ```
@@ -55,10 +55,10 @@ historical_temperature %>%
 Change in average temperature in December per decade.
 
 ```{r}
-historical_temperature %>%
-    filter(month == "DEC") %>%
-    group_by(decade) %>%
-    summarise(average = mean(temperature)) %>%
+historical_temperature |>
+    filter(month == "DEC") |>
+    group_by(decade) |>
+    summarise(average = mean(temperature)) |>
     ggplot(aes(x = decade, y = average)) + 
     geom_point() +
     geom_smooth()
@@ -67,9 +67,9 @@ historical_temperature %>%
 Change in average temperature per century, plus a smooth trend line
 
 ```{r}
-historical_temperature %>%
-    group_by(century) %>%
-    summarise(average = mean(temperature)) %>%
+historical_temperature |>
+    group_by(century) |>
+    summarise(average = mean(temperature)) |>
     ggplot(aes(x = century, y = average)) + 
     geom_point() + 
     geom_smooth(span = 2.0)

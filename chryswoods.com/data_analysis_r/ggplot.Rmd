@@ -42,13 +42,13 @@ temperature <- read_table(
 month_levels <- c("JAN", "FEB", "MAR", "APR", "MAY", "JUN",
                   "JUL", "AUG", "SEP", "OCT", "NOV", "DEC")
 
-historical_temperature <- temperature %>%
-    select(-YEAR) %>%
+historical_temperature <- temperature |>
+    select(-YEAR) |>
     pivot_longer(c("JAN", "FEB", "MAR", "APR", "MAY", "JUN",
                    "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"),
                  names_to = "month",
                  values_to = "temperature",
-                 values_drop_na = TRUE) %>%
+                 values_drop_na = TRUE) |>
     rename(year = DATE) %>%
     mutate(month = factor(month, month_levels))
 ```
@@ -57,7 +57,7 @@ Next, we will use `ggplot` to draw a graph (we will explain how
 this works after drawing).
 
 ```R
-historical_temperature %>% ggplot(aes(x = year, y = temperature)) + geom_point()
+historical_temperature |> ggplot(aes(x = year, y = temperature)) + geom_point()
 ```
 
 You should see a graph similar to this;
@@ -79,7 +79,7 @@ There are three key components;
 These are entered via the general form;
 
 ```R
-data %>% ggplot( aesthetic ) + layer1 + layer2 + layer3...
+data |> ggplot( aesthetic ) + layer1 + layer2 + layer3...
 ```
 
 The `data` is a `tibble` (although providing a `data.frame` here works
@@ -99,9 +99,9 @@ You can combine analysis with plotting, e.g. here we plot the average
 yearly temperature as a line graph;
 
 ```R
-historical_temperature %>%
-    group_by(year) %>%
-    summarise(temperature = mean(temperature)) %>%
+historical_temperature |>
+    group_by(year) |>
+    summarise(temperature = mean(temperature)) |>
     ggplot(aes(x = year, y = temperature)) +
     geom_line() + 
     geom_smooth()
@@ -116,7 +116,7 @@ We could do more. For example, here we add a new variable (column)
 to the data that is the decade in which the observation was taken;
 
 ```R
-historical_temperature <- historical_temperature %>%
+historical_temperature <- historical_temperature |>
     mutate(decade = (year %/% 10) * 10)
 ```
 
@@ -127,9 +127,9 @@ This enables us to draw a line graph of the average temperature
 each decade;
 
 ```R
-historical_temperature %>%
-    group_by(decade) %>%
-    summarise(temperature = mean(temperature)) %>%
+historical_temperature |>
+    group_by(decade) |>
+    summarise(temperature = mean(temperature)) |>
     ggplot(aes(x = decade, y = temperature)) + 
     geom_line()
 ```

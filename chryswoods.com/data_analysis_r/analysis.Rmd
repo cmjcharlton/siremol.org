@@ -41,7 +41,7 @@ functions include;
 For example, we can calculate the mean average temperature using;
 
 ```R
-historical_temperature %>% 
+historical_temperature |>
     summarise("average temperature" = mean(temperature))
 ```
 
@@ -66,8 +66,8 @@ For example, we can group by year and summarise by the mean
 function to calculate the average temperature for each year;
 
 ```R
-historical_temperature %>% 
-    group_by(year) %>%
+historical_temperature |>
+    group_by(year) |>
     summarise("average temperature" = mean(temperature))
 ```
 
@@ -91,8 +91,8 @@ historical_temperature %>%
 or, we could calculate the average temperature for each month via;
 
 ```R
-historical_temperature %>%
-    group_by(month) %>%
+historical_temperature |>
+    group_by(month) |>
     summarise("average temperature" = mean(temperature))
 ```
 
@@ -122,9 +122,9 @@ we could filter the years in the 18th Century (`year < 1800 & year >= 1700`)
 and calculate the average monthly temperatures then via;
 
 ```R
-historical_temperature %>%
-    filter(year < 1800 & year >= 1700) %>%
-    group_by(month) %>%
+historical_temperature |>
+    filter(year < 1800 & year >= 1700) |>
+    group_by(month) |>
     summarise("18th Century" = mean(temperature))
 ```
 
@@ -149,9 +149,9 @@ historical_temperature %>%
 We could then repeat this for the 21st Century...
 
 ```R
-historical_temperature %>%
-    filter(year >= 2000) %>%
-    group_by(month) %>%
+historical_temperature |>
+    filter(year >= 2000) |>
+    group_by(month) |>
     summarise("21st Century" = mean(temperature))
 ```
 

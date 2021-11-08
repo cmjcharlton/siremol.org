@@ -20,27 +20,27 @@ temperature <- read_table(
 month_levels <- c("JAN", "FEB", "MAR", "APR", "MAY", "JUN",
                   "JUL", "AUG", "SEP", "OCT", "NOV", "DEC")
 
-historical_temperature <- temperature %>%
-    select(-YEAR) %>%
+historical_temperature <- temperature |>
+    select(-YEAR) |>
     pivot_longer(c("JAN", "FEB", "MAR", "APR", "MAY", "JUN",
                    "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"),
                  names_to = "month",
                  values_to = "temperature",
-                 values_drop_na = TRUE) %>%
-    rename(year = DATE) %>%
+                 values_drop_na = TRUE) |>
+    rename(year = DATE) |>
     mutate(month = factor(month, month_levels))
 
-historical_temperature <- historical_temperature %>%
+historical_temperature <- historical_temperature |>
     mutate(decade = (year %/% 10) * 10)
 ```
 
 Here is the answer from the last section that has the "unpretty" graph...
 
 ```{r}
-historical_temperature %>%
-    filter(month == "DEC") %>%
-    group_by(decade) %>%
-    summarise(average = mean(temperature)) %>%
+historical_temperature |>
+    filter(month == "DEC") |>
+    group_by(decade) |>
+    summarise(average = mean(temperature)) |>
     ggplot(aes(x = decade, y = average)) + 
     geom_point() +
     geom_smooth()
@@ -54,10 +54,10 @@ The most useful for labelling the x and y axes is using
 [ylab](https://ggplot2.tidyverse.org/reference/labs.html).
 
 ```{r}
-historical_temperature %>%
-    filter(month == "DEC") %>%
-    group_by(decade) %>%
-    summarise(average = mean(temperature)) %>%
+historical_temperature |>
+    filter(month == "DEC") |>
+    group_by(decade) |>
+    summarise(average = mean(temperature)) |>
     ggplot(aes(x = decade, y = average)) + 
     geom_point() +
     geom_smooth() +
@@ -76,10 +76,10 @@ Next, we can change the colour of the points to red by changing the `colour` in
 its aesthetic.
 
 ```{r}
-historical_temperature %>%
-    filter(month == "DEC") %>%
-    group_by(decade) %>%
-    summarise(average = mean(temperature)) %>%
+historical_temperature |>
+    filter(month == "DEC") |>
+    group_by(decade) |>
+    summarise(average = mean(temperature)) |>
     ggplot(aes(x = decade, y = average)) + 
     geom_point(color = "red") +
     geom_smooth() +
@@ -96,10 +96,10 @@ temperature by temperature. But you could equally colour by another variable in 
 data if that was appropriate.
 
 ```{r}
-historical_temperature %>%
-    filter(month == "DEC") %>%
-    group_by(decade) %>%
-    summarise(average = mean(temperature)) %>%
+historical_temperature |>
+    filter(month == "DEC") |>
+    group_by(decade) |>
+    summarise(average = mean(temperature)) |>
     ggplot(aes(x = decade, y = average, color = average)) + 
     geom_point() +
     geom_smooth() +
@@ -121,10 +121,10 @@ data), or `scale_colour_distiller` (for continuous data). As the average
 temperature is continuous, we use `scale_colour_distiller`.
 
 ```{r}
-historical_temperature %>%
-    filter(month == "DEC") %>%
-    group_by(decade) %>%
-    summarise(average = mean(temperature)) %>%
+historical_temperature |>
+    filter(month == "DEC") |>
+    group_by(decade) |>
+    summarise(average = mean(temperature)) |>
     ggplot(aes(x = decade, y = average, color = average)) + 
     geom_point() +
     geom_smooth() +
@@ -140,10 +140,10 @@ using `theme(legend.position = "none")` (you can learn more about themes
 in the [themes chapter of the ggplot book](https://ggplot2-book.org/polishing.html))
 
 ```{r}
-historical_temperature %>%
-    filter(month == "DEC") %>%
-    group_by(decade) %>%
-    summarise(average = mean(temperature)) %>%
+historical_temperature |>
+    filter(month == "DEC") |>
+    group_by(decade) |>
+    summarise(average = mean(temperature)) |>
     ggplot(aes(x = decade, y = average, color = average)) + 
     geom_point() +
     geom_smooth() +
