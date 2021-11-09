@@ -63,7 +63,8 @@ Now add the difference to the c21st table and print it out
 
 ```{r}
 c21st <- c21st |>
-    mutate(change = temperature - (c17th |> select(temperature) |> pull()))
+    full_join(c17th, by = "month", suffix = c(".c21st", ".c17th")) |>
+    mutate(change = temperature.c21st - temperature.c17th)
 c21st
 ```
 
@@ -81,8 +82,9 @@ c21st_max <- historical_temperature |>
     filter(year >= 2000) |>
     group_by(month) |>
     summarise("temperature" = max(temperature))
-c21st_max <- c21st_max |>
-    mutate(change = temperature - (c17th_max |> select(temperature) |> pull()))
+c21st_max <-  c21st_max |>
+    full_join(c17th_max, by = "month", suffix = c(".c21st", ".c17th")) |>
+    mutate(change = temperature.c21st - temperature.c17th)
 c21st_max
 ```
 
@@ -95,8 +97,9 @@ c21st_min <- historical_temperature |>
     filter(year >= 2000) |>
     group_by(month) |>
     summarise("temperature" = min(temperature))
-c21st_min <- c21st_min |> 
-    mutate(change = temperature - (c17th_min |> select(temperature) |> pull()))
+c21st_min <-  c21st_min |>
+    full_join(c17th_min, by = "month", suffix = c(".c21st", ".c17th")) |>
+    mutate(change = temperature.c21st - temperature.c17th)
 c21st_min
 ```
 
