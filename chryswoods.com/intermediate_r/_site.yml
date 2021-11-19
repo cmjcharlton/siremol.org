@@ -18,3 +18,5 @@ navbar:
       href: magrittr.html
     - text: "Summary"
       href: summary.html
+    - text: "Appendix"
+      href: appendix.html
