@@ -1,0 +1,22 @@
+---
+title: "Introduction to Data Analysis in R"
+output: html_document
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r packages, echo = FALSE}
+suppressPackageStartupMessages(library(tidyverse))
+```
+
+## Version Information
+
+This course was last updated at `r format(Sys.time(), "%H:%M")` on
+`r format(Sys.Date(), "%d %b %Y")` and run with the following version of R and
+packages:
+
+```{r sessioninfo}
+sessionInfo()
+```

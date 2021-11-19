@@ -16,3 +16,5 @@ navbar:
       href: ggplot.html
     - text: "Summary"
       href: summary.html
+    - text: "Appendix"
+      href: appendix.html
