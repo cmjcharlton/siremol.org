@@ -20,6 +20,22 @@ In this workshop we have covered:
 * How to read CSV files into tibbles
 * How to use forward pipes (`|>`) to chain together data processing functions
 
+## Good development practices
+
+With ever updated package versions and support for a wide variety of different 
+platforms, being able to reproduce the original output at a later date can be a
+major problem. I suggest reading the article 
+[Possible Directions for Improving Dependency Versioning in R](https://journal.r-project.org/archive/2013-1/ooms.pdf)
+in the R journal to see how this applies to R and its packaging system. Since 
+this article was written a number of packages have been written to help with this, 
+such as [Groundhog](http://datacolada.org/95), 
+[sessioninfo](https://cran.rstudio.com/web/packages/sessioninfo/index.html) and 
+[renv](https://rstudio.github.io/renv/articles/renv.html), and solutions 
+such as Docker have become more popular. It is much harder to break bad habits
+later on so I suggest that consider how you will address this before you write
+too much code. This should reduce the likelihood of this becoming a problem when 
+your code is re-run in the future (including by yourself).
+
 ## What's next?
 
 Once you're comfortable with the material in this course you will be ready to 
