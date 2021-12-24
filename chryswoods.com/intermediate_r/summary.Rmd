@@ -31,10 +31,11 @@ this article was written a number of packages have been written to help with thi
 such as [Groundhog](http://datacolada.org/95), 
 [sessioninfo](https://cran.rstudio.com/web/packages/sessioninfo/index.html) and 
 [renv](https://rstudio.github.io/renv/articles/renv.html), and solutions 
-such as Docker have become more popular. It is much harder to break bad habits
-later on so I suggest that consider how you will address this before you write
-too much code. This should reduce the likelihood of this becoming a problem when 
-your code is re-run in the future (including by yourself).
+such as Docker have become more popular. It is easiest to get into good development
+habits while you are still learning a new language, so I suggest considering
+how you will address this before you write too much code. This should reduce the 
+likelihood of this becoming a problem when your code is re-run in the future
+(including by yourself).
 
 ## What's next?
 
