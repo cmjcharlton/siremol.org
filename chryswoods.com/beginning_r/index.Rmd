@@ -24,7 +24,7 @@ you will find that you are able to write much more complex programmes and
 understand how to exploit the power of R for data analysis and visualisation.
 
 R is a well-established language, initially released in 1995 (with version 1.0 in 2000),
-and the latest release (4.1.2) was released in 2021. R reimplements the `S` language,
+and the latest release (4.2.0) was released in 2022. R reimplements the `S` language,
 first developed in 1976 which was designed as "A language and system for data analysis" 
 by researchers at Bell Labs for their own use. Despite this it is a general purpose 
 language, taking inspiration from earlier programming languages such as Lisp and 
