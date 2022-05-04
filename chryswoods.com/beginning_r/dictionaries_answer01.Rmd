@@ -8,14 +8,13 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```R
-sounds <- c(
-    "cat" = "meow", 
-    "dog" = "woof", 
-    "horse" = "neigh"
-)
+sounds <- hashtab()
+sounds[["cat"]] <- "meow"
+sounds[["dog"]] <- "woof"
+sounds[["horse"]] <- "neigh"
 
-dog_sound <- sounds["dog"]
-horse_sound <- sounds["horse"]
+dog_sound <- sounds[["dog"]]
+horse_sound <- sounds[["horse"]]
 
 print(paste("Dog goes", dog_sound))
 print(paste("Horse goes", horse_sound))
@@ -29,14 +28,13 @@ Rscript dict.R
 ```
 
 If we edit our script so that it asks for a name that doesn't exist, 
-we will see that is returns `NA`.
+we will see that is returns `NULL`.
 
 ```R
-sounds <- c(
-    "cat" = "meow",
-    "dog" = "woof", 
-    "horse" = "neigh"
-)
+sounds <- hashtab()
+sounds[["cat"]] <- "meow"
+sounds[["dog"]] <- "woof"
+sounds[["horse"]] <- "neigh"
 
 fish_sound <- sounds["fish"]
 
@@ -46,25 +44,21 @@ print(paste("Fish goes", fish_sound))
 ```
 Rscript dict.R
 
-[1] "Fish goes NA"
+[1] "Fish goes NULL"
 ```
 
-As we have seen before, returning `NA` for a non-existent value can be a major
-source of bugs. We could have used the `[[` notation when accessing the vector,
-but this would still have given a "subscript out of bounds" error. It is better
-to test for and handle the error before it happens. You can test if a name (key)
-exists in a dictionary by using the `%in%` keyword, to see if the name is
-in the `names()` of the vector;
+As we have seen before, returning `NULL` for a non-existent value can be a 
+source of bugs. We should therefore make sure that we test the return value
+before attempting to use it
 
 ```R
-sounds <- c(
-    "cat" = "meow",
-    "dog" = "woof",
-    "horse" = "neigh"
-)
+sounds <- hashtab()
+sounds[["cat"]] <- "meow"
+sounds[["dog"]] <- "woof"
+sounds[["horse"]] <- "neigh"
 
-if ("fish" %in% names(sounds)) {
-    fish_sound <- sounds["fish"]
+fish_sound <- sounds[["fish"]]
+if (!is.null(fish_sound)) {
     print(paste("Fish goes", fish_sound))
 } else {
     print("What sounds does a fish make?")

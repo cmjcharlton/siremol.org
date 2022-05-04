@@ -8,18 +8,24 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```R
-sounds <- c("cat" = "meow", "dog" = "woof")
+sounds <- hashtab()
+sounds[["cat"]] <- "meow"
+sounds[["dog"]] <- "woof"
 
-sounds["horse"] <- "neigh"
-sounds["cow"] <- "moo"
+sounds[["horse"]] <- "neigh"
+sounds[["cow"]] <- "moo"
 
-print(sounds)
+maphash(sounds, function(key, value) {
+    print(paste(key, "-", value))
+})
 ```
 
 ```
 Rscript dict.R
 
-    cat     dog   horse     cow 
- "meow"  "woof" "neigh"   "moo" 
+[1] "cat - meow"
+[1] "cow - moo"
+[1] "horse - neigh"
+[1] "dog - woof"
 ```
 

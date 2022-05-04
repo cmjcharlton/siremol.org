@@ -8,19 +8,15 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```R
-capitals <- c(
-    "France" = "Paris",
-    "United Kingdom" = "London",
-    "USA" = "Washington DC",
-    "Kenya" = "Nairobi"
-)
+capitals <- hashtab()
+capitals[["France"]] <- "Paris"
+capitals[["United Kingdom"]] <- "London"
+capitals[["USA"]] <- "Washington DC"
+capitals[["Kenya"]] <- "Nairobi"
 
-for (i in seq_along(capitals)) {
-    capital <- capitals[i]
-    country <- names(capital)
-
+maphash(capitals, function(country, capital) {
     print(paste("The capital of", country, "is", capital))
-}
+})
 ```
 
 ```
